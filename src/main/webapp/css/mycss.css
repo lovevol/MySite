@@ -1,0 +1,70 @@
+.myhr1{
+    border: 1px solid #f3726d
+}
+.myhr2{
+    border: 1px solid #5bc0de
+}
+.myhr3{
+    border: 1px solid #5cb85c
+}
+.myh1{
+    color: #f3726d;
+    text-align: center;
+}
+.myh2{
+    color: #5bc0de;
+    text-align: center;
+}
+.myh3{
+    color: #5cb85c;
+    text-align: center;
+}
+.mybtn1{
+    color: #fff;
+    background-color: #f3726d;
+    border-color: white;
+    width: 100%;
+    margin: 5px;
+}
+.mybtn2{
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: white;
+    width: 100%;
+    margin: 5px;
+}
+.mybtn3{
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: white;
+    width: 100%;
+    margin: 5px;
+}
+.mybtn4{
+    color: #fff;
+    background-color: #e4e4e4;
+    border-color: white;
+    width: 100%;
+    margin: 5px;
+}
+.mybtn5{
+    color: #fff;
+    background-color: #8edbff;
+    border-color: white;
+    width: 100%;
+    margin: 5px;
+}
+.mytable{
+    color: #5cb85c;
+    text-align: center;
+}
+.mydiv{
+    width: 100%;
+    background-color: white;
+    margin-top: 30px;
+    float: left;
+    padding: 20px;
+}
+.mybody{
+
+}
