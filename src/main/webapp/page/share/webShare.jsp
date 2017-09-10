@@ -19,55 +19,34 @@
         <hr>
         <c:forEach items="${requestScope.webs}" var="web" varStatus="webStatus">
             <h3>${webStatus.index + 1}:${web.label}</h3>
-            <c:if test="${webStatus.index % 2 == 0}">
-                <a class="btn mybtn4" role="button" data-toggle="collapse" href="#collapseExample${webStatus.index + 1}"
-                   aria-expanded="false" aria-controls="collapseExample">
-                        ${web.webUrl}
-                </a>
-                <div class="collapse" id="collapseExample${webStatus.index + 1}" style="margin: 5px">
-                    <div class="well">
-                            ${web.description}
-                        <br>
-                        <c:if test="${!empty web.remark}">
-                            <hr>
-                            <label style="color: red">备注:</label>${web.remark}
-                        </c:if>
+            <a class="btn mybtn5" role="button" data-toggle="collapse" href="#collapseExample${webStatus.index + 1}"
+               aria-expanded="false" aria-controls="collapseExample">
+                    ${web.webUrl}
+            </a>
+            <div class="collapse" id="collapseExample${webStatus.index + 1}" style="margin: 5px">
+                <div class="well">
+                        ${web.description}
+                    <br>
+                    <c:if test="${!empty web.remark}">
                         <hr>
-                        访问:<a href="${web.webUrl}">${web.webUrl}</a>
-                    </div>
+                        <label style="color: red">备注:</label>${web.remark}
+                    </c:if>
+                    <hr>
+                    访问:<a href="${web.webUrl}">${web.webUrl}</a>
                 </div>
-                <br>
-                <br>
-            </c:if>
-            <c:if test="${webStatus.index % 2 != 0}">
-                <a class="btn mybtn5" role="button" data-toggle="collapse" href="#collapseExample${webStatus.index + 1}"
-                   aria-expanded="false" aria-controls="collapseExample">
-                        ${web.webUrl}
-                </a>
-                <div class="collapse" id="collapseExample${webStatus.index + 1}" style="margin: 5px">
-                    <div class="well">
-                            ${web.description}
-                        <br>
-                        <c:if test="${!empty web.remark}">
-                            <hr>
-                            <label style="color: red">备注:</label>${web.remark}
-                        </c:if>
-                        <hr>
-                        访问:<a href="${web.webUrl}">${web.webUrl}</a>
-                    </div>
-                </div>
-                <br>
-                <br>
-            </c:if>
-
+            </div>
+            <br>
+            <br>
         </c:forEach>
     </div>
 </div>
-<div style="float: left;width: 40%;height: 100%;float: left">
+<div style="float: left;width: 40%;height: 100%;">
     <div style="background-color: white; margin-top: 30px; margin-left: 30px;width: 50%;height: 300px;padding: 20px">
         <h4>资源分享</h4>
         <hr class="myhr2">
-        <a href="${pageContext.request.contextPath}/share/webShare"><button class="btn mybtn2">网站分享</button></a>
+        <a href="${pageContext.request.contextPath}/share/webShare">
+            <button class="btn mybtn2">网站分享</button>
+        </a>
         <a href="${pageContext.request.contextPath}/share/ebookShare" class="btn mybtn2">电子书分享</a>
         <button class="btn mybtn2">个人心得</button>
         <button class="btn mybtn2">......</button>

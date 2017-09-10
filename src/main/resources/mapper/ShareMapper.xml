@@ -15,4 +15,13 @@
     <select id="selectEbook" resultType="model.Ebook">
         SELECT * FROM ebook
     </select>
+    <insert id="saveArticle" parameterType="model.Article" useGeneratedKeys="true">
+        INSERT INTO article(title,content,date,label,category,sketch,imagepath) VALUES (#{title},#{content},#{date},#{label},#{category},#{sketch},#{imagePath})
+    </insert>
+    <select id="selectArticleForIndex" resultType="model.Article">
+        SELECT * FROM article ORDER BY date DESC LIMIT 5;
+    </select>
+    <select id="selectArticleById" parameterType="int" resultType="model.Article">
+        SELECT * FROM article WHERE idarticle = #{id}
+    </select>
 </mapper>

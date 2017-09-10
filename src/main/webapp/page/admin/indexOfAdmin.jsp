@@ -10,6 +10,22 @@
 <html>
 <head>
     <title>管理端</title>
+    <script>
+        function submitSaveEbook() {
+            $("#formForAddEbook").ajaxSubmit({
+                url:"${pageContext.request.contextPath}/admin/uploadEbookFile",
+                async:true,
+                type:"post",
+                success:function (data) {
+                    alert("文件上传成功");
+                    $("#file").val("");
+                },
+                error:function (data) {
+                    alert("文件上传失败")
+                }
+            });
+        }
+    </script>
 </head>
 <body style=" padding-top: 50px;background-color: #e4e4e4;">
 <div style="width: 60%;margin-left: 20%;padding: 20px;margin-top: 30px;background-color: white">
@@ -40,9 +56,9 @@
     <div class="collapse" id="collapseExample2" style="margin: 5px;width: 100%">
         <div class="well">
             <div class="form-group">
-                <form action="${pageContext.request.contextPath}/admin/addEbook" method="post" enctype="multipart/form-data">
+                <form action="${pageContext.request.contextPath}/admin/addEbook" method="post" enctype="multipart/form-data" id="formForAddEbook">
                     <label for="description2"> 描述:</label><textarea id="description2" name="description" class="form-control" rows="6"></textarea>
-                    <label for="file"> 文件:</label><input type="file" name="file" id="file" class="form-control">
+                    <label for="file"> 文件:</label><input type="file" name="file" id="file" class="form-control" onchange="submitSaveEbook()">
                     <hr>
                     <input type="submit" value="添加电子书" class="btn btn-primary">
                 </form>

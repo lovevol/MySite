@@ -41,6 +41,7 @@
                 <li><a href="${pageContext.request.contextPath}/user/login">登陆</a></li>
                 <li><a data-toggle="modal" data-target=".bs-example-modal-lg"><span class="glyphicon glyphicon-user"
                                                                                     title="管理员"></span></a></li>
+                <li><a href="${pageContext.request.contextPath}/page/admin/addArticle.jsp"><span class="glyphicon glyphicon-plus"></span> </a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">帮助

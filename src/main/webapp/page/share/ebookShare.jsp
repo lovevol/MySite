@@ -19,44 +19,25 @@
         <hr>
         <c:forEach items="${requestScope.ebooks}" var="ebook" varStatus="ebookStatus">
             <h3>${ebookStatus.index + 1}:${ebook.bookName}</h3>
-            <c:if test="${ebookStatus.index % 2 == 0}">
-                <a class="btn mybtn4" role="button" data-toggle="collapse" href="#collapseExample${ebookStatus.index + 1}"
-                   aria-expanded="false" aria-controls="collapseExample">
+            <a class="btn mybtn5" role="button" data-toggle="collapse" href="#collapseExample${ebookStatus.index + 1}"
+               aria-expanded="false" aria-controls="collapseExample">
                     ${ebook.bookName}
-                </a>
-                <div class="collapse" id="collapseExample${ebookStatus.index + 1}" style="margin: 5px">
-                    <div class="well">
-                            ${ebook.description}
-                        <br>
-
-                        <hr>
-                        下载:<a href="${pageContext.request.contextPath}/share/downloadEbook?fileName=${ebook.bookName}">${ebook.bookName}</a>
-                    </div>
+            </a>
+            <div class="collapse" id="collapseExample${ebookStatus.index + 1}" style="margin: 5px">
+                <div class="well">
+                        ${ebook.description}
+                    <br>
+                    <hr>
+                    下载:<a
+                        href="${pageContext.request.contextPath}/share/downloadEbook?fileName=${ebook.bookName}">${ebook.bookName}</a>
                 </div>
-                <br>
-                <br>
-            </c:if>
-            <c:if test="${ebookStatus.index % 2 != 0}">
-                <a class="btn mybtn5" role="button" data-toggle="collapse" href="#collapseExample${ebookStatus.index + 1}"
-                   aria-expanded="false" aria-controls="collapseExample">
-                    ${ebook.bookName}
-                </a>
-                <div class="collapse" id="collapseExample${ebookStatus.index + 1}" style="margin: 5px">
-                    <div class="well">
-                            ${ebook.description}
-                        <br>
-
-                        <hr>
-                                下载:<a href="${pageContext.request.contextPath}/share/downloadEbook?fileName=${ebook.bookName}">${ebook.bookName}</a>
-                    </div>
-                </div>
-                <br>
-                <br>
-            </c:if>
+            </div>
+            <br>
+            <br>
         </c:forEach>
     </div>
 </div>
-<div style="float: left;width: 40%;height: 100%;float: left">
+<div style="float: left;width: 40%;height: 100%;">
     <div style="background-color: white; margin-top: 30px; margin-left: 30px;width: 50%;height: 300px;padding: 20px">
         <h4>资源分享</h4>
         <hr class="myhr2">

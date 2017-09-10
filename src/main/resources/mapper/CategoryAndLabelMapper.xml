@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CategoryAndLabelMapper">
+    <select id="selectCategoryByType" resultType="model.Category" parameterType="int">
+        SELECT * FROM category WHERE type = #{type}
+    </select>
+    <select id="selectCategoryById" resultType="model.Category" parameterType="int">
+        SELECT * FROM category WHERE idcategory = #{id}
+    </select>
+    <resultMap id="labelResultMap" type="model.Label">
+        <id property="idLabel" column="idlabel"/>
+        <result property="name" column="name"/>
+        <association property="category" column="idcategory"
+                     javaType="model.Category" select="selectCategoryById"/>
+    </resultMap>
+    <select id="selectLabelByCategory" parameterType="int" resultMap="labelResultMap">
+        SELECT * FROM label where idcategory = ${idcategory}
+    </select>
+</mapper>

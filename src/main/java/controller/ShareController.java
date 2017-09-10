@@ -1,6 +1,7 @@
 package controller;
 
 import dao.ShareDAO;
+import model.Article;
 import model.Ebook;
 import model.Web;
 import org.apache.commons.io.FileUtils;
@@ -54,5 +55,13 @@ public class ShareController {
         httpHeaders.setContentDispositionFormData("attachment",fileDownloadName);
         httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.CREATED);
+    }
+    @RequestMapping(value = "readArticle")
+    public ModelAndView readArticle(int articleId){
+        Article article = shareDAO.getArticleById(articleId);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("article",article);
+        modelAndView.setViewName("/page/share/readArticle.jsp");
+        return modelAndView;
     }
 }

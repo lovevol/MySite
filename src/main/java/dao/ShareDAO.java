@@ -1,6 +1,7 @@
 package dao;
 
 import Utils.MyBatisUtil;
+import model.Article;
 import model.Ebook;
 import model.Web;
 import org.apache.ibatis.session.SqlSession;
@@ -32,5 +33,20 @@ public class ShareDAO {
         List<Ebook> ebooks = sqlSession.selectList("mapper.ShareMapper.selectEbook");
         sqlSession.commit();
         return ebooks;
+    }
+    public int addArticle(Article article){
+        int id = sqlSession.insert("mapper.ShareMapper.saveArticle",article);
+        sqlSession.commit();
+        return id;
+    }
+    public List<Article> getArticlesForIndex(){
+        List<Article> articles = sqlSession.selectList("mapper.ShareMapper.selectArticleForIndex");
+        sqlSession.commit();
+        return articles;
+    }
+    public Article getArticleById(int id){
+        Article article = sqlSession.selectOne("mapper.ShareMapper.selectArticleById",id);
+        sqlSession.commit();
+        return article;
     }
 }
