@@ -1,7 +1,13 @@
 package controller;
 
+import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by lh
@@ -10,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
+    @Autowired
+    private UserService userService;
     /**
      * 用户界面的路径
      */
@@ -26,5 +34,20 @@ public class UserController {
     @RequestMapping(value = "/login")
     public String login(){
         return LOGIN_PAGE;
+    }
+
+    @RequestMapping(value = "/validate")
+    public String validate(HttpServletRequest request, User user){
+        if (userService.validateLogin(user) && user.getRoleType() == 1){
+            HttpSession session = request.getSession();
+            session.setAttribute("user",user);
+            return "redirect:/index";
+        }else if (userService.validateLogin(user) && user.getRoleType() == 2){
+            HttpSession session = request.getSession();
+            session.setAttribute("user",user);
+            return "redirect:/indexOfAdmin";
+        }else {
+            return "redirect:/user/login";
+        }
     }
 }

@@ -15,6 +15,15 @@ public class User {
     private String password;
     private int age;
     private String gender;
+    private int roleType;
+
+    public int getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(int roleType) {
+        this.roleType = roleType;
+    }
 
     public int getIdUSer() {
         return idUSer;

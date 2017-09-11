@@ -5,10 +5,10 @@
 <configuration>
     <!--引入资源文件来配置数据库-->
     <properties resource="db.properties"/>
-    <settings>
-        <!--指定MyBatis日志的具体实现-->
+   <!-- <settings>
+        &lt;!&ndash;指定MyBatis日志的具体实现&ndash;&gt;
         <setting name="logImpl" value="LOG4J"/>
-    </settings>
+    </settings>-->
     <!--配置连接的数据库-->
     <environments default="mysql">
         <environment id="mysql">

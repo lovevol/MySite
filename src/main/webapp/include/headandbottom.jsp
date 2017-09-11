@@ -39,9 +39,6 @@
             </form>
             <ul class="nav navbar-nav navbar-right" style="margin-right: 15%">
                 <li><a href="${pageContext.request.contextPath}/user/login">登陆</a></li>
-                <li><a data-toggle="modal" data-target=".bs-example-modal-lg"><span class="glyphicon glyphicon-user"
-                                                                                    title="管理员"></span></a></li>
-                <li><a href="${pageContext.request.contextPath}/page/admin/addArticle.jsp"><span class="glyphicon glyphicon-plus"></span> </a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">帮助
@@ -59,35 +56,6 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
-
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">管理员身份验证</h4>
-            </div>
-            <form action="${pageContext.request.contextPath}/verifyAdmin" method="post">
-                <div class="modal-body">
-                    <div class="form-group">
-
-                        <label for="loginName">登录名:</label><input type="text" id="loginName" name="loginName"
-                                                                  class="form-control">
-                        <label for="password">密码:</label><input id="password" name="password" type="password"
-                                                                class="form-control">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" value="验证" class="btn btn-primary">
-                    <input type="reset" value="重置" class="btn btn-danger">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 <div>
     <input hidden="hidden" type="text" value="${requestScope.errorMsg}" id="errorMsg">
 </div>

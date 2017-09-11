@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
+    <h1><a href="${pageContext.request.contextPath}/page/admin/addArticle.jsp"><span class="glyphicon glyphicon-plus"></span></a></h1>
 </div>
-
 </body>
 </html>

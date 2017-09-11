@@ -177,37 +177,42 @@
       <Position>6</Position>
       <DataType>char(2)|0</DataType>
     </column>
-    <key id="51" parent="18" name="PRIMARY">
+    <column id="51" parent="18" name="roletype">
+      <Position>7</Position>
+      <DataType>tinyint(4)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="52" parent="18" name="PRIMARY">
       <ColNames>iduser</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="52" parent="19" name="idweb">
+    <column id="53" parent="19" name="idweb">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="53" parent="19" name="weburl">
+    <column id="54" parent="19" name="weburl">
       <Position>2</Position>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="54" parent="19" name="description">
+    <column id="55" parent="19" name="description">
       <Position>3</Position>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="55" parent="19" name="remark">
+    <column id="56" parent="19" name="remark">
       <Position>4</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="56" parent="19" name="label">
+    <column id="57" parent="19" name="label">
       <Position>5</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="57" parent="19" name="PRIMARY">
+    <key id="58" parent="19" name="PRIMARY">
       <ColNames>idweb</ColNames>
       <Primary>1</Primary>
     </key>

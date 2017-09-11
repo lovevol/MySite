@@ -13,11 +13,13 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.form.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.structure.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.theme.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mycss.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-datetimepicker.css">
 </head>
 <body>
 

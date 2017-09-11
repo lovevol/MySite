@@ -1,10 +1,13 @@
 package controller;
 
-import dao.ShareDAO;
+import dao.ArticleDAO;
+import dao.EbookDAO;
+import dao.WebDAO;
 import model.Article;
 import model.Ebook;
 import model.Web;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,23 +30,51 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/share")
 public class ShareController {
-    ShareDAO shareDAO = new ShareDAO();
+    private final ArticleDAO articleDAO;
+    private final EbookDAO ebookDAO;
+    private final WebDAO webDAO;
+
+    @Autowired
+    public ShareController(ArticleDAO articleDAO, EbookDAO ebookDAO, WebDAO webDAO) {
+        this.articleDAO = articleDAO;
+        this.ebookDAO = ebookDAO;
+        this.webDAO = webDAO;
+    }
+
+    /**
+     * 跳转到网站分享页面
+     * @return
+     */
     @RequestMapping(value = "/webShare")
     public ModelAndView webShare(){
-        List<Web> webs = shareDAO.getAllWeb();
+        List<Web> webs = webDAO.getWebForIndex();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("webs",webs);
         modelAndView.setViewName("/page/share/webShare.jsp");
         return modelAndView;
     }
+
+    /**
+     * 跳转到电子书分享界面
+     * @return
+     */
     @RequestMapping(value = "ebookShare")
     public ModelAndView ebookShare(){
-        List<Ebook> ebooks = shareDAO.getAllBook();
+        List<Ebook> ebooks = ebookDAO.getBookForIndex();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("ebooks",ebooks);
         modelAndView.setViewName("/page/share/ebookShare.jsp");
         return modelAndView;
     }
+
+    /**
+     * 下载电子书
+     * @param request
+     * @param fileName
+     * @param model
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/downloadEbook")
     public ResponseEntity<byte[]> downloadEbook(HttpServletRequest request,
                                                 @RequestParam("fileName") String fileName,
@@ -56,9 +87,15 @@ public class ShareController {
         httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.CREATED);
     }
+
+    /**
+     * 读文章
+     * @param articleId
+     * @return
+     */
     @RequestMapping(value = "readArticle")
     public ModelAndView readArticle(int articleId){
-        Article article = shareDAO.getArticleById(articleId);
+        Article article = articleDAO.getArticleById(articleId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("article",article);
         modelAndView.setViewName("/page/share/readArticle.jsp");

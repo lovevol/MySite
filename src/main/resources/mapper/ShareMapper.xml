@@ -6,14 +6,14 @@
     <insert id="saveWeb" parameterType="model.Web" useGeneratedKeys="true">
         INSERT INTO web(weburl,description,remark,label) VALUES (#{webUrl},#{description},#{remark},#{label})
     </insert>
-    <select id="selectWeb" resultType="model.Web">
-        SELECT * from web
+    <select id="selectWebForIndex" resultType="model.Web">
+        SELECT * from web limit 5;
     </select>
     <insert id="saveEbook" parameterType="model.Ebook" useGeneratedKeys="true">
         INSERT INTO ebook(bookName,description,path) VALUES (#{bookName},#{description},#{path})
     </insert>
-    <select id="selectEbook" resultType="model.Ebook">
-        SELECT * FROM ebook
+    <select id="selectEbookForIndex" resultType="model.Ebook">
+        SELECT * FROM ebook limit 5;
     </select>
     <insert id="saveArticle" parameterType="model.Article" useGeneratedKeys="true">
         INSERT INTO article(title,content,date,label,category,sketch,imagepath) VALUES (#{title},#{content},#{date},#{label},#{category},#{sketch},#{imagePath})

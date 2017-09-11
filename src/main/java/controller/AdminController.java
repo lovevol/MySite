@@ -1,9 +1,12 @@
 package controller;
 
-import dao.ShareDAO;
+import dao.ArticleDAO;
+import dao.EbookDAO;
+import dao.WebDAO;
 import model.Article;
 import model.Ebook;
 import model.Web;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,8 +30,17 @@ import java.sql.Timestamp;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
-    private ShareDAO shareDAO = new ShareDAO();
+    private final ArticleDAO articleDAO ;
+    private final EbookDAO ebookDAO ;
+    private final WebDAO webDAO ;
     private String ebookFileName;
+
+    @Autowired
+    public AdminController(ArticleDAO articleDAO, EbookDAO ebookDAO, WebDAO webDAO) {
+        this.articleDAO = articleDAO;
+        this.ebookDAO = ebookDAO;
+        this.webDAO = webDAO;
+    }
 
     /**
      * 添加网站
@@ -47,7 +59,7 @@ public class AdminController {
             request.setAttribute("errorMsg", "添加网站的数据不正确！");
             return "/indexOfAdmin";
         } else {
-            shareDAO.addWeb(web);
+            webDAO.addWeb(web);
             return "redirect:/index";
         }
     }
@@ -67,13 +79,21 @@ public class AdminController {
             String path = request.getServletContext().getRealPath("/file/");
             ebook.setPath(path + File.separator + ebookFileName);
             ebook.setBookName(ebookFileName);
-            shareDAO.addEbook(ebook);
+            ebookDAO.addEbook(ebook);
             return "redirect:/index";
         }
         request.setAttribute("errorMsg", "添加书的数据不正确！");
         return "/page/admin/indexOfAdmin.jsp";
     }
 
+    /**
+     * 添加文章
+     * @param article
+     * @param request
+     * @param image
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/addArticle")
     public String addArticle(Article article, HttpServletRequest request, MultipartFile image) throws IOException {
         if (article.getTitle() != null && !"".equals(article.getTitle())
@@ -91,7 +111,7 @@ public class AdminController {
                 article.setImagePath(imageName);
             }
             article.setDate(new Timestamp(System.currentTimeMillis()));
-            shareDAO.addArticle(article);
+            articleDAO.addArticle(article);
             return "redirect:/index";
         } else {
             request.setAttribute("errorMsg", "添加文章数据不正确！");

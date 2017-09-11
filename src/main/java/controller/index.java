@@ -1,8 +1,11 @@
 package controller;
 
+import dao.ArticleDAO;
 import dao.CategoryAndLabelDAO;
-import dao.ShareDAO;
+import dao.EbookDAO;
+import dao.WebDAO;
 import model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,16 +20,30 @@ import java.util.List;
  */
 @Controller
 public class index {
-    ShareDAO shareDAO = new ShareDAO();
-    CategoryAndLabelDAO categoryAndLabelDAO = new CategoryAndLabelDAO();
+    private final ArticleDAO articleDAO ;
+    private final EbookDAO ebookDAO ;
+    private final WebDAO webDAO ;
+    private final CategoryAndLabelDAO categoryAndLabelDAO;
+
+    @Autowired
+    public index(ArticleDAO articleDAO, EbookDAO ebookDAO, WebDAO webDAO, CategoryAndLabelDAO categoryAndLabelDAO) {
+        this.articleDAO = articleDAO;
+        this.ebookDAO = ebookDAO;
+        this.webDAO = webDAO;
+        this.categoryAndLabelDAO = categoryAndLabelDAO;
+    }
+    /**
+     * 主页
+     * @return
+     */
     @RequestMapping(value = "/index")
     public ModelAndView goIndex(){
-        List<Web> webs = shareDAO.getAllWeb();
+        List<Web> webs = webDAO.getWebForIndex();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("webs",webs);
-        List<Ebook> ebooks = shareDAO.getAllBook();
+        List<Ebook> ebooks = ebookDAO.getBookForIndex();
         modelAndView.addObject("ebooks",ebooks);
-        List<Article> articles = shareDAO.getArticlesForIndex();
+        List<Article> articles = articleDAO.getArticlesForIndex();
         modelAndView.addObject("articles",articles);
         modelAndView.setViewName("page/index.jsp");
         List<Category> categoriesForArticle = categoryAndLabelDAO.getCategoryByType(1);
@@ -35,10 +52,22 @@ public class index {
         modelAndView.addObject("categoriesForShare",categoriesForShare);
         return modelAndView;
     }
+
+    /**
+     * 管理员的主页
+     * @return
+     */
     @RequestMapping(value = "/indexOfAdmin")
     public String goIndexOfAdmin(){
         return "/page/admin/indexOfAdmin.jsp";
     }
+
+    /**
+     * 管理员验证
+     * @param request
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/verifyAdmin")
     public String verify(HttpServletRequest request, User user){
         HttpSession session = request.getSession();

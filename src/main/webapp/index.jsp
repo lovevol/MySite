@@ -11,6 +11,6 @@
     <title></title>
 </head>
 <body>
-<%response.sendRedirect("index");%>
+<%response.sendRedirect("/mySite/user/login");%>
 </body>
 </html>
