@@ -1,8 +1,8 @@
 package dao;
 
-import Utils.MyBatisUtil;
 import model.Ebook;
-import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,7 +13,8 @@ import java.util.List;
  */
 @Component
 public class EbookDAO {
-    private SqlSession sqlSession = MyBatisUtil.getSqlSession();
+    @Autowired
+    private SqlSessionTemplate sqlSessionTemplate;
 
     /**
      * 添加电子书
@@ -21,8 +22,7 @@ public class EbookDAO {
      * @return
      */
     public int addEbook(Ebook ebook){
-        int id = sqlSession.insert("mapper.ShareMapper.saveEbook",ebook);
-        sqlSession.commit();
+        int id = sqlSessionTemplate.insert("mapper.ShareMapper.saveEbook",ebook);
         return id;
     }
 
@@ -31,8 +31,7 @@ public class EbookDAO {
      * @return
      */
     public List<Ebook> getBookForIndex(){
-        List<Ebook> ebooks = sqlSession.selectList("mapper.ShareMapper.selectEbookForIndex");
-        sqlSession.commit();
+        List<Ebook> ebooks = sqlSessionTemplate.selectList("mapper.ShareMapper.selectEbookForIndex");
         return ebooks;
     }
 }

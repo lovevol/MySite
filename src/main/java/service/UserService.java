@@ -3,13 +3,13 @@ package service;
 import dao.UserDAO;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by lh
  * on 2017/9/11.
  */
-@Component
+@Service
 public class UserService {
     private final UserDAO userDAO;
 

@@ -1,8 +1,8 @@
 package dao;
 
-import Utils.MyBatisUtil;
 import model.User;
-import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class UserDAO {
-    private SqlSession sqlSession = MyBatisUtil.getSqlSession();
+    @Autowired
+    private SqlSessionTemplate sqlSessionTemplate;
 
     public User getUserByLoginName(String loginName){
-        User user = sqlSession.selectOne("mapper.UserMapper.selectUserByLoginName",loginName);
-        sqlSession.commit();
+        User user = sqlSessionTemplate.selectOne("mapper.UserMapper.selectUserByLoginName",loginName);
         return user;
     }
 }

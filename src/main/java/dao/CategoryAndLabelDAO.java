@@ -1,9 +1,9 @@
 package dao;
 
-import Utils.MyBatisUtil;
 import model.Category;
 import model.Label;
-import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,17 +14,17 @@ import java.util.List;
  */
 @Component
 public class CategoryAndLabelDAO {
-    private SqlSession sqlSession = MyBatisUtil.getSqlSession();
+    @Autowired
+    private SqlSessionTemplate sqlSessionTemplate;
+
     public List<Category> getCategoryByType(int type){
-        List<Category> categories = sqlSession.selectList("mapper.CategoryAndLabelMapper.selectCategoryByType",
+        List<Category> categories = sqlSessionTemplate.selectList("mapper.CategoryAndLabelMapper.selectCategoryByType",
                 type);
-        sqlSession.commit();
         return categories;
     }
     public List<Label> getLabelByCategory(int category){
-        List<Label> labels = sqlSession.selectList("mapper.CategoryAndLabelMapper.selectLabelByCategory",
+        List<Label> labels = sqlSessionTemplate.selectList("mapper.CategoryAndLabelMapper.selectLabelByCategory",
                 category);
-        sqlSession.commit();
         return labels;
     }
 }

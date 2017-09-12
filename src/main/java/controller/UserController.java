@@ -45,7 +45,7 @@ public class UserController {
         }else if (userService.validateLogin(user) && user.getRoleType() == 2){
             HttpSession session = request.getSession();
             session.setAttribute("user",user);
-            return "redirect:/indexOfAdmin";
+            return "redirect:/admin/indexOfAdmin";
         }else {
             return "redirect:/user/login";
         }

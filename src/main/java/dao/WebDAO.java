@@ -1,8 +1,8 @@
 package dao;
 
-import Utils.MyBatisUtil;
 import model.Web;
-import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,15 +13,15 @@ import java.util.List;
  */
 @Component
 public class WebDAO {
-    private SqlSession sqlSession = MyBatisUtil.getSqlSession();
+    @Autowired
+    private SqlSessionTemplate sqlSessionTemplate;
 
     /**
      * 获取主页的网站分享
      * @return
      */
     public List<Web> getWebForIndex(){
-        List<Web> webs = sqlSession.selectList("mapper.ShareMapper.selectWebForIndex");
-        sqlSession.commit();
+        List<Web> webs = sqlSessionTemplate.selectList("mapper.ShareMapper.selectWebForIndex");
         return webs;
     }
 
@@ -31,8 +31,7 @@ public class WebDAO {
      * @return
      */
     public int addWeb(Web web){
-        int id = sqlSession.insert("mapper.ShareMapper.saveWeb",web);
-        sqlSession.commit();
+        int id = sqlSessionTemplate.insert("mapper.ShareMapper.saveWeb",web);
         return id;
     }
 }

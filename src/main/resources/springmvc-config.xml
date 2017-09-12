@@ -9,9 +9,6 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd"
         default-autowire="byName">
     <context:component-scan base-package="controller"/><!--自动扫面包下的controller-->
-    <context:component-scan base-package="dao"/>
-    <context:component-scan base-package="service"/>
-
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
     <!--视图解析器-->

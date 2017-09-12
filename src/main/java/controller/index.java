@@ -53,14 +53,6 @@ public class index {
         return modelAndView;
     }
 
-    /**
-     * 管理员的主页
-     * @return
-     */
-    @RequestMapping(value = "/indexOfAdmin")
-    public String goIndexOfAdmin(){
-        return "/page/admin/indexOfAdmin.jsp";
-    }
 
     /**
      * 管理员验证
