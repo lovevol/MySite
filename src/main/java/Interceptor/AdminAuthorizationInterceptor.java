@@ -1,5 +1,6 @@
 package Interceptor;
 
+import model.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,9 +18,10 @@ public class AdminAuthorizationInterceptor implements HandlerInterceptor {
         Boolean flag = false;
         HttpSession session = request.getSession();
         String adminVerify = (String) session.getAttribute("adminVerify");
-        if (adminVerify == null || !"success".equals(adminVerify)){
-            request.setAttribute("errorMsg","请完成管理员验证后再进行管理员功能操作!");
-            request.getRequestDispatcher("/index").forward(request,response);
+        User user = (User) session.getAttribute("user");
+        if (user == null || user.getRoleType() != 2){
+            request.setAttribute("errorMsg","请以管理员身份登录后再进行管理员功能操作!");
+            request.getRequestDispatcher("/user/login").forward(request,response);
         }else {
             flag = true;
         }

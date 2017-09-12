@@ -15,7 +15,10 @@ public class UserDAO {
     private SqlSessionTemplate sqlSessionTemplate;
 
     public User getUserByLoginName(String loginName){
-        User user = sqlSessionTemplate.selectOne("mapper.UserMapper.selectUserByLoginName",loginName);
-        return user;
+        return sqlSessionTemplate.selectOne("mapper.UserMapper.selectUserByLoginName",loginName);
+    }
+
+    public User getUserById(int id){
+        return sqlSessionTemplate.selectOne("mapper.UserMapper.selectUserById",id);
     }
 }

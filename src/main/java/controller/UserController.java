@@ -40,14 +40,23 @@ public class UserController {
     public String validate(HttpServletRequest request, User user){
         if (userService.validateLogin(user) && user.getRoleType() == 1){
             HttpSession session = request.getSession();
+            user = userService.getUserByLoginName(user.getLoginName());
             session.setAttribute("user",user);
             return "redirect:/index";
         }else if (userService.validateLogin(user) && user.getRoleType() == 2){
+            user = userService.getUserByLoginName(user.getLoginName());
             HttpSession session = request.getSession();
             session.setAttribute("user",user);
             return "redirect:/admin/indexOfAdmin";
         }else {
             return "redirect:/user/login";
         }
+    }
+
+    @RequestMapping(value = "/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "redirect:/user/login";
     }
 }

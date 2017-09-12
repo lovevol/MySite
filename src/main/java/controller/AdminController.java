@@ -6,6 +6,7 @@ import dao.WebDAO;
 import model.Article;
 import model.Ebook;
 import model.Web;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ import java.sql.Timestamp;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
+    private Logger logger = Logger.getLogger(this.getClass());
     private final ArticleDAO articleDAO ;
     private final EbookDAO ebookDAO ;
     private final WebDAO webDAO ;
@@ -40,6 +42,7 @@ public class AdminController {
         this.articleDAO = articleDAO;
         this.ebookDAO = ebookDAO;
         this.webDAO = webDAO;
+        logger.info(this.getClass()+"AdminController运行了");
     }
 
     /**

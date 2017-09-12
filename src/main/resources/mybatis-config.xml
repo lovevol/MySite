@@ -3,24 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <!--引入资源文件来配置数据库-->
-    <!--<properties resource="db.properties"/>-->
-   <!-- <settings>
-        &lt;!&ndash;指定MyBatis日志的具体实现&ndash;&gt;
-        <setting name="logImpl" value="LOG4J"/>
-    </settings>-->
-    <!--&lt;!&ndash;配置连接的数据库&ndash;&gt;
-    <environments default="mysql">
-        <environment id="mysql">
-            <transactionManager type="JDBC"/>&lt;!&ndash;指定事务的类型&ndash;&gt;
-            <dataSource type="POOLED">&lt;!&ndash;指定并配置数据源，使用资源文件中的数据&ndash;&gt;
-                <property name="driver" value="${driver}"/>
-                <property name="url" value="${url}"/>
-                <property name="username" value="${username}"/>
-                <property name="password" value="${password}"/>
-            </dataSource>
-        </environment>
-    </environments>-->
     <!--指定映射文件的具体位置-->
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>

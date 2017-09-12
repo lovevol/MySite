@@ -11,6 +11,12 @@
 <head>
 
     <script>
+        $(function () {
+            var errorMsg = $("#errorMsg").val();
+            if(errorMsg != null && errorMsg != ""){
+                alert(errorMsg);
+            }
+        })
     </script>
     <title>登陆</title>
 </head>
@@ -41,6 +47,9 @@
 
         </form>
     </div>
+</div>
+<div>
+    <input hidden="hidden" type="text" value="${requestScope.errorMsg}" id="errorMsg">
 </div>
 </body>
 </html>

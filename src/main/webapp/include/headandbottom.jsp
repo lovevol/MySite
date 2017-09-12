@@ -38,7 +38,24 @@
                 </button>
             </form>
             <ul class="nav navbar-nav navbar-right" style="margin-right: 15%">
-                <li><a href="${pageContext.request.contextPath}/user/login">登陆</a></li>
+                <c:choose>
+                    <c:when test="${! empty sessionScope.user}">
+                        <c:choose>
+                            <c:when test="${sessionScope.user.roleType eq 1}">
+                                <li><a>欢迎用户:${sessionScope.user.userName}</a></li>
+                                <li><a href="${pageContext.request.contextPath}/user/logout">退出</a></li>
+                            </c:when>
+                            <c:otherwise>
+                               <li><a>欢迎管理员:${sessionScope.user.userName}</a> </li>
+                                <li><a href="${pageContext.request.contextPath}/user/logout">退出</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="${pageContext.request.contextPath}/user/login">登陆</a></li>
+                    </c:otherwise>
+                </c:choose>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">帮助
