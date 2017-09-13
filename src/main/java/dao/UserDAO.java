@@ -13,17 +13,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDAO {
     @Autowired
-    private SqlSessionTemplate sqlSessionTemplate;
-
-    private UserMapper userMapper = null;
+    private UserMapper userMapper;
 
     public User getUserByLoginName(String loginName){
-        userMapper = sqlSessionTemplate.getMapper(UserMapper.class);
         return userMapper.selectUserByLoginName(loginName);
     }
 
     public User getUserById(int id){
-        userMapper = sqlSessionTemplate.getMapper(UserMapper.class);
         return userMapper.selectUserById(id);
     }
 }

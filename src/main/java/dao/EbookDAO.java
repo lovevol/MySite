@@ -1,5 +1,6 @@
 package dao;
 
+import mapper.ShareMapper;
 import model.Ebook;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.List;
 @Component
 public class EbookDAO {
     @Autowired
-    private SqlSessionTemplate sqlSessionTemplate;
+    private ShareMapper shareMapper;
 
     /**
      * 添加电子书
@@ -22,8 +23,7 @@ public class EbookDAO {
      * @return
      */
     public int addEbook(Ebook ebook){
-        int id = sqlSessionTemplate.insert("mapper.ShareMapper.saveEbook",ebook);
-        return id;
+        return shareMapper.saveEbook(ebook);
     }
 
     /**
@@ -31,7 +31,6 @@ public class EbookDAO {
      * @return
      */
     public List<Ebook> getBookForIndex(){
-        List<Ebook> ebooks = sqlSessionTemplate.selectList("mapper.ShareMapper.selectEbookForIndex");
-        return ebooks;
+       return shareMapper.selectEbookForIndex();
     }
 }

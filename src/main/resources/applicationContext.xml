@@ -10,6 +10,9 @@
     <!--自动扫描-->
     <context:component-scan base-package="dao"/>
     <context:component-scan base-package="service"/>
+    <context:component-scan base-package="mapper" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
     <!--数据源-->
     <context:property-override location="classpath:db.properties"/><!--加载数据源配置-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -23,5 +26,10 @@
     </bean>
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"/>
     <tx:annotation-driven transaction-manager="txManager"/>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
+        <property name="basePackage" value="mapper"/>
+        <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
+    </bean>
 
 </beans>

@@ -1,5 +1,6 @@
 package dao;
 
+import mapper.CategoryAndLabelMapper;
 import model.Category;
 import model.Label;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,16 +16,12 @@ import java.util.List;
 @Component
 public class CategoryAndLabelDAO {
     @Autowired
-    private SqlSessionTemplate sqlSessionTemplate;
+    private CategoryAndLabelMapper categoryAndLabelMapper;
 
     public List<Category> getCategoryByType(int type){
-        List<Category> categories = sqlSessionTemplate.selectList("mapper.CategoryAndLabelMapper.selectCategoryByType",
-                type);
-        return categories;
+       return categoryAndLabelMapper.selectCategoryByType(type);
     }
     public List<Label> getLabelByCategory(int category){
-        List<Label> labels = sqlSessionTemplate.selectList("mapper.CategoryAndLabelMapper.selectLabelByCategory",
-                category);
-        return labels;
+        return categoryAndLabelMapper.selectLabelByCategory(category);
     }
 }
