@@ -60,7 +60,7 @@ public class AdminController {
         if (web.getWebUrl() == null || web.getDescription() == null || web.getLabel() == null
                 || "".equals(web.getWebUrl()) || "".equals(web.getDescription()) || "".equals(web.getLabel())) {
             request.setAttribute("errorMsg", "添加网站的数据不正确！");
-            return "/indexOfAdmin";
+            return "redirect:/admin/indexOfAdmin";
         } else {
             webDAO.addWeb(web);
             return "redirect:/index";
@@ -83,7 +83,7 @@ public class AdminController {
             ebook.setPath(path + File.separator + ebookFileName);
             ebook.setBookName(ebookFileName);
             ebookDAO.addEbook(ebook);
-            return "redirect:/index";
+            return "redirect:/admin/indexOfAdmin";
         }
         request.setAttribute("errorMsg", "添加书的数据不正确！");
         return "/page/admin/indexOfAdmin.jsp";
@@ -115,7 +115,7 @@ public class AdminController {
             }
             article.setDate(new Timestamp(System.currentTimeMillis()));
             articleDAO.addArticle(article);
-            return "redirect:/index";
+            return "redirect:/admin/indexOfAdmin";
         } else {
             request.setAttribute("errorMsg", "添加文章数据不正确！");
             return "/page/admin/addArticle.jsp";

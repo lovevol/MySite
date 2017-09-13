@@ -1,4 +1,4 @@
-package ValueObject;
+package value_object;
 
 import java.sql.Timestamp;
 
