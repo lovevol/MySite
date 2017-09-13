@@ -46,7 +46,7 @@
                                 <li><a href="${pageContext.request.contextPath}/user/logout">退出</a></li>
                             </c:when>
                             <c:otherwise>
-                               <li><a>欢迎管理员:${sessionScope.user.userName}</a> </li>
+                               <li><a href="${pageContext.request.contextPath}/admin/indexOfAdmin">欢迎管理员:${sessionScope.user.userName}</a> </li>
                                 <li><a href="${pageContext.request.contextPath}/user/logout">退出</a></li>
                             </c:otherwise>
                         </c:choose>

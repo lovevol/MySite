@@ -143,7 +143,7 @@
             <label for="label">标签:</label><input type="text" id="label" name="label" class="form-control">
             <label for="category">类别:</label><input type="text" id="category" name="category" class="form-control">
             <label for="image">封面图:</label> <input type="file" id="image" name="image" class="form-control">
-            <label for="sketch">简述:</label><textarea rows="4" id="sketch" name="sketch" class="form-control"></textarea>
+            <label for="sketch">简述:</label><textarea rows="4" id="sketch" name="sketch" class="form-control" maxlength="500"></textarea>
             <input type="text" hidden="hidden" id="content" name="content">
         </form>
     </div>

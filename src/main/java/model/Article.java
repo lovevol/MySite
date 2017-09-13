@@ -14,6 +14,7 @@ public class Article {
     private String label;
     private String category;
     private String imagePath;
+    private String sketch;
 
     public String getImagePath() {
         return imagePath;
@@ -31,7 +32,7 @@ public class Article {
         this.sketch = sketch;
     }
 
-    private String sketch;
+
 
     public int getIdArticle() {
         return idArticle;

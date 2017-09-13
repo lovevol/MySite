@@ -16,7 +16,7 @@
     <h5>标签</h5>
     <hr class="myhr1">
 </div>
-<div style="margin-left: 21%;padding: 20px;background-color: white;float: left;width: 50%;height: 1000px">
+<div style="margin-left: 21%;padding: 20px;background-color: white;float: left;width: 50%;">
     <h2 class="myh1">${requestScope.article.title}</h2>
     <h5 style="text-align: center">日期:${requestScope.article.date}&nbsp;&nbsp;&nbsp;<span>标签:<a href="#" style="color: #f3726d">${requestScope.article.label}</a></span></h5>
     <br>
@@ -26,7 +26,7 @@
     <br>
     <p style="font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${requestScope.article.sketch}</p>
     <hr>
-    <div>
+    <div style="width: 100%">
         ${requestScope.article.content}
     </div>
 </div>
