@@ -26,7 +26,7 @@
     <div style="margin:0 auto;width: 400px;height:350px;border: 1px" class="form-group">
         <form action="${pageContext.request.contextPath}/user/validate" method="post">
             <h3 style="color: ">登陆</h3>
-            <span style="float: right">没有账户号?<a href="#">注册</a></span>
+            <span style="float: right">没有账户号?<a href="${pageContext.request.contextPath}/page/user/register.jsp">注册</a></span>
             <hr>
             <label for="loginName">登录名:</label>
             <input name="loginName" id="loginName" class="form-control" placeholder="loginName">

@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * Created by lh
@@ -53,10 +55,40 @@ public class UserController {
         }
     }
 
+    /**
+     * 退出登陆
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.invalidate();
         return "redirect:/user/login";
+    }
+
+    /**
+     * 异步验证用户名是否存在
+     * @param response
+     * @param loginName
+     * @return
+     */
+    @RequestMapping(value = "/validateLoginName")
+    public String validateLoginName(HttpServletResponse response,String loginName){
+        User user = userService.getUserByLoginName(loginName);
+        if (user != null){
+            try {
+                response.getWriter().write("false");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else {
+            try {
+                response.getWriter().write("true");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 }
