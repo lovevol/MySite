@@ -1,5 +1,6 @@
 package dao;
 
+import mapper.UserMapper;
 import model.User;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,15 @@ public class UserDAO {
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 
+    private UserMapper userMapper = null;
+
     public User getUserByLoginName(String loginName){
-        return sqlSessionTemplate.selectOne("mapper.UserMapper.selectUserByLoginName",loginName);
+        userMapper = sqlSessionTemplate.getMapper(UserMapper.class);
+        return userMapper.selectUserByLoginName(loginName);
     }
 
     public User getUserById(int id){
-        return sqlSessionTemplate.selectOne("mapper.UserMapper.selectUserById",id);
+        userMapper = sqlSessionTemplate.getMapper(UserMapper.class);
+        return userMapper.selectUserById(id);
     }
 }
