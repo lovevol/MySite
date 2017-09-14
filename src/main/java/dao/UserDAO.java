@@ -2,7 +2,6 @@ package dao;
 
 import mapper.UserMapper;
 import model.User;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,5 +20,8 @@ public class UserDAO {
 
     public User getUserById(int id){
         return userMapper.selectUserById(id);
+    }
+    public int saveUser(User user){
+        return userMapper.save(user);
     }
 }

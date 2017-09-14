@@ -7,7 +7,7 @@
         SELECT * FROM user WHERE loginname = #{loginName}
     </select>
     <insert id="save" parameterType="model.User" useGeneratedKeys="true">
-        INSERT INTO user(username, password, age) VALUES(#{userName},#{password},#{age})
+        INSERT INTO user(username, loginname,password, gender,roletype,email) VALUES(#{userName},#{loginName},#{password},#{gender},#{roleType},#{email})
     </insert>
     <select id="selectUserById" parameterType="int" resultType="model.User">
         SELECT * FROM user WHERE iduser = #{id}

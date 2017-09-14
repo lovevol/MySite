@@ -168,18 +168,18 @@
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="49" parent="18" name="age">
+    <column id="49" parent="18" name="gender">
       <Position>5</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="50" parent="18" name="gender">
-      <Position>6</Position>
       <DataType>char(2)|0</DataType>
     </column>
-    <column id="51" parent="18" name="roletype">
-      <Position>7</Position>
+    <column id="50" parent="18" name="roletype">
+      <Position>6</Position>
       <DataType>tinyint(4)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="18" name="email">
+      <Position>7</Position>
+      <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
     <key id="52" parent="18" name="PRIMARY">

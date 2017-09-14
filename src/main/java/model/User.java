@@ -13,15 +13,23 @@ public class User {
     private String loginName;
     private String userName;
     private String password;
-    private int age;
     private String gender;
-    private int roleType;
+    private byte roleType;
+    private String email;
 
-    public int getRoleType() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public byte getRoleType() {
         return roleType;
     }
 
-    public void setRoleType(int roleType) {
+    public void setRoleType(byte roleType) {
         this.roleType = roleType;
     }
 
@@ -57,13 +65,6 @@ public class User {
         this.password = password;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public String getGender() {
         return gender;
@@ -71,43 +72,5 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "idUSer=" + idUSer +
-                ", loginName='" + loginName + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (idUSer != user.idUSer) return false;
-        if (age != user.age) return false;
-        if (loginName != null ? !loginName.equals(user.loginName) : user.loginName != null) return false;
-        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        return gender != null ? gender.equals(user.gender) : user.gender == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idUSer;
-        result = 31 * result + (loginName != null ? loginName.hashCode() : 0);
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + age;
-        result = 31 * result + (gender != null ? gender.hashCode() : 0);
-        return result;
     }
 }

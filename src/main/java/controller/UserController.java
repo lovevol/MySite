@@ -28,7 +28,7 @@ public class UserController {
      * 登陆的具体路径
      */
     private final String LOGIN_PAGE = PAGE_PATH + "login.jsp";
-
+    private final String REGISTER_PAGE = PAGE_PATH +"register.jsp";
     /**
      * 跳转到用户登陆界面
      * @return 界面路径
@@ -90,5 +90,25 @@ public class UserController {
             }
         }
         return null;
+    }
+
+    /**
+     * 注册并登陆
+     * @param request
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/register")
+    public String register(HttpServletRequest request,User user){
+        user.setRoleType((byte)1);
+        userService.saveUser(user);
+        HttpSession session = request.getSession();
+        session.setAttribute("user",user);
+        return "redirect:/index";
+    }
+
+    @RequestMapping(value = "/registerForm")
+    public String registerForm(){
+        return REGISTER_PAGE;
     }
 }

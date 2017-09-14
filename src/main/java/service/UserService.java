@@ -31,4 +31,7 @@ public class UserService {
     public User getUserByLoginName(String loginName){
         return userDAO.getUserByLoginName(loginName);
     }
+    public int saveUser(User user){
+        return userDAO.saveUser(user);
+    }
 }
