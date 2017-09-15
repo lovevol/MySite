@@ -1,8 +1,6 @@
 package dao;
-
-import mapper.ShareMapper;
+import mapper.ArticleMapper;
 import model.Article;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +13,7 @@ import java.util.List;
 @Component
 public class ArticleDAO {
     @Autowired
-    private ShareMapper shareMapper;
+    private ArticleMapper articleMapper;
 
     /**
      * 添加文章
@@ -23,7 +21,7 @@ public class ArticleDAO {
      * @return
      */
     public int addArticle(Article article){
-        return shareMapper.saveArticle(article);
+        return articleMapper.saveArticle(article);
     }
 
     /**
@@ -31,7 +29,7 @@ public class ArticleDAO {
      * @return
      */
     public List<Article> getArticlesForIndex(){
-       return shareMapper.selectArticleForIndex();
+       return articleMapper.selectArticleForIndex();
     }
 
     /**
@@ -40,6 +38,6 @@ public class ArticleDAO {
      * @return
      */
     public Article getArticleById(int id){
-      return shareMapper.selectArticleById(id);
+      return articleMapper.selectArticleById(id);
     }
 }

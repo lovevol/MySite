@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.EbookMapper">
+    <insert id="saveEbook" parameterType="model.Ebook" useGeneratedKeys="true">
+        INSERT INTO ebook(bookName,description,path) VALUES (#{bookName},#{description},#{path})
+    </insert>
+    <select id="selectEbookForIndex" resultType="model.Ebook">
+        SELECT * FROM ebook limit 5;
+    </select>
+</mapper>

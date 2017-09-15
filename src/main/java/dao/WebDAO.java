@@ -1,8 +1,7 @@
 package dao;
 
-import mapper.ShareMapper;
+import mapper.WebMapper;
 import model.Web;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,14 +14,14 @@ import java.util.List;
 @Component
 public class WebDAO {
     @Autowired
-    private ShareMapper shareMapper;
+    private WebMapper webMapper;
 
     /**
      * 获取主页的网站分享
      * @return
      */
     public List<Web> getWebForIndex(){
-        return shareMapper.selectWebForIndex();
+        return webMapper.selectWebForIndex();
     }
 
     /**
@@ -31,6 +30,6 @@ public class WebDAO {
      * @return
      */
     public int addWeb(Web web){
-        return shareMapper.saveWeb(web);
+        return webMapper.saveWeb(web);
     }
 }

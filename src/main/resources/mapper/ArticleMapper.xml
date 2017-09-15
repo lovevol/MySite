@@ -2,19 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.ShareMapper">
-    <insert id="saveWeb" parameterType="model.Web" useGeneratedKeys="true">
-        INSERT INTO web(weburl,description,remark,label) VALUES (#{webUrl},#{description},#{remark},#{label})
-    </insert>
-    <select id="selectWebForIndex" resultType="model.Web">
-        SELECT * from web limit 5;
-    </select>
-    <insert id="saveEbook" parameterType="model.Ebook" useGeneratedKeys="true">
-        INSERT INTO ebook(bookName,description,path) VALUES (#{bookName},#{description},#{path})
-    </insert>
-    <select id="selectEbookForIndex" resultType="model.Ebook">
-        SELECT * FROM ebook limit 5;
-    </select>
+<mapper namespace="mapper.ArticleMapper">
     <insert id="saveArticle" parameterType="model.Article" useGeneratedKeys="true">
         INSERT INTO article(title,content,date,label,category,sketch,imagepath) VALUES (#{title},#{content},#{date},#{label},#{category},#{sketch},#{imagePath})
     </insert>

@@ -6,7 +6,9 @@
     <!--指定映射文件的具体位置-->
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>
-        <mapper resource="mapper/ShareMapper.xml"/>
+        <mapper resource="mapper/EbookMapper.xml"/>
+        <mapper resource="mapper/WebMapper.xml"/>
+        <mapper resource="mapper/ArticleMapper.xml"/>
         <mapper resource="mapper/CategoryAndLabelMapper.xml"/>
     </mappers>
 </configuration>
