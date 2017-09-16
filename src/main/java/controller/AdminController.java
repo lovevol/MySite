@@ -3,15 +3,16 @@ package controller;
 import dao.ArticleDAO;
 import dao.EbookDAO;
 import dao.WebDAO;
-import model.Article;
-import model.Ebook;
-import model.Web;
+import model.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import service.CategoryAndLabelService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * Created by lh
@@ -36,7 +38,8 @@ public class AdminController {
     private final EbookDAO ebookDAO ;
     private final WebDAO webDAO ;
     private String ebookFileName;
-
+    @Autowired
+    private CategoryAndLabelService categoryAndLabelService;
     @Autowired
     public AdminController(ArticleDAO articleDAO, EbookDAO ebookDAO, WebDAO webDAO) {
         this.articleDAO = articleDAO;
@@ -88,7 +91,14 @@ public class AdminController {
         request.setAttribute("errorMsg", "添加书的数据不正确！");
         return "/page/admin/indexOfAdmin.jsp";
     }
-
+    @RequestMapping(value = "/goAddArticle")
+    public ModelAndView goAddArticel(){
+        List<Category> categories = categoryAndLabelService.getCategory();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("categories",categories);
+        modelAndView.setViewName("/page/admin/addArticle.jsp");
+        return modelAndView;
+    }
     /**
      * 添加文章
      * @param article
@@ -142,6 +152,17 @@ public class AdminController {
         return "/page/admin/indexOfAdmin.jsp";
     }
 
+    @RequestMapping(value = "/addCategory")
+    public String addCategory(Category category){
+        categoryAndLabelService.saveCategory(category);
+        return "redirect:/admin/indexOfAdmin";
+    }
+
+    @RequestMapping(value = "/addLabel")
+    public String addLabel(Label label){
+        categoryAndLabelService.saveLabel(label);
+        return "redirect:/admin/indexOfAdmin";
+    }
     /**
      * 管理员的主页
      * @return
@@ -149,5 +170,21 @@ public class AdminController {
     @RequestMapping(value = "/indexOfAdmin")
     public String goIndexOfAdmin(){
         return "/page/admin/indexOfAdmin.jsp";
+    }
+
+    @RequestMapping(value = "/goAddLabel")
+    public ModelAndView gpAddLabel(){
+        List<Category> categories = categoryAndLabelService.getCategory();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("categorys",categories);
+        modelAndView.setViewName("/page/admin/addLabel.jsp");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/getLabelForAjax")
+    @ResponseBody
+    public Object getLabelForAjax(int idCategory){
+        List<Label> labels = categoryAndLabelService.getLabelByCategoryId(idCategory);
+        return labels;
     }
 }

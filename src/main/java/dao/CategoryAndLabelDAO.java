@@ -3,7 +3,6 @@ package dao;
 import mapper.CategoryAndLabelMapper;
 import model.Category;
 import model.Label;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +20,28 @@ public class CategoryAndLabelDAO {
     public List<Category> getCategoryByType(int type){
        return categoryAndLabelMapper.selectCategoryByType(type);
     }
-    public List<Label> getLabelByCategory(int category){
-        return categoryAndLabelMapper.selectLabelByCategory(category);
+    public int saveCategory(Category category){
+        return categoryAndLabelMapper.saveCategory(category);
+    }
+
+    public int saveLabel(Label label){
+        return categoryAndLabelMapper.saveLabel(label);
+    }
+
+    /**
+     * 查询所有类别
+     * @return
+     */
+    public List<Category> getCategory(){
+        return categoryAndLabelMapper.selectCategory();
+    }
+
+    /**
+     * 按照类别查询标签
+     * @param
+     * @return
+     */
+    public List<Label> getLabelByCategoryId(int idCategory){
+        return categoryAndLabelMapper.selectLabelByCategoryId(idCategory);
     }
 }

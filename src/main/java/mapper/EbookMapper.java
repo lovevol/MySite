@@ -10,6 +10,6 @@ import java.util.List;
  */
 @Repository
 public interface EbookMapper {
-    public int saveEbook(Ebook ebook);
-    public List<Ebook> selectEbookForIndex();
+    int saveEbook(Ebook ebook);
+    List<Ebook> selectEbookForIndex();
 }

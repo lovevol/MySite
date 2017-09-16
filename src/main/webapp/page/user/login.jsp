@@ -26,7 +26,7 @@
     <div style="margin:0 auto;width: 400px;height:350px;border: 1px" class="form-group">
         <form action="${pageContext.request.contextPath}/user/validate" method="post">
             <h3 style="color: ">登陆</h3>
-            <span style="float: right">没有账户号?<a href="${pageContext.request.contextPath}/user/registerForm">注册</a></span>
+            <span style="float: right">没有账户号?<a href="${pageContext.request.contextPath}/user/registerForm">注册</a>或<a href="${pageContext.request.contextPath}/index">游客访问</a></span>
             <hr>
             <label for="loginName">登录名:</label>
             <input name="loginName" id="loginName" class="form-control" placeholder="loginName">
@@ -39,7 +39,6 @@
                 <input type="radio" name="roleType" id="roleType2" value="2" style="margin-left: 30px"><label for="roleType2">管理员</label>
             </div>
             <hr>
-            <span style="float: right"><a href="${pageContext.request.contextPath}/index">游客访问</a></span>
             <div style="text-align: center;">
                 <button type="submit" class="btn btn-primary">提交</button>
                 <button type="reset" class="btn bg-danger">重置</button>

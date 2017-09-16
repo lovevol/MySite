@@ -11,7 +11,17 @@ import java.util.List;
  */
 @Repository
 public interface CategoryAndLabelMapper {
-    public List<Category> selectCategoryByType(int type);
-    public Category selectCategoryById(int id);
-    public List<Label> selectLabelByCategory(int category);
+    List<Category> selectCategoryByType(int type);
+
+    Category selectCategoryById(int id);
+
+    List<Label> selectLabelByCategoryId(int idCategory);
+
+    int saveLabel(Label label);
+
+    int saveCategory(Category category);
+
+    List<Category> selectCategory();
+
+    Label selectLabelById(int id);
 }

@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserMapper {
-    public User selectUserByLoginName(String loginName);
-    public User selectUserById(int id);
-    public int save(User user);
-    public int deleteUserById(int id);
-    public int updateUserById(User user);
+    User selectUserByLoginName(String loginName);
+    User selectUserById(int id);
+    int save(User user);
+    int deleteUserById(int id);
+    int updateUserById(User user);
 }

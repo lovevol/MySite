@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * Created by lh
  * on 2017/9/10.
@@ -9,6 +11,17 @@ public class Category {
     private String name;
     private int type;
     private String description;
+    private List<Label> labels;
+
+    public List<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<Label> labels) {
+        this.labels = labels;
+    }
+
+
 
     public int getIdCategory() {
         return idCategory;

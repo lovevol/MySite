@@ -18,6 +18,34 @@
             $("#content").val(UE.getEditor('editor').getContent());
             $("#formForArticle").submit();
         }
+        /**
+         * 按照类别，动态更新label
+         */
+        function getLabel() {
+            $.ajax({
+                url:"${pageContext.request.contextPath}/admin/getLabelForAjax?idCategory="+$("#category").val(),
+                type:"post",
+                contentType:"application/json",
+                success:function (data) {
+                    var select = $("#label");
+                    select.empty();
+                    var data = eval('(' + data + ')');
+                    if(data != null && data.length >= 1){
+                        for(var i = 0; i < data.length; i++){
+                            select.append("<option value="+data[i].idLable+">"+data[i].name+"</option>")
+                        }
+                    }else {
+
+                        select.append("<option value=''>该分类下无标签</option>")
+                    }
+                },
+                error:function () {
+                    alert("获取相应标签出错");
+                }
+
+            })
+
+        }
     </script>
     <script type="text/javascript">
 
@@ -26,11 +54,11 @@
         var ue = UE.getEditor('editor');
 
 
-        function isFocus(e){
+        function isFocus(e) {
             alert(UE.getEditor('editor').isFocus());
             UE.dom.domUtils.preventDefault(e)
         }
-        function setblur(e){
+        function setblur(e) {
             UE.getEditor('editor').blur();
             UE.dom.domUtils.preventDefault(e)
         }
@@ -123,27 +151,47 @@
             }
         }
 
-        function getLocalData () {
-            alert(UE.getEditor('editor').execCommand( "getlocaldata" ));
+        function getLocalData() {
+            alert(UE.getEditor('editor').execCommand("getlocaldata"));
         }
 
-        function clearLocalData () {
-            UE.getEditor('editor').execCommand( "clearlocaldata" );
+        function clearLocalData() {
+            UE.getEditor('editor').execCommand("clearlocaldata");
             alert("已清空草稿箱")
         }
     </script>
 </head>
 <body style=" padding-top: 50px;background-color: #e4e4e4;">
-<div style="margin-left: 20%;margin-top:30px;width: 60%;background-color: white;padding: 20px">
+<div style="margin-left: 10%;margin-top:30px;width: 60%;background-color: white;padding: 20px;float: left;">
     <h2 style="color: #f3726d">发布文章</h2>
     <hr class="myhr1">
     <div class="form-group">
-        <form action="${pageContext.request.contextPath}/admin/addArticle" method="post" id="formForArticle" enctype="multipart/form-data">
-            <label for="title">标题:</label><input type="text" id="title" name="title" class="form-control">
-            <label for="label">标签:</label><input type="text" id="label" name="label" class="form-control">
-            <label for="category">类别:</label><input type="text" id="category" name="category" class="form-control">
-            <label for="image">封面图:</label> <input type="file" id="image" name="image" class="form-control">
-            <label for="sketch">简述:</label><textarea rows="4" id="sketch" name="sketch" class="form-control" maxlength="500"></textarea>
+        <form action="${pageContext.request.contextPath}/admin/addArticle" method="post" id="formForArticle"
+              enctype="multipart/form-data">
+            <label for="title">标题:</label>
+            <input type="text" id="title" name="title" class="form-control">
+
+            <div style="display: inline">
+                <div style="width: 50%;float: left">
+                    <label for="category">类别:</label>
+                    <select id="category" name="category" class="form-control" onchange="getLabel()">
+                        <c:forEach items="${categories}" var="category">
+                            <option value="${category.idCategory}">${category.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div style="width: 50%;float: left">
+                    <label for="label">标签:</label>
+                    <select id="label" name="label" class="form-control">
+
+                    </select>
+                </div>
+            </div>
+
+            <label for="image">封面图:</label>
+            <input type="file" id="image" name="image" class="form-control">
+            <label for="sketch">简述:</label>
+            <textarea rows="4" id="sketch" name="sketch" class="form-control" maxlength="500"></textarea>
             <input type="text" hidden="hidden" id="content" name="content">
         </form>
     </div>
@@ -185,4 +233,5 @@
     <button class="btn btn-primary" onclick="submitForm()">发布文章</button>
 </div>
 </body>
+<%@include file="leftMenuOfAdmin.jsp" %>
 </html>

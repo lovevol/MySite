@@ -3,19 +3,43 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.CategoryAndLabelMapper">
-    <select id="selectCategoryByType" resultType="model.Category" parameterType="int">
+    <resultMap id="categoryMap" type="model.Category">
+        <id property="idCategory" column="idcategory"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="description" column="description"/>
+        <collection property="labels" column="idcategory" javaType="ArrayList"
+                    ofType="model.Label" select="selectLabelByCategoryId"/>
+    </resultMap>
+    <select id="selectCategoryByType" resultMap="categoryMap" parameterType="int">
         SELECT * FROM category WHERE type = #{type}
     </select>
-    <select id="selectCategoryById" resultType="model.Category" parameterType="int">
+    <select id="selectCategory" resultMap="categoryMap">
+        SELECT * FROM category
+    </select>
+    <select id="selectCategoryById" resultMap="categoryMap" parameterType="int">
         SELECT * FROM category WHERE idcategory = #{id}
+    </select>
+    <insert id="saveCategory" parameterType="model.Category" useGeneratedKeys="true">
+        INSERT INTO category(name,type,description) VALUES (#{name},#{type},#{description})
+    </insert>
+    <select id="selectCategoryByIdForLabel" parameterType="int" resultType="model.Category">
+        SELECT * from category WHERE idcategory=#{id}
     </select>
     <resultMap id="labelResultMap" type="model.Label">
         <id property="idLabel" column="idlabel"/>
         <result property="name" column="name"/>
+        <result property="description" column="description"/>
         <association property="category" column="idcategory"
-                     javaType="model.Category" select="selectCategoryById"/>
+                     javaType="model.Category" select="selectCategoryByIdForLabel"/>
     </resultMap>
-    <select id="selectLabelByCategory" parameterType="int" resultMap="labelResultMap">
-        SELECT * FROM label where idcategory = ${idcategory}
+    <select id="selectLabelByCategoryId" resultMap="labelResultMap"  parameterType="int">
+        SELECT * FROM label where idcategory = #{idCategory}
+    </select>
+    <insert id="saveLabel" parameterType="model.Label" useGeneratedKeys="true">
+        INSERT INTO label(name,idcategory,description) VALUES (#{name},#{category.idCategory},#{description})
+    </insert>
+    <select id="selectLabelById" parameterType="int" resultMap="labelResultMap">
+        SELECT * FROM label WHERE idlabel=#{id}
     </select>
 </mapper>

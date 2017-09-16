@@ -11,11 +11,10 @@ public class Article {
     private String title;
     private String content;
     private Timestamp date;
-    private String label;
-    private String category;
     private String imagePath;
     private String sketch;
-
+    private Category category;
+    private Label label;
     public String getImagePath() {
         return imagePath;
     }
@@ -66,19 +65,19 @@ public class Article {
         this.date = date;
     }
 
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Label getLabel() {
+        return label;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
     }
 }

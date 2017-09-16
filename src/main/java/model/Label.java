@@ -7,6 +7,7 @@ package model;
 public class Label {
     private int idLabel;
     private String name;
+    private String description;
     private Category category;
 
     public int getIdLabel() {
@@ -31,5 +32,13 @@ public class Label {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

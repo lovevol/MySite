@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Repository
 public interface ArticleMapper {
-    public int saveArticle(Article article);
-    public Article selectArticleById(int id);
-    public List<Article> selectArticleForIndex();
+    int saveArticle(Article article);
+    Article selectArticleById(int id);
+    List<Article> selectArticleForIndex();
 }

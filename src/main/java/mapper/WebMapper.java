@@ -10,6 +10,6 @@ import java.util.List;
  */
 @Repository
 public interface WebMapper {
-    public int saveWeb(Web web);
-    public List<Web> selectWebForIndex();
+    int saveWeb(Web web);
+    List<Web> selectWebForIndex();
 }
