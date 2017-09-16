@@ -1,6 +1,7 @@
 package dao;
 import mapper.ArticleMapper;
 import model.Article;
+import model.Content;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ public class ArticleDAO {
     private ArticleMapper articleMapper;
 
     /**
-     * 添加文章
+     * 保存文章
      * @param article
      * @return
      */
@@ -39,5 +40,14 @@ public class ArticleDAO {
      */
     public Article getArticleById(int id){
       return articleMapper.selectArticleById(id);
+    }
+
+    /**
+     * 保存文章的正文内容
+     * @param content
+     * @return
+     */
+    public int addContent(Content content){
+        return articleMapper.saveContent(content);
     }
 }

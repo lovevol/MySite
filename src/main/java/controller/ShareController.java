@@ -60,7 +60,7 @@ public class ShareController {
      */
     @RequestMapping(value = "ebookShare")
     public ModelAndView ebookShare(){
-        List<Ebook> ebooks = ebookDAO.getBookForIndex();
+        List<Ebook> ebooks = ebookDAO.getEbookForIndex();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("ebooks",ebooks);
         modelAndView.setViewName("/page/share/ebookShare.jsp");

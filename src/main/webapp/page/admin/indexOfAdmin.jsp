@@ -75,5 +75,5 @@
     </div>
 </div>
 </body>
-<%@include file="leftMenuOfAdmin.jsp"%>
+<%@include file="rightMenuOfAdmin.jsp"%>
 </html>

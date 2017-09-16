@@ -17,17 +17,17 @@
     <hr class="myhr1">
 </div>
 <div style="margin-left: 21%;padding: 20px;background-color: white;float: left;width: 50%;">
-    <h2 class="myh1">${requestScope.article.title}</h2>
-    <h5 style="text-align: center">日期:${requestScope.article.date}&nbsp;&nbsp;&nbsp;<span>标签:<a href="#" style="color: #f3726d">${requestScope.article.label}</a></span></h5>
+    <h2 class="myh1">${article.title}</h2>
+    <h5 style="text-align: center">日期:${article.date}&nbsp;&nbsp;&nbsp;<span>标签:<a href="#" style="color: #f3726d">${requestScope.article.label}</a></span></h5>
     <br>
-    <c:if test="${!empty requestScope.article.imagePath}">
-        <img src="/mySite/image/${requestScope.article.imagePath}" alt="..." class="img-thumbnail" style="width: 100%">
+    <c:if test="${!empty article.imagePath}">
+        <img src="/mySite/image/${article.imagePath}" alt="..." class="img-thumbnail" style="width: 100%">
     </c:if>
     <br>
-    <p style="font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${requestScope.article.sketch}</p>
+    <p style="font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${article.sketch}</p>
     <hr>
     <div style="width: 100%">
-        ${requestScope.article.content}
+        ${article.content.content}
     </div>
 </div>
 <div style="left: 72%;padding: 20px;background-color: white;float: left;height: 300px;position: fixed;width: 15%">

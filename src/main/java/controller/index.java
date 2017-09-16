@@ -1,14 +1,14 @@
 package controller;
 
-import dao.ArticleDAO;
-import dao.CategoryAndLabelDAO;
-import dao.EbookDAO;
-import dao.WebDAO;
 import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import service.ArticleService;
+import service.CategoryAndLabelService;
+import service.EbookService;
+import service.WebService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,34 +20,45 @@ import java.util.List;
  */
 @Controller
 public class index {
-    private final ArticleDAO articleDAO ;
-    private final EbookDAO ebookDAO ;
-    private final WebDAO webDAO ;
-    private final CategoryAndLabelDAO categoryAndLabelDAO;
+    /**
+     * service
+     */
+    private CategoryAndLabelService categoryAndLabelService;
+    private EbookService ebookService;
+    private WebService webService;
+    private ArticleService articleService;
 
+    /**
+     * 自动注入
+     * @param categoryAndLabelService
+     * @param ebookService
+     * @param webService
+     * @param articleService
+     */
     @Autowired
-    public index(ArticleDAO articleDAO, EbookDAO ebookDAO, WebDAO webDAO, CategoryAndLabelDAO categoryAndLabelDAO) {
-        this.articleDAO = articleDAO;
-        this.ebookDAO = ebookDAO;
-        this.webDAO = webDAO;
-        this.categoryAndLabelDAO = categoryAndLabelDAO;
+    public index(CategoryAndLabelService categoryAndLabelService, EbookService ebookService, WebService webService, ArticleService articleService) {
+        this.categoryAndLabelService = categoryAndLabelService;
+        this.ebookService = ebookService;
+        this.webService = webService;
+        this.articleService = articleService;
     }
+
     /**
      * 主页
-     * @return
+     * @return 主页地址
      */
     @RequestMapping(value = "/index")
     public ModelAndView goIndex(){
-        List<Web> webs = webDAO.getWebForIndex();
+        List<Web> webs = webService.getWebForIndex();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("webs",webs);
-        List<Ebook> ebooks = ebookDAO.getBookForIndex();
+        List<Ebook> ebooks = ebookService.getEbookForIndex();
         modelAndView.addObject("ebooks",ebooks);
-        List<Article> articles = articleDAO.getArticlesForIndex();
+        List<Article> articles = articleService.getArticleForIndex();
         modelAndView.addObject("articles",articles);
         modelAndView.setViewName("page/index.jsp");
-        List<Category> categoriesForArticle = categoryAndLabelDAO.getCategoryByType(1);
-        List<Category> categoriesForShare = categoryAndLabelDAO.getCategoryByType(2);
+        List<Category> categoriesForArticle = categoryAndLabelService.getCategoryByType(1);
+        List<Category> categoriesForShare = categoryAndLabelService.getCategoryByType(2);
         modelAndView.addObject("categoriesForArticle",categoriesForArticle);
         modelAndView.addObject("categoriesForShare",categoriesForShare);
         return modelAndView;

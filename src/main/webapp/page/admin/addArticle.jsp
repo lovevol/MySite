@@ -32,7 +32,7 @@
                     var data = eval('(' + data + ')');
                     if(data != null && data.length >= 1){
                         for(var i = 0; i < data.length; i++){
-                            select.append("<option value="+data[i].idLable+">"+data[i].name+"</option>")
+                            select.append("<option value="+data[i].idLabel+">"+data[i].name+"</option>")
                         }
                     }else {
 
@@ -174,7 +174,7 @@
             <div style="display: inline">
                 <div style="width: 50%;float: left">
                     <label for="category">类别:</label>
-                    <select id="category" name="category" class="form-control" onchange="getLabel()">
+                    <select id="category" name="category.idCategory" class="form-control" onchange="getLabel()">
                         <c:forEach items="${categories}" var="category">
                             <option value="${category.idCategory}">${category.name}</option>
                         </c:forEach>
@@ -182,8 +182,7 @@
                 </div>
                 <div style="width: 50%;float: left">
                     <label for="label">标签:</label>
-                    <select id="label" name="label" class="form-control">
-
+                    <select id="label" name="label.idLabel" class="form-control">
                     </select>
                 </div>
             </div>
@@ -192,7 +191,7 @@
             <input type="file" id="image" name="image" class="form-control">
             <label for="sketch">简述:</label>
             <textarea rows="4" id="sketch" name="sketch" class="form-control" maxlength="500"></textarea>
-            <input type="text" hidden="hidden" id="content" name="content">
+            <input type="text" hidden="hidden" id="content" name="content.content">
         </form>
     </div>
     <h3>正文内容:</h3>
@@ -233,5 +232,5 @@
     <button class="btn btn-primary" onclick="submitForm()">发布文章</button>
 </div>
 </body>
-<%@include file="leftMenuOfAdmin.jsp" %>
+<%@include file="rightMenuOfAdmin.jsp" %>
 </html>

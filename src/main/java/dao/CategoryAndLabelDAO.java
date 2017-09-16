@@ -44,4 +44,12 @@ public class CategoryAndLabelDAO {
     public List<Label> getLabelByCategoryId(int idCategory){
         return categoryAndLabelMapper.selectLabelByCategoryId(idCategory);
     }
+
+    public int updateLabelForAddArticle(Label label){
+        return categoryAndLabelMapper.updateLabelForAddArticle(label);
+    }
+
+    public Label getLabelById(int id){
+        return categoryAndLabelMapper.selectLabelById(id);
+    }
 }

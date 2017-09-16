@@ -29,7 +29,7 @@ public class EbookDAO {
      * 获取主页的电子书分享
      * @return
      */
-    public List<Ebook> getBookForIndex(){
+    public List<Ebook> getEbookForIndex(){
        return ebookMapper.selectEbookForIndex();
     }
 }

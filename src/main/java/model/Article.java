@@ -9,12 +9,21 @@ import java.sql.Timestamp;
 public class Article {
     private int idArticle;
     private String title;
-    private String content;
     private Timestamp date;
     private String imagePath;
     private String sketch;
     private Category category;
     private Label label;
+    private Content content;
+
+    public Content getContent() {
+        return content;
+    }
+
+    public void setContent(Content content) {
+        this.content = content;
+    }
+
     public String getImagePath() {
         return imagePath;
     }
@@ -47,14 +56,6 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public Timestamp getDate() {

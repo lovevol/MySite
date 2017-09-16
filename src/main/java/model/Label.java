@@ -9,6 +9,15 @@ public class Label {
     private String name;
     private String description;
     private Category category;
+    private int articleNum;
+
+    public int getArticleNum() {
+        return articleNum;
+    }
+
+    public void setArticleNum(int articleNum) {
+        this.articleNum = articleNum;
+    }
 
     public int getIdLabel() {
         return idLabel;

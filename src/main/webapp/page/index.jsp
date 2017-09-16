@@ -12,7 +12,7 @@
     <title>主页</title>
 </head>
 <body style=" padding-top: 50px;background-color: #e4e4e4;">
-<div style="height: 100%;float: left;width: 40%;margin-left: 20%;">
+<div style="height: 100%;float: left;width: 50%;margin-left: 15%;">
     <c:forEach items="${requestScope.articles}" var="article" varStatus="articleStatus">
         <div style="padding: 20px" class="mydiv">
             <h2 class="myh1">${article.title}</h2>
@@ -79,7 +79,7 @@
         </c:forEach>
     </div>
 </div>
-<div style="width: 40%;float: left">
+<div style="width: 30%;float: left">
     <div style="background-color: white; margin-top: 30px; margin-left: 30px;width: 50%;padding: 20px">
         <h4>文章分类</h4>
         <hr class="myhr1">

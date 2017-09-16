@@ -32,6 +32,6 @@ public class UserService {
         return userDAO.getUserByLoginName(loginName);
     }
     public int saveUser(User user){
-        return userDAO.saveUser(user);
+        return userDAO.addUser(user);
     }
 }

@@ -3,19 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.ArticleMapper">
-    <insert id="saveArticle" parameterType="model.Article" useGeneratedKeys="true">
-        INSERT INTO article(title,content,date,idlabel,idcategory,sketch,imagepath) VALUES (#{title},#{content},#{date},#{label.idLabel},#{category.idCategory},#{sketch},#{imagePath})
+    <insert id="saveArticle" parameterType="model.Article" useGeneratedKeys="true" keyProperty="idArticle">
+        INSERT INTO article(title,date,idlabel,idcategory,sketch,imagepath,idcontent) VALUES (#{title},#{date},#{label.idLabel},#{category.idCategory},#{sketch},#{imagePath},#{content.idContent})
     </insert>
     <resultMap id="articleMap" type="model.Article">
         <id column="idarticle" property="idArticle"/>
-        <result property="content" column="content"/>
         <result property="date" column="date"/>
         <result property="imagePath" column="imagepath"/>
         <result property="sketch" column="sketch"/>
         <association property="category" column="idcategory" fetchType="eager"
-            select="selectCategoryById"/>
+            select="mapper.CategoryAndLabelMapper.selectCategoryById"/>
         <association property="label" column="idlabel" fetchType="eager"
-                     select="selectLabelById"/>
+                     select="mapper.CategoryAndLabelMapper.selectLabelById"/>
+        <association property="content" column="idcontent" fetchType="lazy"
+                     select="selectContentByArticleId"/>
      </resultMap>
     <select id="selectArticleForIndex" resultMap="articleMap">
         SELECT * FROM article ORDER BY date DESC LIMIT 5;
@@ -23,4 +24,10 @@
     <select id="selectArticleById" parameterType="int" resultMap="articleMap">
         SELECT * FROM article WHERE idarticle = #{id}
     </select>
+    <select id="selectContentByArticleId" parameterType="int" resultType="model.Content">
+        SELECT * from content WHERE idcontent = #{id}
+    </select>
+    <insert id="saveContent" parameterType="model.Content" useGeneratedKeys="true" keyProperty="idContent">
+        insert into content (content) values (#{content})
+    </insert>
 </mapper>

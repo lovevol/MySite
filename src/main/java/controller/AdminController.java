@@ -1,8 +1,5 @@
 package controller;
 
-import dao.ArticleDAO;
-import dao.EbookDAO;
-import dao.WebDAO;
 import model.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import service.ArticleService;
 import service.CategoryAndLabelService;
+import service.EbookService;
+import service.WebService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,24 +34,38 @@ import java.util.List;
 @RequestMapping(value = "/admin")
 public class AdminController {
     private Logger logger = Logger.getLogger(this.getClass());
-    private final ArticleDAO articleDAO ;
-    private final EbookDAO ebookDAO ;
-    private final WebDAO webDAO ;
     private String ebookFileName;
-    @Autowired
+
+    /**
+     * service层
+     */
     private CategoryAndLabelService categoryAndLabelService;
+    private EbookService ebookService;
+    private WebService webService;
+    private ArticleService articleService;
+
+    /**
+     * 自动注入
+     * @param categoryAndLabelService
+     * @param ebookService
+     * @param webService
+     * @param articleService
+     */
     @Autowired
-    public AdminController(ArticleDAO articleDAO, EbookDAO ebookDAO, WebDAO webDAO) {
-        this.articleDAO = articleDAO;
-        this.ebookDAO = ebookDAO;
-        this.webDAO = webDAO;
-        logger.info(this.getClass()+"AdminController运行了");
+    public AdminController(CategoryAndLabelService categoryAndLabelService, EbookService ebookService, WebService webService, ArticleService articleService) {
+        this.categoryAndLabelService = categoryAndLabelService;
+        this.ebookService = ebookService;
+        this.webService = webService;
+        this.articleService = articleService;
     }
+
+
+
 
     /**
      * 添加网站
      *
-     * @param web
+     * @param web 网站
      * @param request
      * @param response
      * @return 管理员主页地址
@@ -65,7 +79,7 @@ public class AdminController {
             request.setAttribute("errorMsg", "添加网站的数据不正确！");
             return "redirect:/admin/indexOfAdmin";
         } else {
-            webDAO.addWeb(web);
+            webService.addWeb(web);
             return "redirect:/index";
         }
     }
@@ -85,15 +99,21 @@ public class AdminController {
             String path = request.getServletContext().getRealPath("/file/");
             ebook.setPath(path + File.separator + ebookFileName);
             ebook.setBookName(ebookFileName);
-            ebookDAO.addEbook(ebook);
+            ebookService.addEbook(ebook);
             return "redirect:/admin/indexOfAdmin";
         }
         request.setAttribute("errorMsg", "添加书的数据不正确！");
         return "/page/admin/indexOfAdmin.jsp";
     }
+
+    /**
+     * 转向添加文章的页面
+     * @return 添加文章页面地址
+     */
     @RequestMapping(value = "/goAddArticle")
     public ModelAndView goAddArticel(){
-        List<Category> categories = categoryAndLabelService.getCategory();
+        //获取文章类别
+        List<Category> categories = categoryAndLabelService.getCategoryByType(1);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("categories",categories);
         modelAndView.setViewName("/page/admin/addArticle.jsp");
@@ -103,7 +123,7 @@ public class AdminController {
      * 添加文章
      * @param article
      * @param request
-     * @param image
+     * @param image 封面图片
      * @return
      * @throws IOException
      */
@@ -124,11 +144,11 @@ public class AdminController {
                 article.setImagePath(imageName);
             }
             article.setDate(new Timestamp(System.currentTimeMillis()));
-            articleDAO.addArticle(article);
+            articleService.addArticle(article);
             return "redirect:/admin/indexOfAdmin";
         } else {
             request.setAttribute("errorMsg", "添加文章数据不正确！");
-            return "/page/admin/addArticle.jsp";
+            return "redirect:/admin/goAddArticle";
         }
     }
 
@@ -152,15 +172,26 @@ public class AdminController {
         return "/page/admin/indexOfAdmin.jsp";
     }
 
+    /**
+     * 添加类别
+     * @param category
+     * @return
+     */
     @RequestMapping(value = "/addCategory")
     public String addCategory(Category category){
-        categoryAndLabelService.saveCategory(category);
+        categoryAndLabelService.addCategory(category);
         return "redirect:/admin/indexOfAdmin";
     }
 
+    /**
+     * 添加标签
+     * @param label
+     * @return
+     */
     @RequestMapping(value = "/addLabel")
     public String addLabel(Label label){
-        categoryAndLabelService.saveLabel(label);
+        label.setArticleNum(0);
+        categoryAndLabelService.addLabel(label);
         return "redirect:/admin/indexOfAdmin";
     }
     /**
@@ -172,6 +203,10 @@ public class AdminController {
         return "/page/admin/indexOfAdmin.jsp";
     }
 
+    /**
+     * 去添加标签界面
+     * @return
+     */
     @RequestMapping(value = "/goAddLabel")
     public ModelAndView gpAddLabel(){
         List<Category> categories = categoryAndLabelService.getCategory();
@@ -181,10 +216,25 @@ public class AdminController {
         return modelAndView;
     }
 
+    /**
+     * 动态获取某一类别下的标签信息
+     * 实现类别和标签的联动
+     * @param idCategory
+     * @return
+     */
     @RequestMapping(value = "/getLabelForAjax")
     @ResponseBody
     public Object getLabelForAjax(int idCategory){
         List<Label> labels = categoryAndLabelService.getLabelByCategoryId(idCategory);
         return labels;
+    }
+
+    @RequestMapping(value = "/goAddCategory")
+    public ModelAndView goAddCategory(){
+        List<Category> categories = categoryAndLabelService.getCategory();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("categories",categories);
+        modelAndView.setViewName("/page/admin/addCategory.jsp");
+        return modelAndView;
     }
 }

@@ -30,6 +30,7 @@
         <id property="idLabel" column="idlabel"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
+        <result property="articleNum" column="articlenum"/>
         <association property="category" column="idcategory"
                      javaType="model.Category" select="selectCategoryByIdForLabel"/>
     </resultMap>
@@ -37,9 +38,12 @@
         SELECT * FROM label where idcategory = #{idCategory}
     </select>
     <insert id="saveLabel" parameterType="model.Label" useGeneratedKeys="true">
-        INSERT INTO label(name,idcategory,description) VALUES (#{name},#{category.idCategory},#{description})
+        INSERT INTO label(name,idcategory,description,articlenum) VALUES (#{name},#{category.idCategory},#{description},#{articleNum})
     </insert>
     <select id="selectLabelById" parameterType="int" resultMap="labelResultMap">
         SELECT * FROM label WHERE idlabel=#{id}
     </select>
+    <update id="updateLabelForAddArticle" parameterType="model.Label">
+        UPDATE label set articlenum = #{articleNum} where idlabel = #{idLabel}
+    </update>
 </mapper>

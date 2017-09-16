@@ -26,4 +26,7 @@ public interface CategoryAndLabelMapper {
     Label selectLabelById(int id);
 
     Category selectCategoryByIdForLabel(int id);
+
+    int updateLabelForAddArticle(Label label);
+
 }

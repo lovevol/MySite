@@ -21,7 +21,7 @@ public class UserDAO {
     public User getUserById(int id){
         return userMapper.selectUserById(id);
     }
-    public int saveUser(User user){
+    public int addUser(User user){
         return userMapper.save(user);
     }
 }

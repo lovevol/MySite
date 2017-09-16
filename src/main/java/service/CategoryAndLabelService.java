@@ -17,11 +17,11 @@ public class CategoryAndLabelService {
     @Autowired
     private CategoryAndLabelDAO categoryAndLabelDAO;
 
-    public int saveCategory(Category category){
+    public int addCategory(Category category){
         return categoryAndLabelDAO.saveCategory(category);
     }
 
-    public int saveLabel(Label label){
+    public int addLabel(Label label){
         return categoryAndLabelDAO.saveLabel(label);
     }
 
@@ -35,5 +35,13 @@ public class CategoryAndLabelService {
 
     public List<Label> getLabelByCategoryId(int idCategory){
         return categoryAndLabelDAO.getLabelByCategoryId(idCategory);
+    }
+
+    public List<Category> getCategoryByType(int type){
+        return categoryAndLabelDAO.getCategoryByType(type);
+    }
+
+    public int updateLabelForAddArticle(Label label){
+        return categoryAndLabelDAO.updateLabelForAddArticle(label);
     }
 }
