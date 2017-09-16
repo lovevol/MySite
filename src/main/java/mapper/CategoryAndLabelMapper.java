@@ -24,4 +24,6 @@ public interface CategoryAndLabelMapper {
     List<Category> selectCategory();
 
     Label selectLabelById(int id);
+
+    Category selectCategoryByIdForLabel(int id);
 }
