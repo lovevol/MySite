@@ -7,6 +7,6 @@
         INSERT INTO ebook(bookName,description,path) VALUES (#{bookName},#{description},#{path})
     </insert>
     <select id="selectEbookForIndex" resultType="model.Ebook">
-        SELECT * FROM ebook limit 5;
+        SELECT * FROM ebook ORDER BY idebook DESC limit 5;
     </select>
 </mapper>

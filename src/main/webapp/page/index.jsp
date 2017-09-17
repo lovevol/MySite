@@ -16,7 +16,7 @@
     <c:forEach items="${requestScope.articles}" var="article" varStatus="articleStatus">
         <div style="padding: 20px" class="mydiv">
             <h2 class="myh1">${article.title}</h2>
-            <h5 style="text-align: center">日期:${article.date}&nbsp;&nbsp;&nbsp;<span>标签:<a href="#" style="color: #f3726d">${article.label}</a></span></h5>
+            <h5 style="text-align: center">日期:${article.date}&nbsp;&nbsp;&nbsp;<span>标签:<a href="#" style="color: #f3726d">${article.label.name}</a></span></h5>
             <br>
             <c:if test="${!empty article.imagePath}">
                 <img src="/mySite/image/${article.imagePath}" alt="..." class="img-thumbnail" style="width: 100%">

@@ -84,7 +84,7 @@
     </dependencies>
     <!--构建时参数-->
     <build>
-        <finalName>MySite</finalName>
+        <finalName>mySite</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -106,14 +106,14 @@
                         <!--tomcat类型 -->
                         <containerId>tomcat8x</containerId>
                         <!-- 指定tomcat路径 -->
-                        <home>C:\apache-tomcat-9.0.0.M17</home>
+                        <home>/home/lh/java/tomcat9.0</home>
                         <timeout>300000</timeout>
                     </container>
                     <configuration>
                         <!--部署方式-->
                         <type>existing</type>
                         <!--指定tomcat路径 -->
-                        <home>C:\apache-tomcat-9.0.0.M17</home>
+                        <home>/home/lh/java/tomcat9.0</home>
                     </configuration>
                 </configuration>
                 <executions>

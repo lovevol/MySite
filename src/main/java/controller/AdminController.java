@@ -133,6 +133,7 @@ public class AdminController {
             if (image != null && !image.isEmpty()) {
                 String path = request.getServletContext().getRealPath("/image/");
                 String imageName = image.getOriginalFilename();
+                imageName = new String(imageName.getBytes("GBK"), "UTF-8");
                 File filePath = new File(path, imageName);
                 if (!filePath.getParentFile().exists()) {
                     filePath.getParentFile().mkdirs();

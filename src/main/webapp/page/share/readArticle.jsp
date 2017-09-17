@@ -18,7 +18,7 @@
 </div>
 <div style="margin-left: 21%;padding: 20px;background-color: white;float: left;width: 50%;">
     <h2 class="myh1">${article.title}</h2>
-    <h5 style="text-align: center">日期:${article.date}&nbsp;&nbsp;&nbsp;<span>标签:<a href="#" style="color: #f3726d">${requestScope.article.label}</a></span></h5>
+    <h5 style="text-align: center">日期:${article.date}&nbsp;&nbsp;&nbsp;<span>标签:<a href="#" style="color: #f3726d">${article.label.name}</a></span></h5>
     <br>
     <c:if test="${!empty article.imagePath}">
         <img src="/mySite/image/${article.imagePath}" alt="..." class="img-thumbnail" style="width: 100%">
@@ -26,7 +26,7 @@
     <br>
     <p style="font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${article.sketch}</p>
     <hr>
-    <div style="width: 100%">
+    <div style="width: 100%;overflow: auto">
         ${article.content.content}
     </div>
 </div>

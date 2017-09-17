@@ -22,6 +22,11 @@ public class ArticleService {
     @Autowired
     private CategoryAndLabelDAO categoryAndLabelDAO;
 
+    /**
+     * 保存文章
+     * @param article
+     * @return
+     */
     public int addArticle(Article article){
         Content content = article.getContent();
         //先储存文章正文内容到数据库
@@ -32,10 +37,13 @@ public class ArticleService {
         Label label = categoryAndLabelDAO.getLabelById(article.getLabel().getIdLabel());
         label.setArticleNum(label.getArticleNum() + 1);
         categoryAndLabelDAO.updateLabelForAddArticle(label);
-
         return result;
     }
 
+    /**
+     * 获取显示在主页的文章
+     * @return
+     */
     public List<Article> getArticleForIndex(){
         return articleDAO.getArticlesForIndex();
     }

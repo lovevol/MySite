@@ -7,95 +7,259 @@
       <Visible>1</Visible>
     </schema>
     <schema id="3" parent="1" name="information_schema"/>
-    <table id="4" parent="2" name="ebook"/>
-    <table id="5" parent="2" name="user"/>
-    <table id="6" parent="2" name="web"/>
-    <column id="7" parent="4" name="idebook">
+    <table id="4" parent="2" name="article"/>
+    <table id="5" parent="2" name="category"/>
+    <table id="6" parent="2" name="content"/>
+    <table id="7" parent="2" name="ebook"/>
+    <table id="8" parent="2" name="label"/>
+    <table id="9" parent="2" name="user"/>
+    <table id="10" parent="2" name="web"/>
+    <column id="11" parent="4" name="idarticle">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="8" parent="4" name="bookName">
+    <column id="12" parent="4" name="title">
       <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="9" parent="4" name="description">
+    <column id="13" parent="4" name="date">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="14" parent="4" name="idlabel">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="4" name="idcategory">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="4" name="sketch">
+      <Position>6</Position>
+      <DataType>varchar(400)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="4" name="imagepath">
+      <Position>7</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="18" parent="4" name="idcontent">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="19" parent="4" name="article_category_idx">
+      <ColNames>idcategory</ColNames>
+    </index>
+    <index id="20" parent="4" name="article_content">
+      <ColNames>idcontent</ColNames>
+    </index>
+    <index id="21" parent="4" name="article_label_idx">
+      <ColNames>idlabel</ColNames>
+    </index>
+    <key id="22" parent="4" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>idarticle</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="23" parent="4" name="article_label">
+      <ColNames>idlabel</ColNames>
+      <RefSchemaName>mysitedb</RefSchemaName>
+      <RefTableName>label</RefTableName>
+      <RefColNames>idlabel</RefColNames>
+    </foreign-key>
+    <foreign-key id="24" parent="4" name="article_category">
+      <ColNames>idcategory</ColNames>
+      <RefSchemaName>mysitedb</RefSchemaName>
+      <RefTableName>category</RefTableName>
+      <RefColNames>idcategory</RefColNames>
+    </foreign-key>
+    <foreign-key id="25" parent="4" name="article_content">
+      <ColNames>idcontent</ColNames>
+      <RefSchemaName>mysitedb</RefSchemaName>
+      <RefTableName>content</RefTableName>
+      <RefColNames>idcontent</RefColNames>
+    </foreign-key>
+    <column id="26" parent="5" name="idcategory">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="27" parent="5" name="name">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="5" name="type">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="5" name="description">
+      <Position>4</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <key id="30" parent="5" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>idcategory</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="31" parent="6" name="idcontent">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="32" parent="6" name="content">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="33" parent="6" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>idcontent</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="7" name="idebook">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="35" parent="7" name="bookName">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="7" name="description">
       <Position>3</Position>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="10" parent="4" name="path">
+    <column id="37" parent="7" name="path">
       <Position>4</Position>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="11" parent="4" name="PRIMARY">
+    <key id="38" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>idebook</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="12" parent="5" name="iduser">
+    <column id="39" parent="8" name="idlabel">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="13" parent="5" name="loginname">
+    <column id="40" parent="8" name="name">
       <Position>2</Position>
-      <DataType>varchar(45)|0</DataType>
+      <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="14" parent="5" name="username">
+    <column id="41" parent="8" name="idcategory">
       <Position>3</Position>
-      <DataType>varchar(45)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="15" parent="5" name="password">
+    <column id="42" parent="8" name="description">
       <Position>4</Position>
-      <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(500)|0</DataType>
     </column>
-    <column id="16" parent="5" name="age">
+    <column id="43" parent="8" name="articlenum">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="17" parent="5" name="gender">
-      <Position>6</Position>
-      <DataType>char(2)|0</DataType>
-    </column>
-    <key id="18" parent="5" name="PRIMARY">
-      <ColNames>iduser</ColNames>
+    <index id="44" parent="8" name="category_label_fk_idx">
+      <ColNames>idcategory</ColNames>
+    </index>
+    <key id="45" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>idlabel</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="19" parent="6" name="idweb">
+    <foreign-key id="46" parent="8" name="category_label_fk">
+      <ColNames>idcategory</ColNames>
+      <RefSchemaName>mysitedb</RefSchemaName>
+      <RefTableName>category</RefTableName>
+      <RefColNames>idcategory</RefColNames>
+    </foreign-key>
+    <column id="47" parent="9" name="iduser">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="20" parent="6" name="weburl">
+    <column id="48" parent="9" name="loginname">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="49" parent="9" name="username">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="9" name="password">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="9" name="gender">
+      <Position>5</Position>
+      <DataType>char(2)|0</DataType>
+    </column>
+    <column id="52" parent="9" name="roletype">
+      <Position>6</Position>
+      <DataType>tinyint(4)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="9" name="email">
+      <Position>7</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="54" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>iduser</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="55" parent="10" name="idweb">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="56" parent="10" name="weburl">
       <Position>2</Position>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="21" parent="6" name="description">
+    <column id="57" parent="10" name="description">
       <Position>3</Position>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="22" parent="6" name="remark">
+    <column id="58" parent="10" name="remark">
       <Position>4</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="6" name="label">
+    <column id="59" parent="10" name="label">
       <Position>5</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="24" parent="6" name="PRIMARY">
+    <key id="60" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>idweb</ColNames>
       <Primary>1</Primary>
     </key>

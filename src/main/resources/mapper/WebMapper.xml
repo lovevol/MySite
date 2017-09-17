@@ -7,6 +7,6 @@
         INSERT INTO web(weburl,description,remark,label) VALUES (#{webUrl},#{description},#{remark},#{label})
     </insert>
     <select id="selectWebForIndex" resultType="model.Web">
-        SELECT * from web limit 5;
+        SELECT * from web ORDER BY idweb DESC limit 5;
     </select>
 </mapper>
