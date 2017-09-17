@@ -39,4 +39,8 @@ public class ArticleService {
     public List<Article> getArticleForIndex(){
         return articleDAO.getArticlesForIndex();
     }
+
+    public Article getArticleById(int id){
+        return articleDAO.getArticleById(id);
+    }
 }

@@ -17,6 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import service.ArticleService;
+import service.EbookService;
+import service.WebService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -30,15 +33,16 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/share")
 public class ShareController {
-    private final ArticleDAO articleDAO;
-    private final EbookDAO ebookDAO;
-    private final WebDAO webDAO;
+
+    private ArticleService articleService;
+    private EbookService ebookService;
+    private WebService webService;
 
     @Autowired
-    public ShareController(ArticleDAO articleDAO, EbookDAO ebookDAO, WebDAO webDAO) {
-        this.articleDAO = articleDAO;
-        this.ebookDAO = ebookDAO;
-        this.webDAO = webDAO;
+    public ShareController(ArticleService articleService, EbookService ebookService, WebService webService) {
+        this.articleService = articleService;
+        this.ebookService = ebookService;
+        this.webService = webService;
     }
 
     /**
@@ -47,7 +51,7 @@ public class ShareController {
      */
     @RequestMapping(value = "/webShare")
     public ModelAndView webShare(){
-        List<Web> webs = webDAO.getWebForIndex();
+        List<Web> webs = webService.getWebForIndex();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("webs",webs);
         modelAndView.setViewName("/page/share/webShare.jsp");
@@ -60,7 +64,7 @@ public class ShareController {
      */
     @RequestMapping(value = "ebookShare")
     public ModelAndView ebookShare(){
-        List<Ebook> ebooks = ebookDAO.getEbookForIndex();
+        List<Ebook> ebooks = ebookService.getEbookForIndex();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("ebooks",ebooks);
         modelAndView.setViewName("/page/share/ebookShare.jsp");
@@ -95,7 +99,7 @@ public class ShareController {
      */
     @RequestMapping(value = "readArticle")
     public ModelAndView readArticle(int articleId){
-        Article article = articleDAO.getArticleById(articleId);
+        Article article = articleService.getArticleById(articleId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("article",article);
         modelAndView.setViewName("/page/share/readArticle.jsp");

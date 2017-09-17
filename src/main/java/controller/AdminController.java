@@ -34,8 +34,6 @@ import java.util.List;
 @RequestMapping(value = "/admin")
 public class AdminController {
     private Logger logger = Logger.getLogger(this.getClass());
-    private String ebookFileName;
-
     /**
      * service层
      */
@@ -92,18 +90,17 @@ public class AdminController {
      * @return 管理员主页地址
      * @throws IOException
      */
-    @RequestMapping(value = "addEbook")
+    @RequestMapping(value = "/addEbook")
     public String addEbook(HttpServletRequest request, Ebook ebook) throws IOException {
         if (ebook.getDescription() != null && !"".equals(ebook.getDescription())
-                && ebookFileName != null) {
+                && ebook.getBookName() != null) {
             String path = request.getServletContext().getRealPath("/file/");
-            ebook.setPath(path + File.separator + ebookFileName);
-            ebook.setBookName(ebookFileName);
+            ebook.setPath(path + File.separator + ebook.getBookName());
             ebookService.addEbook(ebook);
             return "redirect:/admin/indexOfAdmin";
         }
         request.setAttribute("errorMsg", "添加书的数据不正确！");
-        return "/page/admin/indexOfAdmin.jsp";
+        return "redirect:/admin/indexOfAdmin";
     }
 
     /**
@@ -157,19 +154,18 @@ public class AdminController {
      */
     @RequestMapping(value = "/uploadEbookFile")
     public String uploadEbookFile(@RequestParam("file") MultipartFile file,
-                                  HttpServletRequest request) throws IOException {
+                                  HttpServletRequest request,HttpServletResponse response) throws IOException {
         if (file != null && !file.isEmpty()) {
             String path = request.getServletContext().getRealPath("/file/");
             String fileName = file.getOriginalFilename();
-            ebookFileName = fileName;
             File filePath = new File(path, fileName);
             if (!filePath.getParentFile().exists()) {
                 filePath.getParentFile().mkdirs();
             }
             file.transferTo(new File(path + File.separator + fileName));
-
+            response.getWriter().write(fileName);
         }
-        return "/page/admin/indexOfAdmin.jsp";
+        return null;
     }
 
     /**

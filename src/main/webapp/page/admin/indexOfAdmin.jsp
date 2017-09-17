@@ -12,13 +12,13 @@
     <title>管理端</title>
     <script>
         function submitSaveEbook() {
-            $("#formForAddEbook").ajaxSubmit({
+            $("#formForEbookFile").ajaxSubmit({
                 url: "${pageContext.request.contextPath}/admin/uploadEbookFile",
                 async: true,
                 type: "post",
                 success: function (data) {
                     alert("文件上传成功");
-                    $("#file").val("");
+                    $("#bookName").val(data);
                 },
                 error: function (data) {
                     alert("文件上传失败")
@@ -60,12 +60,15 @@
         <div class="collapse" id="collapseExample2" style="margin: 5px;width: 100%">
             <div class="well">
                 <div class="form-group">
-                    <form action="${pageContext.request.contextPath}/admin/addEbook" method="post"
-                          enctype="multipart/form-data" id="formForAddEbook">
-                        <label for="description2"> 描述:</label><textarea id="description2" name="description"
-                                                                        class="form-control" rows="6"></textarea>
+                    <form action="/admin/uploadEbookFile" method="post" enctype="multipart/form-data" id="formForEbookFile">
                         <label for="file"> 文件:</label><input type="file" name="file" id="file" class="form-control"
                                                              onchange="submitSaveEbook()">
+                    </form>
+                    <form action="${pageContext.request.contextPath}/admin/addEbook" method="post"
+                          id="formForAddEbook">
+                        <label for="description2"> 描述:</label><textarea id="description2" name="description"
+                                                                        class="form-control" rows="6"></textarea>
+                        <input type="text" id="bookName" name="bookName">
                         <hr>
                         <input type="submit" value="添加电子书" class="btn btn-primary">
                     </form>
