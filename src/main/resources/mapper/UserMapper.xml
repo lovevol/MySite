@@ -6,8 +6,8 @@
     <select id="selectUserByLoginName" parameterType="string" resultType="model.User">
         SELECT * FROM user WHERE loginname = #{loginName}
     </select>
-    <insert id="save" parameterType="model.User" useGeneratedKeys="true">
-        INSERT INTO user(username, loginname,password, gender,roletype,email) VALUES(#{userName},#{loginName},#{password},#{gender},#{roleType},#{email})
+    <insert id="save" parameterType="model.User" useGeneratedKeys="true" keyProperty="idUser">
+        INSERT INTO user(username, loginname,password, gender,roletype,email,validatecode,status,validatedate) VALUES(#{userName},#{loginName},#{password},#{gender},#{roleType},#{email},#{validateCode},#{status},#{validateDate})
     </insert>
     <select id="selectUserById" parameterType="int" resultType="model.User">
         SELECT * FROM user WHERE iduser = #{id}
@@ -20,5 +20,7 @@
     <delete id="deleteUserById" parameterType="int">
         DELETE FROM user WHERE id = #{id}
     </delete>
-
+    <select id="updateUserByIdAndValidateCode" parameterType="model.User" resultType="model.User">
+       UPDATE user set status = 1 WHERE iduser = #{idUser} and validatecode = #{validateCode}
+    </select>
 </mapper>

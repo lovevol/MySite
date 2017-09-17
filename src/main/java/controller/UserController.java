@@ -100,15 +100,25 @@ public class UserController {
      */
     @RequestMapping(value = "/register")
     public String register(HttpServletRequest request,User user){
-        user.setRoleType((byte)1);
-        userService.saveUser(user);
-        HttpSession session = request.getSession();
-        session.setAttribute("user",user);
+        userService.registerUser(user);
+        //HttpSession session = request.getSession();
+        //session.setAttribute("user",user);
         return "redirect:/index";
     }
 
     @RequestMapping(value = "/registerForm")
     public String registerForm(){
         return REGISTER_PAGE;
+    }
+
+    @RequestMapping(value = "/validateUserForRegister")
+    public String validateUser(User user){
+
+       if (userService.updateUserByIdAndValidateCode(user)){
+           return "redirect:/user/login";
+       }else {
+           return "redirect:/user/register";
+       }
+
     }
 }

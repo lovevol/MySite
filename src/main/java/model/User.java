@@ -5,17 +5,54 @@ package model;
  * on 2017/9/6.
  */
 
+import java.sql.Timestamp;
+
 /**
  * 用户
  */
 public class User {
-    private int idUSer;
+    private int idUser;
     private String loginName;
     private String userName;
     private String password;
     private String gender;
     private byte roleType;
     private String email;
+    /**
+     * 0：未验证
+     * 1：验证失败
+     * 2：验证成功
+     */
+    private int status;
+    private String validateCode;
+    /**
+     * 发起验证的时期
+     */
+    private Timestamp validateDate;
+
+    public Timestamp getValidateDate() {
+        return validateDate;
+    }
+
+    public void setValidateDate(Timestamp validateDate) {
+        this.validateDate = validateDate;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getValidateCode() {
+        return validateCode;
+    }
+
+    public void setValidateCode(String validateCode) {
+        this.validateCode = validateCode;
+    }
 
     public String getEmail() {
         return email;
@@ -33,12 +70,12 @@ public class User {
         this.roleType = roleType;
     }
 
-    public int getIdUSer() {
-        return idUSer;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public void setIdUSer(int idUSer) {
-        this.idUSer = idUSer;
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public String getLoginName() {

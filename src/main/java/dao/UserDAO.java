@@ -24,4 +24,8 @@ public class UserDAO {
     public int addUser(User user){
         return userMapper.save(user);
     }
+
+    public void updateUserByIdAndValidateCode(User user){
+        userMapper.updateUserByIdAndValidateCode(user);
+    }
 }

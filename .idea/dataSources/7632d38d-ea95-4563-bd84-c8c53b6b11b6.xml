@@ -230,38 +230,51 @@
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="57" parent="12" name="PRIMARY">
+    <column id="57" parent="12" name="validatecode">
+      <Position>8</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="58" parent="12" name="status">
+      <Position>9</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="12" name="validatedate">
+      <Position>10</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="60" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>iduser</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="58" parent="13" name="idweb">
+    <column id="61" parent="13" name="idweb">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="59" parent="13" name="weburl">
+    <column id="62" parent="13" name="weburl">
       <Position>2</Position>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="60" parent="13" name="description">
+    <column id="63" parent="13" name="description">
       <Position>3</Position>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="61" parent="13" name="remark">
+    <column id="64" parent="13" name="remark">
       <Position>4</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="62" parent="13" name="label">
+    <column id="65" parent="13" name="label">
       <Position>5</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="63" parent="13" name="PRIMARY">
+    <key id="66" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idweb</ColNames>
       <Primary>1</Primary>
