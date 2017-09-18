@@ -58,14 +58,13 @@ public class UserService {
         return userDAO.addUser(user);
     }
     public boolean updateUserByIdAndValidateCode(User user){
+        user = userDAO.getUserById(user.getIdUser());
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        /*if(now.getNanos() - user.getValidateDate().getNanos() /(60 * 60 * 1000) <= 3){
+        if(now.getTime() - user.getValidateDate().getTime() /(60 * 60 * 1000) <= 3){
             return false;
         }else {
             userDAO.updateUserByIdAndValidateCode(user);
             return true;
-        }*/
-        return true;
-
+        }
     }
 }
