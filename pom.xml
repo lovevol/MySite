@@ -87,39 +87,76 @@
             <artifactId>mail</artifactId>
             <version>1.4</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-ssh</artifactId>
+            <version>2.8</version>
+        </dependency>
     </dependencies>
+
     <!--构建时参数-->
     <build>
         <finalName>mySite</finalName>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>2.8</version>
+            </extension>
+        </extensions>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>upload-deploy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>upload-single</goal>
+                            <goal>sshexec</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <encoding>UTF-8</encoding>
+                    <!--<encoding>UTF-8</encoding>-->
                 </configuration>
             </plugin>
             <plugin>
-                <!--利用cargo插件完成项目部署-->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0</version>
+                <configuration>
+                    <fromFile>target/mySite.war</fromFile>
+                    <url>scp://root:935686942lH@120.24.4.136/data/wwwroot/default</url>
+                    <commands>
+                        <command>rm -rf /data/wwwroot/default/mySite</command>
+                        <command>service tomcat restart</command>
+                    </commands>
+                    <displayCommandOutputs>true</displayCommandOutputs>
+                </configuration>
+            </plugin>
+            <!--利用cargo插件完成项目部署-->
+            <!--<plugin>
+
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <version>1.4.18</version>
                 <configuration>
                     <container>
-                        <!--tomcat类型 -->
+                        &lt;!&ndash;tomcat类型 &ndash;&gt;
                         <containerId>tomcat8x</containerId>
-                        <!-- 指定tomcat路径 -->
+                        &lt;!&ndash; 指定tomcat路径 &ndash;&gt;
                         <home>/home/lh/java/tomcat9.0</home>
                         <timeout>300000</timeout>
                     </container>
                     <configuration>
-                        <!--部署方式-->
+                        &lt;!&ndash;部署方式&ndash;&gt;
                         <type>existing</type>
-                        <!--指定tomcat路径 -->
+                        &lt;!&ndash;指定tomcat路径 &ndash;&gt;
                         <home>/home/lh/java/tomcat9.0</home>
                     </configuration>
                 </configuration>
@@ -132,7 +169,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>

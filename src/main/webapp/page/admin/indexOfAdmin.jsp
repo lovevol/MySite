@@ -28,7 +28,7 @@
     </script>
 </head>
 <body style=" padding-top: 50px;background-color: #e4e4e4;">
-<div style="height: 100%;float: left;width: 40%;margin-left: 20%;">
+<div style="height: 100%;float: left;width: 50%;margin-left: 15%;">
     <div class="mydiv" style="padding: 20px" id="divForShaerWebAndEbook">
         <h3 style="color: #5bc0de">1: 分享网站</h3>
         <a class="btn mybtn2" role="button" data-toggle="collapse" href="#collapseExample1" aria-expanded="false"

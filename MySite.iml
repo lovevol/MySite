@@ -20,7 +20,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -42,8 +42,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="jquery.form" level="application" />
-    <orderEntry type="library" name="Maven: javax.mail:mail:1.4" level="project" />
-    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.10.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.3.10.RELEASE" level="project" />
@@ -66,5 +64,20 @@
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.38" level="project" />
     <orderEntry type="library" name="Maven: javax.mail:mail:1.4" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven.wagon:wagon-ssh:2.8" level="project" />
+    <orderEntry type="library" name="Maven: com.jcraft:jsch:0.1.50" level="project" />
+    <orderEntry type="library" name="Maven: com.jcraft:jsch.agentproxy.connector-factory:0.0.6" level="project" />
+    <orderEntry type="library" name="Maven: com.jcraft:jsch.agentproxy.core:0.0.6" level="project" />
+    <orderEntry type="library" name="Maven: com.jcraft:jsch.agentproxy.usocket-jna:0.0.6" level="project" />
+    <orderEntry type="library" name="Maven: net.java.dev.jna:jna:3.4.0" level="project" />
+    <orderEntry type="library" name="Maven: net.java.dev.jna:platform:3.4.0" level="project" />
+    <orderEntry type="library" name="Maven: com.jcraft:jsch.agentproxy.usocket-nc:0.0.6" level="project" />
+    <orderEntry type="library" name="Maven: com.jcraft:jsch.agentproxy.sshagent:0.0.6" level="project" />
+    <orderEntry type="library" name="Maven: com.jcraft:jsch.agentproxy.pageant:0.0.6" level="project" />
+    <orderEntry type="library" name="Maven: com.jcraft:jsch.agentproxy.jsch:0.0.6" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-utils:3.0.15" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven.wagon:wagon-ssh-common:2.8" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-interactivity-api:1.0-alpha-6" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven.wagon:wagon-provider-api:2.8" level="project" />
   </component>
 </module>

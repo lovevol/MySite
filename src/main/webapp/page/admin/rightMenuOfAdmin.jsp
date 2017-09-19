@@ -11,7 +11,7 @@
 </head>
 <body>
 <div style="width: 30%;float: left">
-    <div style="background-color: white; margin-top: 30px; margin-left: 30px;width: 40%;padding: 20px">
+    <div style="background-color: white; margin-top: 20px; margin-left: 20px;width: 40%;padding: 20px">
         <h4>菜单</h4>
         <hr class="myhr1">
         <a href="${pageContext.request.contextPath}/admin/goAddArticle" class="btn mybtn1">文章分享</a>

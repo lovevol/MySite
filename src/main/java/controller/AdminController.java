@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by lh
@@ -133,6 +134,7 @@ public class AdminController {
             if (image != null && !image.isEmpty()) {
                 String path = request.getServletContext().getRealPath("/image/");
                 String imageName = image.getOriginalFilename();
+                imageName = UUID.randomUUID().toString()+imageName.substring(imageName.lastIndexOf("."));
                 File filePath = new File(path, imageName);
                 if (!filePath.getParentFile().exists()) {
                     filePath.getParentFile().mkdirs();

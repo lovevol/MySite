@@ -80,21 +80,21 @@
     </div>
 </div>
 <div style="width: 30%;float: left">
-    <div style="background-color: white; margin-top: 30px; margin-left: 30px;width: 50%;padding: 20px">
+    <div style="background-color: white; margin-top: 20px; margin-left: 20px;width: 60%;padding: 20px">
         <h4>文章分类</h4>
         <hr class="myhr1">
         <c:forEach items="${requestScope.categoriesForArticle}" var="categoriesForArticle">
             <a href="#" class="btn mybtn1">${categoriesForArticle.name}</a>
         </c:forEach>
     </div>
-    <div style="background-color: white; margin-top: 30px; margin-left: 30px;width: 50%;padding: 20px">
+    <div style="background-color: white; margin-top: 20px; margin-left: 20px;width: 60%;padding: 20px">
         <h4>资源分享</h4>
         <hr class="myhr2">
         <c:forEach items="${requestScope.categoriesForShare}" var="categoriesForShare">
             <a href="${pageContext.request.contextPath}/share/webShare" class="btn mybtn2">${categoriesForShare.name}</a>
         </c:forEach>
     </div>
-    <div style="background-color: white; margin-top: 30px; margin-left: 30px;width: 50%;padding: 20px">
+    <div style="background-color: white; margin-top: 20px; margin-left: 20px;width: 60%;padding: 20px">
         <h4>关于作者</h4>
         <hr class="myhr3">
         <a href="#" class="thumbnail">

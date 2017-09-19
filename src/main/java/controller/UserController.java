@@ -40,12 +40,13 @@ public class UserController {
 
     @RequestMapping(value = "/validate")
     public String validate(HttpServletRequest request, User user){
-        if (userService.validateLogin(user) && user.getRoleType() == 1){
+        boolean validate = userService.validateLogin(user);
+        if (validate && user.getRoleType() == 1){
             HttpSession session = request.getSession();
             user = userService.getUserByLoginName(user.getLoginName());
             session.setAttribute("user",user);
             return "redirect:/index";
-        }else if (userService.validateLogin(user) && user.getRoleType() == 2){
+        }else if (validate && user.getRoleType() == 2){
             user = userService.getUserByLoginName(user.getLoginName());
             HttpSession session = request.getSession();
             session.setAttribute("user",user);

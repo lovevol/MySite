@@ -27,8 +27,8 @@ public class UserService {
     }
 
     public boolean validateLogin(User user){
-        user.setPassword(MD5Util.getMD5(user.getPassword()));
         User userForValidate = userDAO.getUserByLoginName(user.getLoginName());
+        user.setPassword(MD5Util.getMD5(user.getPassword()));
         if (userForValidate != null && user.getPassword().equals(userForValidate.getPassword()) &&
                 user.getRoleType() == userForValidate.getRoleType()){
             return true;
