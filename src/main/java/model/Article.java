@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -9,7 +10,7 @@ import java.sql.Timestamp;
 public class Article {
     private int idArticle;
     private String title;
-    private Timestamp date;
+    private Date date;
     private String imagePath;
     private String sketch;
     private Category category;
@@ -58,11 +59,11 @@ public class Article {
         this.title = title;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

@@ -4,6 +4,7 @@ import dao.ArticleDAO;
 import dao.EbookDAO;
 import dao.WebDAO;
 import model.Article;
+import model.Category;
 import model.Ebook;
 import model.Web;
 import org.apache.commons.io.FileUtils;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import service.ArticleService;
+import service.CategoryAndLabelService;
 import service.EbookService;
 import service.WebService;
+import valueobject.ArticleVO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -37,12 +40,14 @@ public class ShareController {
     private ArticleService articleService;
     private EbookService ebookService;
     private WebService webService;
+    private CategoryAndLabelService categoryAndLabelService;
 
     @Autowired
-    public ShareController(ArticleService articleService, EbookService ebookService, WebService webService) {
+    public ShareController(ArticleService articleService, EbookService ebookService, WebService webService,CategoryAndLabelService categoryAndLabelService) {
         this.articleService = articleService;
         this.ebookService = ebookService;
         this.webService = webService;
+        this.categoryAndLabelService = categoryAndLabelService;
     }
 
     /**
@@ -51,9 +56,9 @@ public class ShareController {
      */
     @RequestMapping(value = "/webShare")
     public ModelAndView webShare(){
-        List<Web> webs = webService.getWebForIndex();
+        //List<Web> webs = webService.getWebForIndex();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("webs",webs);
+        //modelAndView.addObject("webs",webs);
         modelAndView.setViewName("/page/share/webShare.jsp");
         return modelAndView;
     }
@@ -64,9 +69,9 @@ public class ShareController {
      */
     @RequestMapping(value = "ebookShare")
     public ModelAndView ebookShare(){
-        List<Ebook> ebooks = ebookService.getEbookForIndex();
+        //List<Ebook> ebooks = ebookService.getEbookForIndex();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("ebooks",ebooks);
+       // modelAndView.addObject("ebooks",ebooks);
         modelAndView.setViewName("/page/share/ebookShare.jsp");
         return modelAndView;
     }
@@ -97,12 +102,25 @@ public class ShareController {
      * @param articleId
      * @return
      */
-    @RequestMapping(value = "readArticle")
+    @RequestMapping(value = "/readArticle")
     public ModelAndView readArticle(int articleId){
         Article article = articleService.getArticleById(articleId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("article",article);
         modelAndView.setViewName("/page/share/readArticle.jsp");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/searchArticle")
+    public ModelAndView searchArticle(ArticleVO articleVO){
+        ModelAndView modelAndView = new ModelAndView();
+        List<Article> articles = articleService.getArticle(articleVO);
+        modelAndView.addObject("articles",articles);
+        List<Category> categoriesForArticle = categoryAndLabelService.getCategoryByType(1);
+        modelAndView.addObject("categoriesForArticle",categoriesForArticle);
+        modelAndView.setViewName("/page/share/articleShare.jsp");
+        List<Category> categories = categoryAndLabelService.getCategory();
+        modelAndView.addObject("categorys",categories);
         return modelAndView;
     }
 }

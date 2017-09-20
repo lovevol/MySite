@@ -16,8 +16,8 @@ public class WebService {
     @Autowired
     private WebDAO webDAO;
 
-    public List<Web> getWebForIndex(){
-        return webDAO.getWebForIndex();
+    public List<Web> getWebForIndex(String keyWord){
+        return webDAO.getWebForIndex(keyWord);
     }
 
     public int addWeb(Web web){

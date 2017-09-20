@@ -1,4 +1,7 @@
-package value_object;
+package valueobject;
+
+import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by lh
@@ -10,6 +13,24 @@ public class BaseVO {
     private int pageCount;
     private boolean hasNextPage;
     private boolean hasPreviousPage;
+    private Date startDate;
+    private Date endDate;
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
     public int getPageCount() {
         return pageCount;

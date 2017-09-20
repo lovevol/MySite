@@ -1,6 +1,7 @@
 package mapper;
 
 import model.Web;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,5 +12,5 @@ import java.util.List;
 @Repository
 public interface WebMapper {
     int saveWeb(Web web);
-    List<Web> selectWebForIndex();
+    List<Web> selectWebForIndex(@Param("keyWord") String keyWord);
 }

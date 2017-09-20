@@ -30,7 +30,7 @@
     </column>
     <column id="16" parent="7" name="date">
       <Position>3</Position>
-      <DataType>datetime|0</DataType>
+      <DataType>date|0</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="17" parent="7" name="idlabel">

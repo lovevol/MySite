@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
@@ -142,7 +143,7 @@ public class AdminController {
                 image.transferTo(new File(path + File.separator + imageName));
                 article.setImagePath(imageName);
             }
-            article.setDate(new Timestamp(System.currentTimeMillis()));
+            article.setDate(new Date(System.currentTimeMillis()));
             articleService.addArticle(article);
             return "redirect:/admin/indexOfAdmin";
         } else {

@@ -6,7 +6,16 @@
     <insert id="saveEbook" parameterType="model.Ebook" useGeneratedKeys="true">
         INSERT INTO ebook(bookName,description,path) VALUES (#{bookName},#{description},#{path})
     </insert>
-    <select id="selectEbookForIndex" resultType="model.Ebook">
-        SELECT * FROM ebook ORDER BY idebook DESC limit 5;
+    <select id="selectEbookForIndex" resultType="model.Ebook" parameterType="string">
+        SELECT * FROM ebook
+        <where>
+            <if test="keyWord != null">
+                bookName LIKE concat('%',#{keyWord},'%')
+            </if>
+        </where>
+        ORDER BY idebook DESC limit 5
+    </select>
+    <select id="seleAllEbook" resultType="model.Ebook">
+        SELECT * FROM ebook
     </select>
 </mapper>

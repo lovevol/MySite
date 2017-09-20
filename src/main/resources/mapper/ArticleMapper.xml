@@ -18,8 +18,34 @@
         <association property="content" column="idcontent" fetchType="lazy"
                      select="selectContentByArticleId"/>
      </resultMap>
-    <select id="selectArticleForIndex" resultMap="articleMap">
-        SELECT * FROM article ORDER BY date DESC LIMIT 5;
+    <select id="selectArticleForIndex" resultMap="articleMap" parameterType="string">
+        SELECT * FROM article
+        <where>
+            <if test="keyWord != null">
+                AND title LIKE concat('%',#{keyWord},'%')
+            </if>
+        </where>
+        ORDER BY date DESC LIMIT 5
+    </select>
+    <select id="selectArticle" resultMap="articleMap" parameterType="valueobject.ArticleVO">
+        SELECT * FROM article
+        <where>
+            <if test="title != null">
+                title like concat('%',#{title},'%')
+            </if>
+            <if test="startDate != null and endDate != null">
+                AND date BETWEEN #{startDate} AND #{endDate}
+            </if>
+            <if test="label != null and label.idLabel != null">
+                AND idlabel = #{label.idLabel}
+            </if>
+            <if test="category != null and category.idCategory != null">
+                AND idcategory = #{category.idCategory}
+            </if>
+            <if test="sketch != null">
+                AND sketch like concat('%',#{sketch},'%')
+            </if>
+        </where>
     </select>
     <select id="selectArticleById" parameterType="int" resultMap="articleMap">
         SELECT * FROM article WHERE idarticle = #{id}

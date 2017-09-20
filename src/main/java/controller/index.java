@@ -48,13 +48,13 @@ public class index {
      * @return 主页地址
      */
     @RequestMapping(value = "/index")
-    public ModelAndView goIndex(){
-        List<Web> webs = webService.getWebForIndex();
+    public ModelAndView goIndex(String keyWord){
+        List<Web> webs = webService.getWebForIndex(keyWord);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("webs",webs);
-        List<Ebook> ebooks = ebookService.getEbookForIndex();
+        List<Ebook> ebooks = ebookService.getEbookForIndex(keyWord);
         modelAndView.addObject("ebooks",ebooks);
-        List<Article> articles = articleService.getArticleForIndex();
+        List<Article> articles = articleService.getArticleForIndex(keyWord);
         modelAndView.addObject("articles",articles);
         modelAndView.setViewName("page/index.jsp");
         List<Category> categoriesForArticle = categoryAndLabelService.getCategoryByType(1);

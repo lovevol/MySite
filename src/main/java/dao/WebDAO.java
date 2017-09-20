@@ -1,9 +1,11 @@
 package dao;
 
 import mapper.WebMapper;
+import model.Article;
 import model.Web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import valueobject.ArticleVO;
 
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class WebDAO {
      * 获取主页的网站分享
      * @return
      */
-    public List<Web> getWebForIndex(){
-        return webMapper.selectWebForIndex();
+    public List<Web> getWebForIndex(String keyWord){
+        return webMapper.selectWebForIndex(keyWord);
     }
 
     /**
@@ -32,4 +34,6 @@ public class WebDAO {
     public int addWeb(Web web){
         return webMapper.saveWeb(web);
     }
+
+
 }

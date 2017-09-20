@@ -29,13 +29,14 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left">
+            <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/index">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search" name="keyWord" id="keyWord">
                 </div>
                 <button type="submit" class="btn btn-default" aria-label="Left Align">搜索
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </button>
+                <span class="glyphicon glyphicon-question-sign" title="这里输入的关键字可搜索文章标题，电子书的名称，网站的介绍关键字，但是只能展示部分结果，要想搜到更多更准确的内容，请到相关页面进行精确搜索。"></span>
             </form>
             <ul class="nav navbar-nav navbar-right" style="margin-right: 15%">
                 <c:choose>
@@ -59,7 +60,6 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">帮助
-                        <span class="glyphicon glyphicon-question-sign"></span>
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">网站帮助</a></li>

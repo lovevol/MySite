@@ -4,6 +4,7 @@ import model.Article;
 import model.Content;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import valueobject.ArticleVO;
 
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class ArticleDAO {
      * 获取主页的文章
      * @return
      */
-    public List<Article> getArticlesForIndex(){
-       return articleMapper.selectArticleForIndex();
+    public List<Article> getArticlesForIndex(String keyWord){
+       return articleMapper.selectArticleForIndex(keyWord);
     }
 
     /**
@@ -49,5 +50,9 @@ public class ArticleDAO {
      */
     public int addContent(Content content){
         return articleMapper.saveContent(content);
+    }
+
+    public List<Article> getArticle(ArticleVO articleVO){
+        return articleMapper.selectArticle(articleVO);
     }
 }

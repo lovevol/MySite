@@ -1,11 +1,10 @@
-package value_object;
+package valueobject;
 
 import model.Article;
 import model.Category;
 import model.Content;
 import model.Label;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

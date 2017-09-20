@@ -1,9 +1,13 @@
 package dao;
 
 import mapper.UserMapper;
+import model.Article;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import valueobject.ArticleVO;
+
+import java.util.List;
 
 /**
  * Created by lh
@@ -28,4 +32,5 @@ public class UserDAO {
     public void updateUserByIdAndValidateCode(User user){
         userMapper.updateUserByIdAndValidateCode(user);
     }
+
 }

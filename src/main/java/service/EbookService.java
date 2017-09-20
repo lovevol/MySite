@@ -16,8 +16,8 @@ public class EbookService {
     @Autowired
     private EbookDAO ebookDAO;
 
-    public List<Ebook> getEbookForIndex(){
-        return ebookDAO.getEbookForIndex();
+    public List<Ebook> getEbookForIndex(String keyWord){
+        return ebookDAO.getEbookForIndex(keyWord);
     }
 
     public int addEbook(Ebook ebook){

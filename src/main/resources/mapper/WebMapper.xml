@@ -6,7 +6,16 @@
     <insert id="saveWeb" parameterType="model.Web" useGeneratedKeys="true">
         INSERT INTO web(weburl,description,remark,label) VALUES (#{webUrl},#{description},#{remark},#{label})
     </insert>
-    <select id="selectWebForIndex" resultType="model.Web">
-        SELECT * from web ORDER BY idweb DESC limit 5;
+    <select id="selectWebForIndex" resultType="model.Web" parameterType="string">
+        SELECT * from web
+        <where>
+            <if test="keyWord != null">
+                description LIKE concat('%',#{keyWord},'%')
+            </if>
+        </where>
+        ORDER BY idweb DESC limit 5
+    </select>
+    <select id="selectAllWeb" resultType="model.Web">
+        SELECT * FROM web
     </select>
 </mapper>

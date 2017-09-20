@@ -7,6 +7,7 @@ import model.Content;
 import model.Label;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import valueobject.ArticleVO;
 
 import java.util.List;
 
@@ -44,11 +45,15 @@ public class ArticleService {
      * 获取显示在主页的文章
      * @return
      */
-    public List<Article> getArticleForIndex(){
-        return articleDAO.getArticlesForIndex();
+    public List<Article> getArticleForIndex(String keyWord){
+        return articleDAO.getArticlesForIndex(keyWord);
     }
 
     public Article getArticleById(int id){
         return articleDAO.getArticleById(id);
+    }
+
+    public List<Article> getArticle(ArticleVO articleVO){
+        return articleDAO.getArticle(articleVO);
     }
 }
