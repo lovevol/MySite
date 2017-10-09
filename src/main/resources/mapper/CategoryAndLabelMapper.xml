@@ -46,4 +46,16 @@
     <update id="updateLabelForAddArticle" parameterType="model.Label">
         UPDATE label set articlenum = #{articleNum} where idlabel = #{idLabel}
     </update>
+    <update id="updateCategory" parameterType="model.Category">
+        UPDATE category
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="type != null">type=#{type},</if>
+            <if test="description != null">description=#{description}</if>
+        </set>
+        where idcategory=#{idCategory}
+    </update>
+    <delete id="deleteCategoryById" parameterType="int">
+        DELETE FROM category WHERE idcategory=#{id}
+    </delete>
 </mapper>

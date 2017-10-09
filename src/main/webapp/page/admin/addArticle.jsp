@@ -23,16 +23,16 @@
          */
         function getLabel() {
             $.ajax({
-                url:"${pageContext.request.contextPath}/admin/getLabelForAjax?idCategory="+$("#category").val(),
+                url:"${pageContext.request.contextPath}/getLabelForAjax?idCategory="+$("#category").val(),
                 type:"post",
                 contentType:"application/json",
                 success:function (data) {
                     var select = $("#label");
                     select.empty();
-                    var data = eval('(' + data + ')');
-                    if(data != null && data.length >= 1){
-                        for(var i = 0; i < data.length; i++){
-                            select.append("<option value="+data[i].idLabel+">"+data[i].name+"</option>")
+                    var data1 = eval('(' + data + ')');
+                    if(data1 != null && data1.length >= 1){
+                        for(var i = 0; i < data1.length; i++){
+                            select.append("<option value="+data1[i].idLabel+">"+data1[i].name+"</option>")
                         }
                     }else {
 
@@ -43,7 +43,7 @@
                     alert("获取相应标签出错");
                 }
 
-            })
+            });
 
         }
     </script>
@@ -228,9 +228,8 @@
             <button onclick="clearLocalData()" >清空草稿箱</button>
         </div>
     </div>--%>
-    <hr>
-    <button class="btn btn-primary" onclick="submitForm()">发布文章</button>
-</div>
+    <button onclick="submitForm()">发布文章</button>
+    </div>
 </body>
 <%@include file="rightMenuOfAdmin.jsp" %>
 </html>

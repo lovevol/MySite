@@ -215,25 +215,37 @@ public class AdminController {
         return modelAndView;
     }
 
+
     /**
-     * 动态获取某一类别下的标签信息
-     * 实现类别和标签的联动
-     * @param idCategory
+     * 转向添加类别界面
      * @return
      */
-    @RequestMapping(value = "/getLabelForAjax")
-    @ResponseBody
-    public Object getLabelForAjax(int idCategory){
-        List<Label> labels = categoryAndLabelService.getLabelByCategoryId(idCategory);
-        return labels;
-    }
-
     @RequestMapping(value = "/goAddCategory")
     public ModelAndView goAddCategory(){
         List<Category> categories = categoryAndLabelService.getCategory();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("categories",categories);
         modelAndView.setViewName("/page/admin/addCategory.jsp");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/modifyCategory")
+    public ModelAndView modifyCategory(Category category){
+        int result = categoryAndLabelService.updateCategory(category);
+        ModelAndView modelAndView =new ModelAndView();
+        if (result >= 1){
+            modelAndView.setViewName("redirect:/admin/goAddCategory");
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/deleteCategoryById")
+    public ModelAndView deleteCategoryById(int idCategory){
+        int result = categoryAndLabelService.deleteCategoryById(idCategory);
+        ModelAndView modelAndView =new ModelAndView();
+        if (result >= 1){
+            modelAndView.setViewName("redirect:/admin/goAddCategory");
+        }
         return modelAndView;
     }
 }

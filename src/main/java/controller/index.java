@@ -4,6 +4,7 @@ import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import service.ArticleService;
 import service.CategoryAndLabelService;
@@ -80,5 +81,18 @@ public class index {
         }else {
             return "redirect:/index";
         }
+    }
+
+    /**
+     * 动态获取某一类别下的标签信息
+     * 实现类别和标签的联动
+     * @param idCategory
+     * @return
+     */
+    @RequestMapping(value = "/getLabelForAjax")
+    @ResponseBody
+    public Object getLabelForAjax(int idCategory){
+        List<Label> labels = categoryAndLabelService.getLabelByCategoryId(idCategory);
+        return labels;
     }
 }

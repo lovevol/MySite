@@ -25,6 +25,13 @@ public class ArticleVO extends BaseVO {
     private Label label;
     private Content content;
 
+    /**
+     * 利用反射机制对VO实现组装
+     * @param article 文章model类
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
     public void editArticleVO(Article article) throws InvocationTargetException, IllegalAccessException, InstantiationException {
 
         //获取Article的域和方法
@@ -53,6 +60,7 @@ public class ArticleVO extends BaseVO {
         Iterator<Method> methodOfArticleVOIterator = methodsOfArticleVOSet.iterator();
         Iterator<Method> methodOfArticleIterator = methodsOfArticleSet.iterator();
 
+        //组装
         while (methodOfArticleVOIterator.hasNext()){
             Method methodOfArticleVO = methodOfArticleVOIterator.next();
             String methodNameOfArticleVO = methodOfArticleVO.getName();

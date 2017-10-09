@@ -52,4 +52,11 @@ public class CategoryAndLabelDAO {
     public Label getLabelById(int id){
         return categoryAndLabelMapper.selectLabelById(id);
     }
+
+    public int updateCategory(Category category){
+        return categoryAndLabelMapper.updateCategory(category);
+    }
+    public int deleteCategoryById(int idCategory){
+        return categoryAndLabelMapper.deleteCategoryById(idCategory);
+    }
 }

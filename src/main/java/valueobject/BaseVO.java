@@ -1,13 +1,18 @@
 package valueobject;
 
 import java.sql.Date;
-import java.sql.Timestamp;
-
 /**
  * Created by lh
  * on 2017/9/11.
  */
+
+/**
+ * 基本vo类
+ */
 public class BaseVO {
+    /**
+     * 分页时用到的参数
+     */
     private int pageSize;
     private int currentPage;
     private int pageCount;

@@ -44,4 +44,12 @@ public class CategoryAndLabelService {
     public int updateLabelForAddArticle(Label label){
         return categoryAndLabelDAO.updateLabelForAddArticle(label);
     }
+
+    public int updateCategory(Category category){
+        return categoryAndLabelDAO.updateCategory(category);
+    }
+
+    public int deleteCategoryById(int idCategory){
+        return categoryAndLabelDAO.deleteCategoryById(idCategory);
+    }
 }

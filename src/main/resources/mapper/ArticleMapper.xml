@@ -36,10 +36,10 @@
             <if test="startDate != null and endDate != null">
                 AND date BETWEEN #{startDate} AND #{endDate}
             </if>
-            <if test="label != null and label.idLabel != null">
+            <if test="label != null and label.idLabel != null and label.idLabel != 0">
                 AND idlabel = #{label.idLabel}
             </if>
-            <if test="category != null and category.idCategory != null">
+            <if test="category != null and category.idCategory != null and category.idCategory != 0">
                 AND idcategory = #{category.idCategory}
             </if>
             <if test="sketch != null">

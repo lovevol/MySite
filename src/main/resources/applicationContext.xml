@@ -17,11 +17,12 @@
     <context:component-scan base-package="mapper" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
+
     <!--数据源-->
     <context:property-override location="classpath:db.properties"/><!--加载数据源配置-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <!--<property name="username" value="mysite"/>
-        <property name="password" value="123456"/>
+        <property name="password" value=""/>
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://120.24.4.136:3306/mysitedb"/>-->
         <property name="username" value="root"/>
