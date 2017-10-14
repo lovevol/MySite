@@ -7,6 +7,11 @@
         <setting name="logImpl" value="log4j"/>
         <setting name="lazyLoadingEnabled" value="true"/>
     </settings>
+    <!--注册自定义的类型处理器-->
+    <typeHandlers>
+        <typeHandler handler="mybatisTypeHandler.MyGenderTypeHandler"
+                     javaType="myenum.Gender"/>
+    </typeHandlers>
     <!--指定映射文件的具体位置-->
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>

@@ -40,6 +40,9 @@
     <insert id="saveLabel" parameterType="model.Label" useGeneratedKeys="true">
         INSERT INTO label(name,idcategory,description,articlenum) VALUES (#{name},#{category.idCategory},#{description},#{articleNum})
     </insert>
+    <select id="selectLabel" resultType="model.Label">
+        SELECT * from label
+    </select>
     <select id="selectLabelById" parameterType="int" resultMap="labelResultMap">
         SELECT * FROM label WHERE idlabel=#{id}
     </select>
@@ -57,5 +60,8 @@
     </update>
     <delete id="deleteCategoryById" parameterType="int">
         DELETE FROM category WHERE idcategory=#{id}
+    </delete>
+    <delete id="deleteLabelById" parameterType="int">
+        DELETE FROM label WHERE idlabel=#{id}
     </delete>
 </mapper>

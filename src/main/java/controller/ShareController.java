@@ -121,6 +121,7 @@ public class ShareController {
         modelAndView.setViewName("/page/share/articleShare.jsp");
         List<Category> categories = categoryAndLabelService.getCategory();
         modelAndView.addObject("categorys",categories);
+        modelAndView.addObject("articleVO",articleVO);
         return modelAndView;
     }
 }

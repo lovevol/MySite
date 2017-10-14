@@ -135,6 +135,7 @@ public class AdminController {
             if (image != null && !image.isEmpty()) {
                 String path = request.getServletContext().getRealPath("/image/");
                 String imageName = image.getOriginalFilename();
+                //文件重命名，解决中文文件名问题
                 imageName = UUID.randomUUID().toString()+imageName.substring(imageName.lastIndexOf("."));
                 File filePath = new File(path, imageName);
                 if (!filePath.getParentFile().exists()) {
@@ -208,9 +209,9 @@ public class AdminController {
      */
     @RequestMapping(value = "/goAddLabel")
     public ModelAndView gpAddLabel(){
-        List<Category> categories = categoryAndLabelService.getCategory();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("categorys",categories);
+       List<Label> labels = categoryAndLabelService.getLabel();
+       ModelAndView modelAndView = new ModelAndView();
+       modelAndView.addObject("labels",labels);
         modelAndView.setViewName("/page/admin/addLabel.jsp");
         return modelAndView;
     }
@@ -229,6 +230,11 @@ public class AdminController {
         return modelAndView;
     }
 
+    /**
+     * 类别修改
+     * @param category
+     * @return
+     */
     @RequestMapping(value = "/modifyCategory")
     public ModelAndView modifyCategory(Category category){
         int result = categoryAndLabelService.updateCategory(category);
@@ -239,12 +245,32 @@ public class AdminController {
         return modelAndView;
     }
 
+    /**
+     * 按照id删除类别
+     * @param idCategory
+     * @return
+     */
     @RequestMapping(value = "/deleteCategoryById")
     public ModelAndView deleteCategoryById(int idCategory){
         int result = categoryAndLabelService.deleteCategoryById(idCategory);
         ModelAndView modelAndView =new ModelAndView();
         if (result >= 1){
             modelAndView.setViewName("redirect:/admin/goAddCategory");
+        }
+        return modelAndView;
+    }
+
+    /**
+     * 按照id删除label
+     * @param idLabel
+     * @return
+     */
+    @RequestMapping(value = "deleteLabelById")
+    public ModelAndView deleteLabelById(int idLabel){
+        ModelAndView modelAndView = new ModelAndView();
+        int result = categoryAndLabelService.deleteLabelById(idLabel);
+        if (result >= 1){
+            modelAndView.setViewName("redirect:/admin/goAddLabel");
         }
         return modelAndView;
     }

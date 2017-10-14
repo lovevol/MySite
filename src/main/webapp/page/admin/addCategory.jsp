@@ -134,7 +134,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-default" value="确定"/>
-                    <input type="reset" class="btn btn-primary" data-dismiss="modal" aria-label="Close" value="取消"/>
+                    <input type="reset" class="btn btn-primary" data-dismiss="modal" aria-label="Close" `value="取消"/>
                 </div>
             </form>
 

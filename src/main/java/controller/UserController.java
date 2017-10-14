@@ -1,6 +1,7 @@
 package controller;
 
 import model.User;
+import myenum.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -100,18 +101,28 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/register")
-    public String register(HttpServletRequest request,User user){
+    public String register(HttpServletRequest request,User user,int genderId){
+        user.setGender(Gender.getGender(genderId));
         userService.registerUser(user);
         //HttpSession session = request.getSession();
         //session.setAttribute("user",user);
         return "redirect:/index";
     }
 
+    /**
+     * 跳转到注册界面
+     * @return
+     */
     @RequestMapping(value = "/registerForm")
     public String registerForm(){
         return REGISTER_PAGE;
     }
 
+    /**
+     * 用户邮箱验证
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/validateUserForRegister")
     public String validateUser(User user){
 

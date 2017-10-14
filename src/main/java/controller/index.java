@@ -30,7 +30,7 @@ public class index {
     private ArticleService articleService;
 
     /**
-     * 自动注入
+     * 自动注入服务层
      * @param categoryAndLabelService
      * @param ebookService
      * @param webService
@@ -50,14 +50,21 @@ public class index {
      */
     @RequestMapping(value = "/index")
     public ModelAndView goIndex(String keyWord){
+        //获取主页的网站分享
         List<Web> webs = webService.getWebForIndex(keyWord);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("webs",webs);
+
+        //获取主页的电子书分享
         List<Ebook> ebooks = ebookService.getEbookForIndex(keyWord);
         modelAndView.addObject("ebooks",ebooks);
+
+        //获取主页的文章分享
         List<Article> articles = articleService.getArticleForIndex(keyWord);
         modelAndView.addObject("articles",articles);
         modelAndView.setViewName("page/index.jsp");
+
+        //获取分类和标签数据
         List<Category> categoriesForArticle = categoryAndLabelService.getCategoryByType(1);
         List<Category> categoriesForShare = categoryAndLabelService.getCategoryByType(2);
         modelAndView.addObject("categoriesForArticle",categoriesForArticle);

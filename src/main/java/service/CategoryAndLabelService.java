@@ -52,4 +52,10 @@ public class CategoryAndLabelService {
     public int deleteCategoryById(int idCategory){
         return categoryAndLabelDAO.deleteCategoryById(idCategory);
     }
+    public List<Label> getLabel(){
+        return categoryAndLabelDAO.getLabel();
+    }
+    public int deleteLabelById(int id){
+        return categoryAndLabelDAO.deleteLabelById(id);
+    }
 }

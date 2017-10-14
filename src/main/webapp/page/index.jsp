@@ -52,13 +52,15 @@
         function checkInputForSubmit() {
             var startDate = $("#startDate").val();
             if(startDate == "" || startDate == null){
-                alert("输入开始时间");
-                return false;
+                /*alert("输入开始时间");
+                return false;*/
+                $("#startDate").val("2000-01-01");
             }
             var endDate = $("#endDate").val();
             if(endDate == "" || endDate == null){
-                alert("输入结束时间");
-                return false;
+                /*alert("输入结束时间");
+                return false;*/
+                $("#endDate").val("2999-01-01");
             }
             return true;
         }
@@ -170,14 +172,14 @@
         <h4>文章分类</h4>
         <hr class="myhr1">
         <c:forEach items="${requestScope.categoriesForArticle}" var="categoriesForArticle">
-            <a href="#" class="btn mybtn1">${categoriesForArticle.name}</a>
+            <a href="#" class="btn mybtn1" title="${categoriesForArticle.description}">${categoriesForArticle.name}</a>
         </c:forEach>
     </div>
     <div style="background-color: white; margin-top: 20px; margin-left: 20px;width: 60%;padding: 20px">
         <h4>资源分享</h4>
         <hr class="myhr2">
         <c:forEach items="${requestScope.categoriesForShare}" var="categoriesForShare">
-            <a href="${pageContext.request.contextPath}/share/webShare" class="btn mybtn2">${categoriesForShare.name}</a>
+            <a href="${pageContext.request.contextPath}/share/webShare" class="btn mybtn2" title="${categoriesForShare.description}">${categoriesForShare.name}</a>
         </c:forEach>
     </div>
     <div style="background-color: white; margin-top: 20px; margin-left: 20px;width: 60%;padding: 20px">

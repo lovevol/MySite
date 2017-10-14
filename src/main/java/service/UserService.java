@@ -29,6 +29,11 @@ public class UserService {
         this.emailService = emailService;
     }
 
+    /**
+     * 验证登录信息
+     * @param user 用户
+     * @return 验证结果
+     */
     public boolean validateLogin(User user){
         User userForValidate = userDAO.getUserByLoginName(user.getLoginName());
         user.setPassword(MD5Util.getMD5(user.getPassword()));
@@ -43,6 +48,12 @@ public class UserService {
     public User getUserByLoginName(String loginName){
         return userDAO.getUserByLoginName(loginName);
     }
+
+    /**
+     *保存用户
+     * @param user 用户
+     * @return 结果
+     */
     public int saveUser(User user){
         return userDAO.addUser(user);
     }

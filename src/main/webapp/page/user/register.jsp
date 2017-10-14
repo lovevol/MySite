@@ -154,9 +154,9 @@
             </div>
             <div class="form-group" id="genderDiv">
                 <label for="gender" class="control-label"> 性别:</label>
-                <select id="gender" name="gender" class="form-control" style="width: 80px">
-                    <option value="男" >男</option>
-                    <option value="女" >女</option>
+                <select id="gender" name="genderId" class="form-control" style="width: 80px">
+                    <option value=1 >男</option>
+                    <option value=2 >女</option>
                 </select>
             </div>
             <div class="form-group" id="emailDiv">

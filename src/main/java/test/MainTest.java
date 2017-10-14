@@ -3,7 +3,10 @@ package test;
  * Created by lh
  * on 2017/9/6.
  */
+import dao.UserDAO;
 import model.Article;
+import model.User;
+import myenum.Gender;
 import valueobject.ArticleVO;
 
 import java.lang.reflect.InvocationTargetException;
@@ -16,21 +19,18 @@ import java.sql.Timestamp;
  */
 public class MainTest {
     public static void main(String[] args) {
-        ArticleVO articleVO = new ArticleVO();
-        Article article = new Article();
-        article.setDate(new Date(System.currentTimeMillis()));
-        article.setIdArticle(9898);
-        try {
-            articleVO.editArticleVO(article);
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
-        System.out.println(articleVO.getDate());
-        System.out.println(articleVO.getIdArticle());
+        User user = new User();
+        user.setLoginName("lll");
+        user.setUserName("lll");
+        user.setPassword("aaaaa");
+        user.setGender(Gender.FEMALE);
+        user.setRoleType((byte)1);
+        user.setEmail("aaaa");
+        user.setValidateCode("56456");
+        user.setStatus(1);
+        user.setValidateDate(new Timestamp(System.currentTimeMillis()));
+        UserDAO userDAO = new UserDAO();
+        userDAO.addUser(user);
     }
 }
 

@@ -5,6 +5,9 @@ package model;
  * on 2017/9/6.
  */
 
+import myenum.Gender;
+import sun.security.action.GetBooleanAction;
+
 import java.sql.Timestamp;
 
 /**
@@ -15,7 +18,7 @@ public class User {
     private String loginName;
     private String userName;
     private String password;
-    private String gender;
+    private Gender gender;
     private byte roleType;
     private String email;
     /**
@@ -102,12 +105,11 @@ public class User {
         this.password = password;
     }
 
-
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 }

@@ -30,5 +30,7 @@ public interface CategoryAndLabelMapper {
     int updateLabelForAddArticle(Label label);
     int updateCategory(Category category);
     int deleteCategoryById(int idCategory);
+    List<Label> selectLabel();
+    int deleteLabelById(int id);
 
 }

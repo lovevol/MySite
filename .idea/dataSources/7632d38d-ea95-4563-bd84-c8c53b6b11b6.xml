@@ -218,7 +218,7 @@
     </column>
     <column id="54" parent="12" name="gender">
       <Position>5</Position>
-      <DataType>char(2)|0</DataType>
+      <DataType>varchar(10)|0</DataType>
     </column>
     <column id="55" parent="12" name="roletype">
       <Position>6</Position>
