@@ -17,10 +17,11 @@ import java.util.logging.Logger;
 /**
  * Created by lh
  * on 2017/9/11.
+ * @author lh
  */
 @Service
 public class UserService {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
     private final UserDAO userDAO;
     private EmailService emailService;
     @Autowired

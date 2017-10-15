@@ -31,6 +31,7 @@ import java.util.UUID;
 
 /**
  * 处理管理员分享的请求
+ * @author lh
  */
 @Controller
 @RequestMapping(value = "/admin")
@@ -212,6 +213,8 @@ public class AdminController {
        List<Label> labels = categoryAndLabelService.getLabel();
        ModelAndView modelAndView = new ModelAndView();
        modelAndView.addObject("labels",labels);
+        List<Category> categories = categoryAndLabelService.getCategory();
+        modelAndView.addObject("categories",categories);
         modelAndView.setViewName("/page/admin/addLabel.jsp");
         return modelAndView;
     }

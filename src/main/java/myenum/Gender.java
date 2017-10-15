@@ -2,8 +2,10 @@ package myenum;
 
 /**
  * 性别枚举类
+ * @author lh
  */
 public enum Gender {
+    //性别男和女
     MALE(1,"男"),FEMALE(2,"女");
 
     public int getId() {

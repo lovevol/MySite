@@ -130,7 +130,7 @@
             <form action="${pageContext.request.contextPath}/admin/deleteCategoryById" method="post">
                 <div class="modal-body">
                     <input name="idCategory" id="idCategoryForDelete" hidden="hidden">
-                    <h3>确定删除该类被别？</h3>
+                    <h3>确定删除该类别？</h3>
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-default" value="确定"/>

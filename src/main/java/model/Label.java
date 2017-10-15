@@ -3,6 +3,7 @@ package model;
 /**
  * Created by lh
  * on 2017/9/10.
+ * @author lh
  */
 public class Label {
     private int idLabel;
@@ -49,5 +50,16 @@ public class Label {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Label{" +
+                "idLabel=" + idLabel +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + category +
+                ", articleNum=" + articleNum +
+                '}';
     }
 }

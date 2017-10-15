@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Created by lh
  * on 2017/9/11.
+ * @author lh
  */
 @Component
 public class EbookDAO {
@@ -31,5 +32,13 @@ public class EbookDAO {
      */
     public List<Ebook> getEbookForIndex(String keyWord){
        return ebookMapper.selectEbookForIndex(keyWord);
+    }
+
+    /**
+     * 获取所有电子书
+     * @return
+     */
+    public List<Ebook> selectAllEbook(){
+        return ebookMapper.selectAllEbook();
     }
 }

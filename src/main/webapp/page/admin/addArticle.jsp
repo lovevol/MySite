@@ -162,7 +162,7 @@
     </script>
 </head>
 <body style=" padding-top: 50px;background-color: #e4e4e4;">
-<div style="margin-left: 10%;margin-top:30px;width: 60%;background-color: white;padding: 20px;float: left;">
+<div style="margin-left: 10%;margin-top:20px;width: 60%;background-color: white;padding: 20px;float: left;">
     <h2 style="color: #f3726d">发布文章</h2>
     <hr class="myhr1">
     <div class="form-group">

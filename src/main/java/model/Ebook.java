@@ -3,6 +3,7 @@ package model;
 /**
  * Created by lh
  * on 2017/9/9.
+ * @author lh
  */
 public class Ebook {
     private int idEbook;
@@ -54,14 +55,24 @@ public class Ebook {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Ebook ebook = (Ebook) o;
 
-        if (idEbook != ebook.idEbook) return false;
-        if (bookName != null ? !bookName.equals(ebook.bookName) : ebook.bookName != null) return false;
-        if (description != null ? !description.equals(ebook.description) : ebook.description != null) return false;
+        if (idEbook != ebook.idEbook) {
+            return false;
+        }
+        if (bookName != null ? !bookName.equals(ebook.bookName) : ebook.bookName != null) {
+            return false;
+        }
+        if (description != null ? !description.equals(ebook.description) : ebook.description != null) {
+            return false;
+        }
         return path != null ? path.equals(ebook.path) : ebook.path == null;
     }
 

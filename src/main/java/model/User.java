@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 
 /**
  * 用户
+ * @author lh
  */
 public class User {
     private int idUser;
@@ -111,5 +112,21 @@ public class User {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "idUser=" + idUser +
+                ", loginName='" + loginName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", gender=" + gender +
+                ", roleType=" + roleType +
+                ", email='" + email + '\'' +
+                ", status=" + status +
+                ", validateCode='" + validateCode + '\'' +
+                ", validateDate=" + validateDate +
+                '}';
     }
 }

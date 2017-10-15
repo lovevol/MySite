@@ -178,9 +178,13 @@
     <div style="background-color: white; margin-top: 20px; margin-left: 20px;width: 60%;padding: 20px">
         <h4>资源分享</h4>
         <hr class="myhr2">
-        <c:forEach items="${requestScope.categoriesForShare}" var="categoriesForShare">
+        <a href="${pageContext.request.contextPath}/share/webShare" class="btn mybtn2">网站分享</a>
+        <a href="${pageContext.request.contextPath}/share/ebookShare" class="btn mybtn2">电子书分享</a>
+        <button class="btn mybtn2">个人心得</button>
+        <button class="btn mybtn2">......</button>
+        <%--<c:forEach items="${requestScope.categoriesForShare}" var="categoriesForShare">
             <a href="${pageContext.request.contextPath}/share/webShare" class="btn mybtn2" title="${categoriesForShare.description}">${categoriesForShare.name}</a>
-        </c:forEach>
+        </c:forEach>--%>
     </div>
     <div style="background-color: white; margin-top: 20px; margin-left: 20px;width: 60%;padding: 20px">
         <h4>关于作者</h4>

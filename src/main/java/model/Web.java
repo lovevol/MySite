@@ -7,6 +7,7 @@ package model;
 
 /**
  * 网站
+ * @author lh
  */
 public class Web {
     private int idWeb;
@@ -68,15 +69,27 @@ public class Web {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Web web = (Web) o;
 
-        if (idWeb != web.idWeb) return false;
-        if (webUrl != null ? !webUrl.equals(web.webUrl) : web.webUrl != null) return false;
-        if (description != null ? !description.equals(web.description) : web.description != null) return false;
-        if (remark != null ? !remark.equals(web.remark) : web.remark != null) return false;
+        if (idWeb != web.idWeb) {
+            return false;
+        }
+        if (webUrl != null ? !webUrl.equals(web.webUrl) : web.webUrl != null) {
+            return false;
+        }
+        if (description != null ? !description.equals(web.description) : web.description != null) {
+            return false;
+        }
+        if (remark != null ? !remark.equals(web.remark) : web.remark != null) {
+            return false;
+        }
         return label != null ? label.equals(web.label) : web.label == null;
     }
 

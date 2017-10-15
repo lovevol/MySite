@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Created by lh
  * on 2017/9/11.
+ * @author lh
  */
 @Service
 public class EbookService {
@@ -22,5 +23,9 @@ public class EbookService {
 
     public int addEbook(Ebook ebook){
         return ebookDAO.addEbook(ebook);
+    }
+
+    public List<Ebook> getEbook(){
+        return ebookDAO.selectAllEbook();
     }
 }

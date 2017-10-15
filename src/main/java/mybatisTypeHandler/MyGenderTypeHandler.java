@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 /**
  * 性别枚举类的转换映射
+ * @author lh
  */
 public class MyGenderTypeHandler implements TypeHandler<Gender> {
     @Override

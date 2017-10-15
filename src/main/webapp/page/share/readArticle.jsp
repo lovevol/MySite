@@ -15,6 +15,18 @@
 <div style="left: 10%;padding: 15px;width:10%;height: 500px;position: fixed;background-color: white">
     <h5>标签</h5>
     <hr class="myhr1">
+    <table style="text-align: center">
+        <c:forEach items="${labels}" var="label">
+            <tr>
+                <td>
+                    <a href="#">${label.name}<c:if test="${label.articleNum  ne 0}"></a>
+                </td>
+                <td style="padding-left: 10px">
+                    <span class="badge">${label.articleNum}</span></c:if>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 <div style="margin-left: 21%;padding: 20px;background-color: white;float: left;width: 50%;">
     <h2 class="myh1">${article.title}</h2>
@@ -30,13 +42,12 @@
         ${article.content.content}
     </div>
 </div>
-<div style="left: 72%;padding: 20px;background-color: white;float: left;height: 300px;position: fixed;width: 15%">
+<div style="left: 72%;padding: 20px;background-color: white;float: left;position: fixed;width: 15%">
     <h4>文章分类</h4>
     <hr class="myhr1">
-    <a href="#" class="btn mybtn1">JAVA语言</a>
-    <button class="btn mybtn1">JavaWeb技术</button>
-    <button class="btn mybtn1">开发工具</button>
-    <button class="btn mybtn1">文学读书笔记</button>
+    <c:forEach items="${requestScope.categoriesForArticle}" var="categoriesForArticle">
+        <a href="#" class="btn mybtn1">${categoriesForArticle.name}</a>
+    </c:forEach>
 </div>
 </body>
 </html>

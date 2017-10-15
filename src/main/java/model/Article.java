@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 /**
  * Created by lh
  * on 2017/9/10.
+ * @author lh
  */
 public class Article {
     private int idArticle;
@@ -81,5 +82,19 @@ public class Article {
 
     public void setLabel(Label label) {
         this.label = label;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "idArticle=" + idArticle +
+                ", title='" + title + '\'' +
+                ", date=" + date +
+                ", imagePath='" + imagePath + '\'' +
+                ", sketch='" + sketch + '\'' +
+                ", category=" + category +
+                ", label=" + label +
+                ", content=" + content +
+                '}';
     }
 }

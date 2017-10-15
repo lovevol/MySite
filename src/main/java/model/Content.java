@@ -3,6 +3,7 @@ package model;
 /**
  * Created by lh
  * on 2017/9/16.
+ * @author lh
  */
 public class Content {
     private int idContent;
@@ -22,5 +23,13 @@ public class Content {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Content{" +
+                "idContent=" + idContent +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

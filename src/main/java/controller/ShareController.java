@@ -3,10 +3,7 @@ package controller;
 import dao.ArticleDAO;
 import dao.EbookDAO;
 import dao.WebDAO;
-import model.Article;
-import model.Category;
-import model.Ebook;
-import model.Web;
+import model.*;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +29,7 @@ import java.util.List;
 /**
  * Created by lh
  * on 2017/9/9.
+ * @author lh
  */
 @Controller
 @RequestMapping(value = "/share")
@@ -69,9 +67,9 @@ public class ShareController {
      */
     @RequestMapping(value = "ebookShare")
     public ModelAndView ebookShare(){
-        //List<Ebook> ebooks = ebookService.getEbookForIndex();
+        List<Ebook> ebooks = ebookService.getEbook();
         ModelAndView modelAndView = new ModelAndView();
-       // modelAndView.addObject("ebooks",ebooks);
+        modelAndView.addObject("ebooks",ebooks);
         modelAndView.setViewName("/page/share/ebookShare.jsp");
         return modelAndView;
     }
@@ -107,6 +105,10 @@ public class ShareController {
         Article article = articleService.getArticleById(articleId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("article",article);
+        List<Category> categoriesForArticle = categoryAndLabelService.getCategoryByType(1);
+        modelAndView.addObject("categoriesForArticle",categoriesForArticle);
+        List<Label> labels = categoryAndLabelService.getLabel();
+        modelAndView.addObject("labels",labels);
         modelAndView.setViewName("/page/share/readArticle.jsp");
         return modelAndView;
     }

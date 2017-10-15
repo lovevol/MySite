@@ -50,8 +50,8 @@
                     <input type="text" name="name" id="name" class="form-control">
                     <label for="idCategory">类目:</label>
                     <select id="idCategory" name="category.idCategory" class="form-control">
-                        <c:if test="${!empty categorys}">
-                            <c:forEach items="${categorys}" var="category">
+                        <c:if test="${!empty categories}">
+                            <c:forEach items="${categories}" var="category">
                                 <option value="${category.idCategory}">${category.name}</option>
                             </c:forEach>
                         </c:if>
@@ -103,9 +103,9 @@
             <form action="${pageContext.request.contextPath}/admin/modifyCategory" method="post">
                 <div class="modal-body">
                     <input name="idCategory" id="idCategoryForModify" hidden="hidden">
-                    <label for="nameForModify">类目：</label>
+                    <label for="nameForModify">标签：</label>
                     <input name="name" id="nameForModify" class="form-control">
-                    <label for="typeForModify">类型:</label>
+                    <label for="typeForModify">类目:</label>
                     <select id="typeForModify" name="type" class="form-control">
                         <option id="type1ForModify" value="1">文章分享</option>
                         <option id="ForModifytype2" value="2">资源分享</option>
@@ -132,7 +132,7 @@
             <form action="${pageContext.request.contextPath}/admin/deleteLabelById" method="post">
                 <div class="modal-body">
                     <input name="idLabel" id="idLabelForDelete" hidden="hidden">
-                    <h3>确定删除该类被别？</h3>
+                    <h3>确定删除该标签？</h3>
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-default" value="确定"/>

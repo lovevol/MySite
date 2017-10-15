@@ -38,7 +38,7 @@
     </div>
 </div>
 <div style="float: left;width: 40%;height: 100%;">
-    <div style="background-color: white; margin-top: 30px; margin-left: 30px;width: 50%;height: 300px;padding: 20px">
+    <div style="background-color: white; margin-top: 20px; margin-left: 30px;width: 50%;height: 300px;padding: 20px">
         <h4>资源分享</h4>
         <hr class="myhr2">
         <a href="${pageContext.request.contextPath}/share/webShare" class="btn mybtn2">网站分享</a>
@@ -46,7 +46,7 @@
         <button class="btn mybtn2">个人心得</button>
         <button class="btn mybtn2">......</button>
     </div>
-    <div style="background-color: white; margin-top: 30px; margin-left: 30px;width: 50%;height: 300px;padding: 20px">
+    <div style="background-color: white; margin-top: 20px; margin-left: 30px;width: 50%;height: 300px;padding: 20px">
         <h4 style="color: red">说明</h4>
         <hr class="myhr2">
         <h4 style="color: red">所有电子资源均从网络获得。</h4>

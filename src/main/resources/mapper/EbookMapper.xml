@@ -15,7 +15,7 @@
         </where>
         ORDER BY idebook DESC limit 5
     </select>
-    <select id="seleAllEbook" resultType="model.Ebook">
+    <select id="selectAllEbook" resultType="model.Ebook">
         SELECT * FROM ebook
     </select>
 </mapper>

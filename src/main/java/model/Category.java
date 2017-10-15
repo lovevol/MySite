@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * Created by lh
  * on 2017/9/10.
+ * @author lh
  */
 public class Category {
     private int idCategory;
@@ -53,5 +54,16 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "idCategory=" + idCategory +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", description='" + description + '\'' +
+                ", labels=" + labels +
+                '}';
     }
 }
