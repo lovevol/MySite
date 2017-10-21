@@ -127,16 +127,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <!--<encoding>UTF-8</encoding>-->
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>wagon-maven-plugin</artifactId>
-                <version>1.0</version>
-                <configuration>
                     <fromFile>target/mySite.war</fromFile>
                     <url>scp://root:935686942lH@120.24.4.136/data/wwwroot/default</url>
                     <commands>
@@ -144,6 +134,8 @@
                         <command>service tomcat restart</command>
                     </commands>
                     <displayCommandOutputs>true</displayCommandOutputs>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <!--利用cargo插件完成项目部署-->
