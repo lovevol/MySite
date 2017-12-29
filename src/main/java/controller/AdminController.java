@@ -1,5 +1,6 @@
 package controller;
 
+import PagingPlugin.PageParams;
 import model.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import service.ArticleService;
-import service.CategoryAndLabelService;
-import service.EbookService;
-import service.WebService;
+import service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +42,7 @@ public class AdminController {
     private EbookService ebookService;
     private WebService webService;
     private ArticleService articleService;
+    private UserService userService;
 
     /**
      * 自动注入
@@ -53,11 +52,12 @@ public class AdminController {
      * @param articleService
      */
     @Autowired
-    public AdminController(CategoryAndLabelService categoryAndLabelService, EbookService ebookService, WebService webService, ArticleService articleService) {
+    public AdminController(CategoryAndLabelService categoryAndLabelService, EbookService ebookService, WebService webService, ArticleService articleService,UserService userService) {
         this.categoryAndLabelService = categoryAndLabelService;
         this.ebookService = ebookService;
         this.webService = webService;
         this.articleService = articleService;
+        this.userService = userService;
     }
 
 
@@ -277,4 +277,18 @@ public class AdminController {
         }
         return modelAndView;
     }
+
+    @RequestMapping(value = "/getUser")
+    public ModelAndView getUser(){
+        //分页插件测试
+        PageParams pageParams = new PageParams();
+        pageParams.setUseFlag(true);
+        pageParams.setCheckFlag(true);
+        pageParams.setPageSize(20);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("users",userService.getUSer(pageParams));
+        modelAndView.setViewName("/page/admin/user.jsp");
+        return modelAndView;
+    }
+
 }

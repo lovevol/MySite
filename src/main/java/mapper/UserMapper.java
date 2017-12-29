@@ -4,6 +4,7 @@ package mapper;
  * Created by Administrator on 2017/9/13.
  */
 
+import PagingPlugin.PageParams;
 import model.Article;
 import model.User;
 import org.springframework.stereotype.Repository;
@@ -59,4 +60,6 @@ public interface UserMapper {
      */
     void updateUserByIdAndValidateCode(User user);
 
+    int saveUserByBatch(List<User> userList);
+    List<User> getUser(PageParams pageParams);
 }

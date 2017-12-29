@@ -53,7 +53,7 @@
     </mvc:interceptors>
     <!--文件上传服务-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="104857600"/>
+        <property name="maxUploadSize" value="1048576000"/>
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
     <!--静态资源配置-->

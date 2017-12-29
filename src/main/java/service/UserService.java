@@ -1,10 +1,12 @@
 package service;
 
+import PagingPlugin.PageParams;
 import dao.UserDAO;
 import model.Article;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.nio.cs.US_ASCII;
 import util.MD5Util;
 import valueobject.ArticleVO;
 
@@ -83,4 +85,11 @@ public class UserService {
         }
     }
 
+    public int addUserByBatch(List<User> list){
+        return userDAO.addUserByBatch(list);
+    }
+
+    public List<User> getUSer(PageParams pageParams){
+        return userDAO.getUSer(pageParams);
+    }
 }

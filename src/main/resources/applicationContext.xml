@@ -13,6 +13,7 @@
     <!--自动扫描-->
     <context:component-scan base-package="dao"/>
     <context:component-scan base-package="service"/>
+    <context:component-scan base-package="PagingPlugin"/>
     <!--<context:component-scan base-package="aop"/>-->
     <context:component-scan base-package="mapper" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
@@ -39,6 +40,14 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" scope="prototype">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--分页插件-->
+        <property name="plugins">
+            <array>
+                <bean class="PagingPlugin.PagingPlugin">                                                                                                          <property name="properties">                                                                                                                                          <value>  property-key=property-value </value>
+                </property>
+                </bean>
+            </array>
+        </property>
     </bean>
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory"/>

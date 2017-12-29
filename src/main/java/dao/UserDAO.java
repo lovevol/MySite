@@ -1,5 +1,6 @@
 package dao;
 
+import PagingPlugin.PageParams;
 import mapper.UserMapper;
 import model.Article;
 import model.User;
@@ -54,4 +55,10 @@ public class UserDAO {
         userMapper.updateUserByIdAndValidateCode(user);
     }
 
+    public int addUserByBatch(List<User> userList){
+        return userMapper.saveUserByBatch(userList);
+    }
+    public List<User> getUSer(PageParams pageParams){
+        return userMapper.getUser(pageParams);
+    }
 }

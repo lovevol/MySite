@@ -22,6 +22,13 @@
     <insert id="save" parameterType="model.User" useGeneratedKeys="true" keyProperty="idUser">
         INSERT INTO user(username, loginname,password, gender,roletype,email,validatecode,status,validatedate) VALUES(#{userName},#{loginName},#{password},#{gender,typeHandler=mybatisTypeHandler.MyGenderTypeHandler},#{roleType},#{email},#{validateCode},#{status},#{validateDate})
     </insert>
+    <!--批量插入-->
+    <insert id="saveUserByBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="idUser">
+        INSERT INTO user(username, loginname,password, gender,roletype,email,validatecode,status,validatedate) VALUES
+            <foreach collection="list" index="index" item="user" separator=",">
+                (#{user.userName},#{user.loginName},#{user.password},#{user.gender,typeHandler=mybatisTypeHandler.MyGenderTypeHandler},#{user.roleType},#{user.email},#{user.validateCode},#{user.status},#{user.validateDate})
+            </foreach>
+    </insert>
     <select id="selectUserById" parameterType="int" resultMap="userMap">
         SELECT * FROM user WHERE iduser = #{id}
     </select>
@@ -35,5 +42,8 @@
     </delete>
     <select id="updateUserByIdAndValidateCode" parameterType="model.User" resultMap="userMap">
        UPDATE user set status = 1 WHERE iduser = #{idUser} and validatecode = #{validateCode}
+    </select>
+    <select id="getUser" resultMap="userMap">
+        select * from user
     </select>
 </mapper>
