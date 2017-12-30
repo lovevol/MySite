@@ -34,7 +34,6 @@ import java.util.UUID;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
-    private Logger logger = Logger.getLogger(this.getClass());
     /**
      * service层
      */
