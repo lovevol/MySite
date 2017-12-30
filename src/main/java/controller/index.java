@@ -1,5 +1,6 @@
 package controller;
 
+import aoplog.AopLog;
 import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,7 @@ public class index {
      * @return 主页地址
      */
     @RequestMapping(value = "/index")
+    @AopLog(operateTypeDesc = "主页跳转")
     public ModelAndView goIndex(String keyWord){
         //获取主页的网站分享
         List<Web> webs = webService.getWebForIndex(keyWord);
@@ -97,6 +99,7 @@ public class index {
      * @param idCategory
      * @return
      */
+    @AopLog(operateTypeDesc = "动态获取某一类别下的标签信息")
     @RequestMapping(value = "/getLabelForAjax")
     @ResponseBody
     public Object getLabelForAjax(int idCategory){

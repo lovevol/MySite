@@ -1,5 +1,6 @@
 package controller;
 
+import aoplog.AopLog;
 import model.User;
 import myenum.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +36,13 @@ public class UserController {
      * 跳转到用户登陆界面
      * @return 界面路径
      */
+    @AopLog(operateTypeDesc = "用户登陆界面调转")
     @RequestMapping(value = "/login")
     public String login(){
         return LOGIN_PAGE;
     }
 
+    @AopLog(operateTypeDesc = "用户登陆验证")
     @RequestMapping(value = "/validate")
     public String validate(HttpServletRequest request, User user){
         boolean validate = userService.validateLogin(user);
@@ -63,6 +66,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @AopLog(operateTypeDesc = "退出登陆")
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession();
