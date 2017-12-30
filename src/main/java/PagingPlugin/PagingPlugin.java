@@ -23,7 +23,7 @@ import java.util.Set;
 @Intercepts(
         //拦截方法签名
         @Signature(
-
+                //拦截的类名称，类方法，方法参数
                 type = StatementHandler.class,
                 method = "prepare",
                 args = {Connection.class,Integer.class}
@@ -34,16 +34,19 @@ public class PagingPlugin implements Interceptor {
     private Integer defaultPageSize;
     private Boolean defaultUseFlag;
     private Boolean defaultCheckFlag;
-
+    //拦截方法
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         StatementHandler statementHandler = getUnProxyObject(invocation);
         MetaObject metaStatementHandler = SystemMetaObject.forObject(statementHandler);
+        //获取sql
         String sql = (String) metaStatementHandler.getValue("delegate.boundSql.sql");
+        //判断是否是select语句
         if (!checkSelect(sql)) {
             return invocation.proceed();
         }
         BoundSql boundSql = (BoundSql) metaStatementHandler.getValue("delegate.boundSql");
+        //获取参数，查看是否有分页参数
         Object parameterObject = boundSql.getParameterObject();
         PageParams pageParams = getPageParams(parameterObject);
         if (pageParams == null) {
@@ -98,6 +101,7 @@ public class PagingPlugin implements Interceptor {
         return index == 0;
     }
 
+    //获取分页参数
     private PageParams getPageParams(Object pageParamsObject) {
         if (pageParamsObject == null) {
             return null;
