@@ -140,7 +140,7 @@
                 </executions>
                 <configuration>
                     <fromFile>target/mySite.war</fromFile>
-                    <url>scp://root:935686942lH@120.24.4.136/data/wwwroot/default</url>
+                    <url>scp://root:@120.24.4.136/data/wwwroot/default</url>
                     <commands>
                         <command>rm -rf /data/wwwroot/default/mySite</command>
                         <command>service tomcat restart</command>
