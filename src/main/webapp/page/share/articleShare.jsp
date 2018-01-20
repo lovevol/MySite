@@ -161,7 +161,7 @@
         <h4>文章分类</h4>
         <hr class="myhr1">
         <c:forEach items="${requestScope.categoriesForArticle}" var="categoriesForArticle">
-            <a href="#" class="btn mybtn1">${categoriesForArticle.name}</a>
+            <a href="${pageContext.request.contextPath}/share/getArticleByCategory?idCategory=${categoriesForArticle.idCategory}" class="btn mybtn1" title="${categoriesForArticle.description}">${categoriesForArticle.name}</a>
         </c:forEach>
     </div>
 </div>

@@ -36,5 +36,12 @@ public class WebDAO {
         return webMapper.saveWeb(web);
     }
 
+    /**
+     * 选择所有Web
+     * @return
+     */
+    public List<Web> selectAllWeb(){
+        return webMapper.selectAllWeb();
+    }
 
 }

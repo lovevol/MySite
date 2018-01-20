@@ -26,4 +26,7 @@ public interface WebMapper {
      * @return
      */
     List<Web> selectWebForIndex(@Param("keyWord") String keyWord);
+
+    List<Web> selectAllWeb();
+
 }

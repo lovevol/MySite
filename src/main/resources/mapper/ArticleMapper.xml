@@ -56,4 +56,7 @@
     <insert id="saveContent" parameterType="model.Content" useGeneratedKeys="true" keyProperty="idContent">
         insert into content (content) values (#{content})
     </insert>
+    <select id="selectArticleByCategory" parameterType="int" resultMap="articleMap">
+        SELECT * FROM article WHERE idcategory = #{idCategort}
+    </select>
 </mapper>

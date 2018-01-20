@@ -24,6 +24,7 @@ import valueobject.ArticleVO;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Retention;
 import java.util.List;
 
 /**
@@ -54,9 +55,9 @@ public class ShareController {
      */
     @RequestMapping(value = "/webShare")
     public ModelAndView webShare(){
-        //List<Web> webs = webService.getWebForIndex();
+        List<Web> webs = webService.getWeb();
         ModelAndView modelAndView = new ModelAndView();
-        //modelAndView.addObject("webs",webs);
+        modelAndView.addObject("webs",webs);
         modelAndView.setViewName("/page/share/webShare.jsp");
         return modelAndView;
     }
@@ -124,6 +125,21 @@ public class ShareController {
         List<Category> categories = categoryAndLabelService.getCategory();
         modelAndView.addObject("categorys",categories);
         modelAndView.addObject("articleVO",articleVO);
+        return modelAndView;
+    }
+
+    /**
+     * 按照类别获取文章
+     * @return
+     */
+    @RequestMapping(value = "/getArticleByCategory")
+    public ModelAndView getArticleByCategory(int idCategory){
+        ModelAndView modelAndView = new ModelAndView();
+        List<Article> articles = articleService.getArticleByCategory(idCategory);
+        modelAndView.addObject("articles",articles);
+        List<Category> categoriesForArticle = categoryAndLabelService.getCategoryByType(1);
+        modelAndView.addObject("categoriesForArticle",categoriesForArticle);
+        modelAndView.setViewName("/page/share/articleShare.jsp");
         return modelAndView;
     }
 }

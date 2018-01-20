@@ -61,4 +61,13 @@ public class ArticleDAO {
     public List<Article> getArticle(ArticleVO articleVO){
         return articleMapper.selectArticle(articleVO);
     }
+
+    /**
+     * 按照类别搜索文章
+     * @param idCategory 文章id
+     * @return
+     */
+     public List<Article> getArticleByCategory(int idCategory){
+        return articleMapper.selectArticleByCategory(idCategory);
+     }
 }

@@ -55,4 +55,6 @@ public interface ArticleMapper {
      * @return　文章
      */
     List<Article> selectArticle(ArticleVO articleVO);
+
+    List<Article> selectArticleByCategory(int idCategory);
 }

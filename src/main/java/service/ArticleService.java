@@ -54,7 +54,16 @@ public class ArticleService {
         return articleDAO.getArticleById(id);
     }
 
+    /**
+     * 主页搜索
+     * @param articleVO
+     * @return
+     */
     public List<Article> getArticle(ArticleVO articleVO){
         return articleDAO.getArticle(articleVO);
+    }
+
+    public List<Article> getArticleByCategory(int idCategory){
+        return articleDAO.getArticleByCategory(idCategory);
     }
 }
