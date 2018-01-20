@@ -101,4 +101,5 @@ public interface CategoryAndLabelMapper {
      */
     int deleteLabelById(int id);
 
+    void updateLabelForDeleteArticle();
 }

@@ -15,7 +15,7 @@
         <h4>菜单</h4>
         <hr class="myhr1">
         <a href="${pageContext.request.contextPath}/admin/goAddArticle" class="btn mybtn1">文章分享</a>
-        <a href="#" class="btn mybtn1">文章管理</a>
+        <a href="${pageContext.request.contextPath}/admin/goArticleList" class="btn mybtn1">文章管理</a>
         <a href="${pageContext.request.contextPath}/admin/goAddLabel" class="btn mybtn1">标签管理</a>
         <a href="${pageContext.request.contextPath}/admin/goAddCategory" class="btn mybtn1">类别管理</a>
         <a href="#" class="btn mybtn1">资源分享</a>

@@ -66,4 +66,8 @@ public class ArticleService {
     public List<Article> getArticleByCategory(int idCategory){
         return articleDAO.getArticleByCategory(idCategory);
     }
+
+    public int deleteArticleById(int id){
+        return articleDAO.deleteArticleById(id);
+    }
 }

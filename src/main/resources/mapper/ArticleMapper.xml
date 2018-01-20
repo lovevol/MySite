@@ -59,4 +59,7 @@
     <select id="selectArticleByCategory" parameterType="int" resultMap="articleMap">
         SELECT * FROM article WHERE idcategory = #{idCategort}
     </select>
+    <delete id="deleteArticleById" parameterType="int">
+        DELETE FROM article WHERE idarticle = #{id}
+    </delete>
 </mapper>

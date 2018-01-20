@@ -30,7 +30,7 @@
         <property name="username" value="mysite"/>
         <property name="password" value=""/>
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://120.24.4.136:3306/mysitedb"/>
+        <property name="url" value="jdbc:mysql://120.24.4.136:3306/mysitedb?useUnicode=true&amp;characterEncoding=UTF-8"/>
         <!--<property name="username" value="root"/>
         <property name="password" value=""/>
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>

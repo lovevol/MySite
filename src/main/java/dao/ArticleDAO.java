@@ -70,4 +70,8 @@ public class ArticleDAO {
      public List<Article> getArticleByCategory(int idCategory){
         return articleMapper.selectArticleByCategory(idCategory);
      }
+
+     public int deleteArticleById(int id){
+         return articleMapper.deleteArticleById(id);
+     }
 }

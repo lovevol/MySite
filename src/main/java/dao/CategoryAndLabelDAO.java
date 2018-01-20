@@ -115,4 +115,8 @@ public class CategoryAndLabelDAO {
     public int deleteLabelById(int id){
         return categoryAndLabelMapper.deleteLabelById(id);
     }
+
+    public void updateLabelForDeleteArticle(){
+        categoryAndLabelMapper.updateLabelForDeleteArticle();
+    }
 }

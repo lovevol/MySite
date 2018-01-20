@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import service.*;
+import valueobject.ArticleVO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -267,7 +268,7 @@ public class AdminController {
      * @param idLabel
      * @return
      */
-    @RequestMapping(value = "deleteLabelById")
+    @RequestMapping(value = "/deleteLabelById")
     public ModelAndView deleteLabelById(int idLabel){
         ModelAndView modelAndView = new ModelAndView();
         int result = categoryAndLabelService.deleteLabelById(idLabel);
@@ -290,4 +291,50 @@ public class AdminController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/goArticleList")
+    public ModelAndView goArticleList(ArticleVO articleVO){
+        ModelAndView md = new ModelAndView();
+        List<Article> articles = articleService.getArticle(articleVO);
+        md.addObject("articles",articles);
+        List<Category> categoriesForArticle = categoryAndLabelService.getCategoryByType(1);
+        md.addObject("categoriesForArticle",categoriesForArticle);
+        md.setViewName("/page/admin/articleListForEdit.jsp");
+        return md;
+    }
+
+    @RequestMapping(value = "/goArticleListByCategory")
+    public ModelAndView goArticleListByCategory(int idCategory){
+        ModelAndView md = new ModelAndView();
+        List<Article> articles = articleService.getArticleByCategory(idCategory);
+        md.addObject("articles",articles);
+        List<Category> categoriesForArticle = categoryAndLabelService.getCategoryByType(1);
+        md.addObject("categoriesForArticle",categoriesForArticle);
+        md.setViewName("/page/admin/articleListForEdit.jsp");
+        return md;
+    }
+
+    @RequestMapping(value = "/deleteArticleById")
+    public ModelAndView deleteArticleById(int id){
+        int result = articleService.deleteArticleById(id);
+        categoryAndLabelService.updateLabelForDeleteArticle();
+        ModelAndView md = new ModelAndView();
+
+        if (result < 1){
+            md.addObject("errorMsg","删除失败");
+        }
+        md.setViewName("redirect:/admin/goArticleList");
+        return md;
+    }
+
+    @RequestMapping(value = "/goUpdateArticle")
+    public ModelAndView goUpdateArticle(int id){
+        ModelAndView md = new ModelAndView();
+        Article article = articleService.getArticleById(id);
+        md.addObject("article",article);
+        //获取类别
+        List<Category> categories = categoryAndLabelService.getCategoryByType(1);
+        md.addObject("categories",categories);
+        md.setViewName("/page/admin/updateArticle.jsp");
+        return md;
+    }
 }

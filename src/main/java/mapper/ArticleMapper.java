@@ -57,4 +57,6 @@ public interface ArticleMapper {
     List<Article> selectArticle(ArticleVO articleVO);
 
     List<Article> selectArticleByCategory(int idCategory);
+
+    int deleteArticleById(int id);
 }
