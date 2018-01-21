@@ -68,6 +68,16 @@ public class ArticleService {
     }
 
     public int deleteArticleById(int id){
+        Article article = getArticleById(id);
+        categoryAndLabelDAO.updateLabelForDeleteArticle(article.getLabel().getIdLabel());
         return articleDAO.deleteArticleById(id);
+    }
+
+    public int updateArticle(Article article){
+        Content content = article.getContent();
+        if (content != null && content.getContent() != null){
+            articleDAO.updateContent(content);
+        }
+        return articleDAO.updateArticle(article);
     }
 }

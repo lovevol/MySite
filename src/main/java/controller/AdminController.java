@@ -2,6 +2,7 @@ package controller;
 
 import PagingPlugin.PageParams;
 import model.*;
+import org.apache.ibatis.annotations.Update;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -316,7 +317,6 @@ public class AdminController {
     @RequestMapping(value = "/deleteArticleById")
     public ModelAndView deleteArticleById(int id){
         int result = articleService.deleteArticleById(id);
-        categoryAndLabelService.updateLabelForDeleteArticle();
         ModelAndView md = new ModelAndView();
 
         if (result < 1){
@@ -336,5 +336,33 @@ public class AdminController {
         md.addObject("categories",categories);
         md.setViewName("/page/admin/updateArticle.jsp");
         return md;
+    }
+
+    @RequestMapping(value = "/updateArticle")
+    public String updateArticle(Article article, HttpServletRequest request, MultipartFile image) throws IOException {
+        if (article.getTitle() != null && !"".equals(article.getTitle())
+                && article.getLabel() != null && !"".equals(article.getLabel())
+                && article.getCategory() != null && !"".equals(article.getCategory())
+                && article.getContent() != null && !"".equals(article.getContent())) {
+            if (image != null && !image.isEmpty()) {
+                String path = request.getServletContext().getRealPath("/image/");
+                String imageName = image.getOriginalFilename();
+                //文件重命名，解决中文文件名问题
+                imageName = UUID.randomUUID().toString()+imageName.substring(imageName.lastIndexOf("."));
+                File filePath = new File(path, imageName);
+                if (!filePath.getParentFile().exists()) {
+                    filePath.getParentFile().mkdirs();
+                }
+                image.transferTo(new File(path + File.separator + imageName));
+                article.setImagePath(imageName);
+            }
+            article.setDate(new Date(System.currentTimeMillis()));
+            articleService.updateArticle(article);
+            request.setAttribute("errorMsg", "修改成功！");
+            return "redirect:/admin/goArticleList";
+        } else {
+            request.setAttribute("errorMsg", "添加文章数据不正确！");
+            return "redirect:/admin/goArticleList";
+        }
     }
 }

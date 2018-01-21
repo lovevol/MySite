@@ -23,7 +23,7 @@ public class BrowsingHistoryInterceptor implements HandlerInterceptor {
         HttpSession session = httpServletRequest.getSession();
         User user = (User) session.getAttribute("user");
         if (null != user){
-            jedisService.setRecordForBrowsing(user,httpServletRequest.getServletPath());
+            jedisService.setRecordForBrowsing(user,httpServletRequest.getContextPath()+httpServletRequest.getServletPath());
         }
         return true;
     }

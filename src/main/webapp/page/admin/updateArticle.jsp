@@ -48,14 +48,14 @@
         }
     </script>
     <script type="text/javascript">
-        $(function () {
-            setContent(false);
-        });
+        function editContent() {
+            var ue = UE.getEditor('editor');
+            ue.setContent('${article.content.content}');
+        }
         //实例化编辑器
         //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-        var ue = UE.getEditor('editor');
 
-
+        ue = UE.getEditor('editor');
         function isFocus(e) {
             alert(UE.getEditor('editor').isFocus());
             UE.dom.domUtils.preventDefault(e)
@@ -168,8 +168,9 @@
     <h2 style="color: #f3726d">文章修改</h2>
     <hr class="myhr1">
     <div class="form-group">
-        <form action="${pageContext.request.contextPath}/admin/addArticle" method="post" id="formForArticle"
+        <form action="${pageContext.request.contextPath}/admin/updateArticle" method="post" id="formForArticle"
               enctype="multipart/form-data">
+            <input type="hidden" name="idArticle" id="idArticle" value="${article.idArticle}">
             <label for="title">标题:</label>
             <input type="text" id="title" name="title" class="form-control" value="${article.title}">
 
@@ -192,8 +193,10 @@
 
             <label for="image">封面图:</label>
             <input type="file" id="image" name="image" class="form-control" >
+            <img src="/mySite/image/${article.imagePath}" alt="..." class="img-thumbnail" style="width: 100%">
             <label for="sketch">简述:</label>
             <textarea rows="4" id="sketch" name="sketch" class="form-control" maxlength="500">${article.sketch}</textarea>
+            <input type="hidden" id="idContent" name="content.idContent" value="${article.content.idContent}">
             <input type="text" hidden="hidden" id="content" name="content.content">
         </form>
     </div>
@@ -232,7 +235,9 @@
         </div>
     </div>--%>
     <button class="btn btn-danger" onclick="submitForm()">文章修改</button>
+        <button class="btn btn-danger" onclick="editContent()">编辑内容</button>
     </div>
+
 </body>
 <%@include file="rightMenuOfAdmin.jsp" %>
 </html>

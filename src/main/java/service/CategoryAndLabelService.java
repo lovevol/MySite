@@ -59,7 +59,7 @@ public class CategoryAndLabelService {
     public int deleteLabelById(int id){
         return categoryAndLabelDAO.deleteLabelById(id);
     }
-    public void updateLabelForDeleteArticle(){
-        categoryAndLabelDAO.updateLabelForDeleteArticle();
+    public void updateLabelForDeleteArticle(int id){
+        categoryAndLabelDAO.updateLabelForDeleteArticle(id);
     }
 }

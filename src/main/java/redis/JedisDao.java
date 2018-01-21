@@ -10,27 +10,37 @@ import java.util.List;
 
 @Component
 public class JedisDao {
-    private final JedisClient client;
-
-    @Autowired
-    public JedisDao(JedisClient client) {
-        this.client = client;
-    }
-
     public boolean checkLogin(User user){
-        String result = client.getClient().get(String.valueOf(user.getIdUser()));
+        Jedis jedis = getJedis();
+        String result = jedis.get(String.valueOf(user.getIdUser()));
+        close(jedis);
         return result != null;
     }
 
     public void login(User user){
-        client.getClient().set(String.valueOf(user.getIdUser()),String.valueOf(System.currentTimeMillis()));
+        Jedis jedis = getJedis();
+        jedis.set(String.valueOf(user.getIdUser()),String.valueOf(System.currentTimeMillis()));
+        close(jedis);
     }
 
     public void setRecordForBrowsing(User user, String url){
-        client.getClient().lpush(String.valueOf(user.getIdUser()),url);
+        Jedis jedis = getJedis();
+        jedis.lpush(String.valueOf(user.getIdUser()),url);
+        close(jedis);
+
     }
 
     public List<String> getRecordForBrowsing(User user){
-        return client.getClient().lrange(String.valueOf(user.getIdUser()),0,-1);
+        Jedis jedis = getJedis();
+        List<String> list = jedis.lrange(String.valueOf(user.getIdUser()),0,-1);
+        close(jedis);
+        return  list;
+    }
+
+    private Jedis getJedis(){
+        return RedisUtil.getJedis();
+    }
+    private void close(Jedis jedis){
+        RedisUtil.returnResource(jedis);
     }
 }

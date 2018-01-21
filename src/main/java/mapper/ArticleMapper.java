@@ -59,4 +59,8 @@ public interface ArticleMapper {
     List<Article> selectArticleByCategory(int idCategory);
 
     int deleteArticleById(int id);
+
+    int updateArticle(Article article);
+
+    int updateContent(Content content);
 }

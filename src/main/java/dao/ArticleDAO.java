@@ -74,4 +74,12 @@ public class ArticleDAO {
      public int deleteArticleById(int id){
          return articleMapper.deleteArticleById(id);
      }
+
+     public int updateArticle(Article article){
+         return articleMapper.updateArticle(article);
+     }
+
+     public int updateContent(Content content){
+         return articleMapper.updateContent(content);
+     }
 }

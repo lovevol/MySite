@@ -62,4 +62,37 @@
     <delete id="deleteArticleById" parameterType="int">
         DELETE FROM article WHERE idarticle = #{id}
     </delete>
+    <update id="updateArticle" parameterType="model.Article">
+        UPDATE article
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="date != null">
+                date = #{date},
+            </if>
+            <if test="label != null and label.idLabel != null ">
+                idlabel = #{label.idLabel},
+            </if>
+            <if test="category != null and category.idCategory != null">
+                idcategory = #{category.idCategory},
+            </if>
+            <if test="sketch != null">
+                sketch = #{sketch},
+            </if>
+            <if test="imagePath != null">
+                imagepath = #{imagePath}
+            </if>
+        </set>
+        WHERE idarticle = #{idArticle}
+    </update>
+    <update id="updateContent" parameterType="model.Content">
+        UPDATE content
+        <set>
+            <if test="content != null">
+                content = #{content}
+            </if>
+        </set>
+        WHERE idcontent = #{idContent}
+    </update>
 </mapper>
