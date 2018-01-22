@@ -1,5 +1,6 @@
 package mapper;
 
+import PagingPlugin.PageParams;
 import model.Article;
 import model.Content;
 import org.apache.ibatis.annotations.Param;
@@ -63,4 +64,6 @@ public interface ArticleMapper {
     int updateArticle(Article article);
 
     int updateContent(Content content);
+
+    List<Article> selectArticleByLabelId(int id);
 }

@@ -62,4 +62,8 @@ public class CategoryAndLabelService {
     public void updateLabelForDeleteArticle(int id){
         categoryAndLabelDAO.updateLabelForDeleteArticle(id);
     }
+
+    public List<Label> getHotLabel(){
+        return categoryAndLabelDAO.getHotLabel();
+    }
 }

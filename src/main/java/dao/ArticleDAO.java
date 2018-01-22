@@ -1,4 +1,5 @@
 package dao;
+import PagingPlugin.PageParams;
 import mapper.ArticleMapper;
 import model.Article;
 import model.Content;
@@ -81,5 +82,9 @@ public class ArticleDAO {
 
      public int updateContent(Content content){
          return articleMapper.updateContent(content);
+     }
+
+     public List<Article> getArticleByLabelId(int id){
+         return articleMapper.selectArticleByLabelId(id);
      }
 }

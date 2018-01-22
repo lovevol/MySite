@@ -1,5 +1,6 @@
 package valueobject;
 
+import PagingPlugin.PageParams;
 import model.Article;
 import model.Category;
 import model.Content;
@@ -8,6 +9,7 @@ import model.Label;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -15,7 +17,7 @@ import java.util.*;
  * Created by lh
  * on 2017/9/11.
  */
-public class ArticleVO extends BaseVO {
+public class ArticleVO implements PageParams {
     private int idArticle;
     private String title;
     private Timestamp date;
@@ -24,7 +26,15 @@ public class ArticleVO extends BaseVO {
     private Category category;
     private Label label;
     private Content content;
+    private Date startDate;
+    private Date endDate;
 
+    private Integer page = 1;//当前页
+    private Integer pageSize = 20;
+    private Boolean useFlag = true;
+    private Boolean checkFlag = true;
+    private Integer total = 0;
+    private Integer totalPage = 0;
     /**
      * 利用反射机制对VO实现组装
      * @param article 文章model类
@@ -141,5 +151,69 @@ public class ArticleVO extends BaseVO {
 
     public void setContent(Content content) {
         this.content = content;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Boolean getUseFlag() {
+        return useFlag;
+    }
+
+    public void setUseFlag(Boolean useFlag) {
+        this.useFlag = useFlag;
+    }
+
+    public Boolean getCheckFlag() {
+        return checkFlag;
+    }
+
+    public void setCheckFlag(Boolean checkFlag) {
+        this.checkFlag = checkFlag;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public Integer getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(Integer totalPage) {
+        this.totalPage = totalPage;
     }
 }

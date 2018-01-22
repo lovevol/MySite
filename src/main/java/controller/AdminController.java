@@ -282,18 +282,18 @@ public class AdminController {
     @RequestMapping(value = "/getUser")
     public ModelAndView getUser(){
         //分页插件测试
-        PageParams pageParams = new PageParams();
+        /*PageParams pageParams = new PageParams();
         pageParams.setUseFlag(true);
         pageParams.setCheckFlag(true);
-        pageParams.setPageSize(20);
+        pageParams.setPageSize(20);*/
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("users",userService.getUSer(pageParams));
+        /*modelAndView.addObject("users",userService.getUSer(pageParams));*/
         modelAndView.setViewName("/page/admin/user.jsp");
         return modelAndView;
     }
 
     @RequestMapping(value = "/goArticleList")
-    public ModelAndView goArticleList(ArticleVO articleVO){
+    public ModelAndView goArticleList(ArticleVO articleVO,PageParams pageParams){
         ModelAndView md = new ModelAndView();
         List<Article> articles = articleService.getArticle(articleVO);
         md.addObject("articles",articles);

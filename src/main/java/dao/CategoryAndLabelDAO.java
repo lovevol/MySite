@@ -119,4 +119,8 @@ public class CategoryAndLabelDAO {
     public void updateLabelForDeleteArticle(int id){
         categoryAndLabelMapper.updateLabelForDeleteArticle(id);
     }
+
+    public List<Label> getHotLabel(){
+        return categoryAndLabelMapper.selectHotLabel();
+    }
 }

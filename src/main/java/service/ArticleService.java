@@ -1,5 +1,6 @@
 package service;
 
+import PagingPlugin.PageParams;
 import dao.ArticleDAO;
 import dao.CategoryAndLabelDAO;
 import model.Article;
@@ -79,5 +80,9 @@ public class ArticleService {
             articleDAO.updateContent(content);
         }
         return articleDAO.updateArticle(article);
+    }
+
+    public List<Article> getArticleByLabelId(int id){
+        return articleDAO.getArticleByLabelId(id);
     }
 }

@@ -95,4 +95,7 @@
         </set>
         WHERE idcontent = #{idContent}
     </update>
+    <select id="selectArticleByLabelId" parameterType="int" resultMap="articleMap">
+        SELECT * FROM article WHERE idlabel = #{id}
+    </select>
 </mapper>

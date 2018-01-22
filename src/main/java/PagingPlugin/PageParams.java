@@ -1,58 +1,28 @@
 package PagingPlugin;
 
-public class PageParams {
-    private Integer page;//当前页
-    private Integer pageSize;
-    private Boolean useFlag;
-    private Boolean checkFlag;
-    private Integer total;
-    private Integer totalPage;
+public interface PageParams {
 
-    public Integer getPage() {
-        return page;
-    }
+    public Integer getPage();
 
-    public void setPage(Integer page) {
-        this.page = page;
-    }
+    public void setPage(Integer page);
 
-    public Integer getPageSize() {
-        return pageSize;
-    }
+    public Integer getPageSize();
 
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
+    public void setPageSize(Integer pageSize);
 
-    public Boolean getUseFlag() {
-        return useFlag;
-    }
+    public Boolean getUseFlag();
 
-    public void setUseFlag(Boolean useFlag) {
-        this.useFlag = useFlag;
-    }
+    public void setUseFlag(Boolean useFlag);
 
-    public Boolean getCheckFlag() {
-        return checkFlag;
-    }
+    public Boolean getCheckFlag();
 
-    public void setCheckFlag(Boolean checkFlag) {
-        this.checkFlag = checkFlag;
-    }
+    public void setCheckFlag(Boolean checkFlag);
 
-    public Integer getTotal() {
-        return total;
-    }
+    public Integer getTotal();
 
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
+    public void setTotal(Integer total);
 
-    public Integer getTotalPage() {
-        return totalPage;
-    }
+    public Integer getTotalPage();
 
-    public void setTotalPage(Integer totalPage) {
-        this.totalPage = totalPage;
-    }
+    public void setTotalPage(Integer totalPage);
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import PagingPlugin.PageParams;
 import dao.ArticleDAO;
 import dao.EbookDAO;
 import dao.WebDAO;
@@ -116,6 +117,7 @@ public class ShareController {
 
     @RequestMapping(value = "/searchArticle")
     public ModelAndView searchArticle(ArticleVO articleVO){
+        articleVO.setPageSize(4);
         ModelAndView modelAndView = new ModelAndView();
         List<Article> articles = articleService.getArticle(articleVO);
         modelAndView.addObject("articles",articles);

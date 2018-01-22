@@ -102,4 +102,6 @@ public interface CategoryAndLabelMapper {
     int deleteLabelById(int id);
 
     void updateLabelForDeleteArticle(int id);
+
+    List<Label> selectHotLabel();
 }
