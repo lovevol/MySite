@@ -42,8 +42,8 @@ public class CategoryAndLabelService {
         return categoryAndLabelDAO.getCategoryByType(type);
     }
 
-    public int updateLabelForAddArticle(Label label){
-        return categoryAndLabelDAO.updateLabelForAddArticle(label);
+    public int updateLabelForAddArticle(int idLabel){
+        return categoryAndLabelDAO.updateLabelForAddArticle(idLabel);
     }
 
     public int updateCategory(Category category){

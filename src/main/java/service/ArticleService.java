@@ -37,9 +37,7 @@ public class ArticleService {
         //再储存文章到数据库
         int result = articleDAO.addArticle(article);
         //更新label的文章数目
-        Label label = categoryAndLabelDAO.getLabelById(article.getLabel().getIdLabel());
-        label.setArticleNum(label.getArticleNum() + 1);
-        categoryAndLabelDAO.updateLabelForAddArticle(label);
+        categoryAndLabelDAO.updateLabelForAddArticle(article.getLabel().getIdLabel());
         return result;
     }
 
@@ -78,6 +76,12 @@ public class ArticleService {
         Content content = article.getContent();
         if (content != null && content.getContent() != null){
             articleDAO.updateContent(content);
+        }
+        //如果标签改变，则修改标签下文章数量
+        Article oldArticle = articleDAO.getArticleById(article.getIdArticle());
+        if (!(oldArticle.getLabel().getIdLabel() == article.getLabel().getIdLabel())){
+            categoryAndLabelDAO.updateLabelForAddArticle(article.getLabel().getIdLabel());
+            categoryAndLabelDAO.updateLabelForDeleteArticle(oldArticle.getLabel().getIdLabel());
         }
         return articleDAO.updateArticle(article);
     }

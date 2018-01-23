@@ -69,10 +69,10 @@ public interface CategoryAndLabelMapper {
 
     /**
      * 添加文章时更新该ｌａｂｅｌ下的文章数量
-     * @param label
+     * @param idLabel
      * @return
      */
-    int updateLabelForAddArticle(Label label);
+    int updateLabelForAddArticle(int idLabel);
 
     /**
      * 更新类别

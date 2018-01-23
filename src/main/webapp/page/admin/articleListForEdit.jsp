@@ -83,6 +83,58 @@
             $("#idArticle").val(id);
             $("#editForm").submit();
         }
+        function nextPage() {
+            var page =  parseInt($("#page").val());
+            var totalPage = parseInt(${articleVO.totalPage});
+            if((page + 1) <= totalPage){
+                $("#page").val(page + 1);
+                $("#searchForm").submit();
+            }else {
+                alert("已经是尾页");
+            }
+
+        }
+        function prePage() {
+            var page =  $("#page").val();
+            if(page - 1 >= 1){
+                $("#page").val(page - 1);
+                $("#searchForm").submit();
+            }else {
+                alert("已经是首页");
+            }
+        }
+        function goPage(page) {
+            if(page <1 || page > parseInt(${articleVO.totalPage})){
+                alert("页码不正确");
+                return;
+            }
+            $("#page").val(page);
+            $("#searchForm").submit();
+        }
+        function setPageSize(size) {
+            $("#page").val(1);
+            $("#pageSize").val(size);
+            $("#searchForm").submit();
+        }
+        function goFirstPage() {
+            $("#page").val(1);
+            $("#searchForm").submit();
+        }
+        function goLastPage() {
+            $("#page").val(${articleVO.totalPage});
+            $("#searchForm").submit();
+        }
+        function goSomePage() {
+            var page = $("#pageGo").val();
+            goPage(page);
+        }
+        function reset() {
+            $("#labelName").val(null);
+        }
+        function changeLabel() {
+            var text =$("#label").find("option:selected").text();
+            $("#labelName").val(text);
+        }
     </script>
 </head>
 <body style=" padding-top: 50px;background-color: #e4e4e4;">
@@ -92,6 +144,8 @@
         <hr>
         <div class="form-group">
             <form action="${pageContext.request.contextPath}/admin/goArticleList" method="post" onsubmit=" return checkInputForSubmit()">
+                <input type="hidden" id="pageSize" name="pageSize" value="${articleVO.pageSize}">
+                <input type="hidden" id="page" name="page" value="${articleVO.page}">
                 <label for="title">标题:</label>
                 <input type="text" name="title" id="title" class="form-control" value="${articleVO.title}">
                 <label for="startDate">起时:</label>
@@ -150,21 +204,67 @@
     <div style="padding: 20px" class="mydiv">
         <nav aria-label="Page navigation" style="text-align: center">
             <ul class="pagination">
+                <li><a>每页数目:</a></li>
+                <li <c:if test="${articleVO.pageSize == 5}">class="active"</c:if>><a onclick="setPageSize(5)">5</a></li>
+                <li <c:if test="${articleVO.pageSize == 10}">class="active"</c:if>><a onclick="setPageSize(10)">10</a></li>
+                <li <c:if test="${articleVO.pageSize == 20}">class="active"</c:if>><a onclick="setPageSize(20)">20</a></li>
+            </ul>
+            <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
+                    <a href="#" aria-label="Previous" onclick="goFirstPage()">
+                        <span aria-hidden="true" title="首页">&laquo;</span>
                     </a>
                 </li>
-                <li class="active"><a href="#" >1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
                 <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
+                    <a href="#" aria-label="Previous" onclick="prePage()">
+                        <span aria-hidden="true" title="上一页"><</span>
                     </a>
                 </li>
+                <c:if test="${articleVO.page > 3}">
+                    <li>
+                        <a onclick="goPage(${articleVO.page-3})" >${articleVO.page-3}</a>
+                    </li>
+                </c:if>
+                <c:if test="${articleVO.page > 2}">
+                    <li>
+                        <a onclick="goPage(${articleVO.page-2})" >${articleVO.page-2}</a>
+                    </li>
+                </c:if>
+                <c:if test="${articleVO.page > 1}">
+                    <li>
+                        <a onclick="goPage(${articleVO.page-1})" >${articleVO.page-1}</a>
+                    </li>
+                </c:if>
+                <li class="active"><a onclick="goPage(${articleVO.page})" >${articleVO.page}</a></li>
+                <c:if test="${articleVO.page + 1 <= articleVO.totalPage}">
+                    <li>
+                        <a onclick="goPage(${articleVO.page+1})" >${articleVO.page+1}</a>
+                    </li>
+                </c:if>
+                <c:if test="${articleVO.page + 2 <= articleVO.totalPage}">
+                    <li>
+                        <a onclick="goPage(${articleVO.page+2})" >${articleVO.page+2}</a>
+                    </li>
+                </c:if>
+                <c:if test="${articleVO.page + 3 <= articleVO.totalPage}">
+                    <li>
+                        <a onclick="goPage(${articleVO.page+3})" >${articleVO.page+3}</a>
+                    </li>
+                </c:if>
+                <li>
+                    <a href="#" aria-label="Next" onclick="nextPage()">
+                        <span aria-hidden="true" title="下一页">></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" aria-label="Next" onclick="goLastPage()">
+                        <span aria-hidden="true" title="尾页">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="pagination">
+                <li><a>跳转到:</a><span><input type="text" name="pageGo" id="pageGo" style="width: 40px;height: 20px" value="${articleVO.page}">/${articleVO.totalPage}</span></li>
+                <li><a onclick="goSomePage()">确定</a></li>
             </ul>
         </nav>
     </div>

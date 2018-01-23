@@ -77,7 +77,7 @@ public class EmailService {
 
         // 3.5. Content: 邮件正文（可以使用html标签）（内容有广告嫌疑，避免被邮件服务器误认为是滥发广告以至返回失败，请修改发送内容）
         String href = "localhost:8080/mySite/user/validateUserForRegister?validateCode="+user.getValidateCode()+"&idUser="+user.getIdUser();
-        message.setContent(user.getUserName()+"用户你好, 欢迎！请点击此链接激活用户<a href="+"\'"+href+"\'"+">点击</a>", "text/html;charset=UTF-8");
+        message.setContent(user.getUserName()+"用户你好, 欢迎！请按照如下激活码在24小时内前往本网站激活你的帐号："+user.getValidateCode(), "text/html;charset=UTF-8");
         // 3.6. 设置发件时间
         message.setSentDate(new Date());
 

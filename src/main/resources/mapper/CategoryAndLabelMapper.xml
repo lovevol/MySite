@@ -46,8 +46,8 @@
     <select id="selectLabelById" parameterType="int" resultMap="labelResultMap">
         SELECT * FROM label WHERE idlabel=#{id}
     </select>
-    <update id="updateLabelForAddArticle" parameterType="model.Label">
-        UPDATE label set articlenum = #{articleNum} where idlabel = #{idLabel}
+    <update id="updateLabelForAddArticle" parameterType="int">
+        UPDATE label set articlenum = articlenum + 1 where idlabel = #{idLabel}
     </update>
     <update id="updateLabelForDeleteArticle">
         UPDATE label set articlenum = articlenum - 1 where idlabel = #{idLabel}

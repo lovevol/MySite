@@ -68,8 +68,8 @@ public class CategoryAndLabelDAO {
      * @param label 要更新的标签
      * @return 更新结果
      */
-    public int updateLabelForAddArticle(Label label){
-        return categoryAndLabelMapper.updateLabelForAddArticle(label);
+    public int updateLabelForAddArticle(int idLabel){
+        return categoryAndLabelMapper.updateLabelForAddArticle(idLabel);
     }
 
     /**

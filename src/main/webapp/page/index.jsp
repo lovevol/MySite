@@ -64,8 +64,9 @@
             }
             return true;
         }
-        function getArticleByLabelId(id) {
+        function getArticleByLabelId(id,name) {
             $("#idLabel").val(id);
+            $("#labelName").val(name);
             $("#idLabelForm").submit();
         }
     </script>
@@ -105,6 +106,7 @@
     <div style="padding: 20px;margin-top: 20px" class="mydiv">
         <form action="${pageContext.request.contextPath}/share/searchArticle" method="post" id="idLabelForm">
             <input type="hidden" id="idLabel" name="label.idLabel">
+            <input type="hidden" id="labelName" name="label.name">
         </form>
         <table class="table mytable">
             <h4>热门标签</h4>
@@ -112,7 +114,7 @@
             <c:forEach items="${hotLabels}" var="label">
                 <tr>
                     <td>
-                        <a onclick="getArticleByLabelId(${label.idLabel})">${label.name}</a>
+                        <a onclick="getArticleByLabelId('${label.idLabel}','${label.name}')">${label.name}</a>
                     </td>
                     <td>
                         <span class="badge">${label.articleNum}</span>

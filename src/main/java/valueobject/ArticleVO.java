@@ -17,7 +17,7 @@ import java.util.*;
  * Created by lh
  * on 2017/9/11.
  */
-public class ArticleVO implements PageParams {
+public class ArticleVO extends PageParams {
     private int idArticle;
     private String title;
     private Timestamp date;
@@ -29,12 +29,7 @@ public class ArticleVO implements PageParams {
     private Date startDate;
     private Date endDate;
 
-    private Integer page = 1;//当前页
-    private Integer pageSize = 20;
-    private Boolean useFlag = true;
-    private Boolean checkFlag = true;
-    private Integer total = 0;
-    private Integer totalPage = 0;
+
     /**
      * 利用反射机制对VO实现组装
      * @param article 文章model类
@@ -169,51 +164,5 @@ public class ArticleVO implements PageParams {
         this.endDate = endDate;
     }
 
-    public Integer getPage() {
-        return page;
-    }
 
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public Boolean getUseFlag() {
-        return useFlag;
-    }
-
-    public void setUseFlag(Boolean useFlag) {
-        this.useFlag = useFlag;
-    }
-
-    public Boolean getCheckFlag() {
-        return checkFlag;
-    }
-
-    public void setCheckFlag(Boolean checkFlag) {
-        this.checkFlag = checkFlag;
-    }
-
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
-    public Integer getTotalPage() {
-        return totalPage;
-    }
-
-    public void setTotalPage(Integer totalPage) {
-        this.totalPage = totalPage;
-    }
 }
