@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import valueobject.ArticleVO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by lh
@@ -88,5 +89,8 @@ public class ArticleService {
 
     public List<Article> getArticleByLabelId(int id){
         return articleDAO.getArticleByLabelId(id);
+    }
+    public List<Article> selectArticleForUserSave(Set<String> ids){
+        return articleDAO.selectArticleForUserSave(ids);
     }
 }

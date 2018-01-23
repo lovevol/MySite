@@ -98,4 +98,10 @@
     <select id="selectArticleByLabelId" parameterType="int" resultMap="articleMap">
         SELECT * FROM article WHERE idlabel = #{id}
     </select>
+    <select id="selectArticleForUserSave" parameterType="java.util.Set" resultMap="articleMap">
+        SELECT * FROM article WHERE idarticle IN
+        <foreach item="articleId" index="index" open="(" separator="," close=")" collection="ids">
+            #{articleId}
+        </foreach>
+    </select>
 </mapper>

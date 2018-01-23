@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import valueobject.ArticleVO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2017/9/15.
@@ -66,4 +67,5 @@ public interface ArticleMapper {
     int updateContent(Content content);
 
     List<Article> selectArticleByLabelId(int id);
+    List<Article> selectArticleForUserSave(@Param(value = "ids") Set<String> ids);
 }

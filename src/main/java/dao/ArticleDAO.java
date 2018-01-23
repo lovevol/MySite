@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import valueobject.ArticleVO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by lh
@@ -87,4 +88,8 @@ public class ArticleDAO {
      public List<Article> getArticleByLabelId(int id){
          return articleMapper.selectArticleByLabelId(id);
      }
+
+    public List<Article> selectArticleForUserSave(Set<String> ids){
+         return articleMapper.selectArticleForUserSave(ids);
+    }
 }

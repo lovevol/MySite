@@ -20,7 +20,7 @@ public class EmailService {
      * 对于开启了独立密码的邮箱, 这里的邮箱密码必需使用这个独立密码（授权码）。
      */
     private static String myEmailAccount = "935686942@qq.com";
-    private static String myEmailPassword = "";
+    private static String myEmailPassword = "xdqonogthwmqbfhc";
 
     /**
      * 发件人邮箱的 SMTP 服务器地址, 必须准确, 不同邮件服务器地址不同, 一般(只是一般, 绝非绝对)格式为: smtp.xxx.com

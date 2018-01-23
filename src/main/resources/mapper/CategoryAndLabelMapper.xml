@@ -68,6 +68,6 @@
         DELETE FROM label WHERE idlabel=#{id}
     </delete>
     <select id="selectHotLabel" resultType="model.Label">
-        SELECT * FROM label ORDER BY articlenum DESC limit 20
+        SELECT * FROM label ORDER BY articlenum DESC limit 10
     </select>
 </mapper>

@@ -114,7 +114,7 @@
             <c:forEach items="${hotLabels}" var="label">
                 <tr>
                     <td>
-                        <a onclick="getArticleByLabelId('${label.idLabel}','${label.name}')">${label.name}</a>
+                        <a href="javascript:getArticleByLabelId('${label.idLabel}','${label.name}');">${label.name}</a>
                     </td>
                     <td>
                         <span class="badge">${label.articleNum}</span>

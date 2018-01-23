@@ -43,7 +43,7 @@
                     <c:when test="${! empty sessionScope.user}">
                         <c:choose>
                             <c:when test="${sessionScope.user.roleType eq 1}">
-                                <li><a>欢迎用户:${sessionScope.user.userName}</a></li>
+                                <li><a href="${pageContext.request.contextPath}/user/myInfo">欢迎用户:${sessionScope.user.userName}</a></li>
                                 <li><a href="${pageContext.request.contextPath}/user/logout">退出</a></li>
                             </c:when>
                             <c:otherwise>
