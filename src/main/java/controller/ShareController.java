@@ -1,6 +1,7 @@
 package controller;
 
 import PagingPlugin.PageParams;
+import aoplog.AopLog;
 import dao.ArticleDAO;
 import dao.EbookDAO;
 import dao.WebDAO;
@@ -61,6 +62,7 @@ public class ShareController {
      * @return
      */
     @RequestMapping(value = "/webShare")
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "查看网站")
     public ModelAndView webShare(){
         List<Web> webs = webService.getWeb();
         ModelAndView modelAndView = new ModelAndView();
@@ -74,6 +76,7 @@ public class ShareController {
      * @return
      */
     @RequestMapping(value = "ebookShare")
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "查看电子书")
     public ModelAndView ebookShare(){
         List<Ebook> ebooks = ebookService.getEbook();
         ModelAndView modelAndView = new ModelAndView();
@@ -91,6 +94,7 @@ public class ShareController {
      * @throws IOException
      */
     @RequestMapping(value = "/downloadEbook")
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "下载电子书")
     public ResponseEntity<byte[]> downloadEbook(HttpServletRequest request,
                                                 @RequestParam("fileName") String fileName,
                                                 Model model) throws IOException {
@@ -109,6 +113,7 @@ public class ShareController {
      * @return
      */
     @RequestMapping(value = "/readArticle")
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "读文章")
     public ModelAndView readArticle(int articleId, HttpSession session){
         Article article = articleService.getArticleById(articleId);
         ModelAndView modelAndView = new ModelAndView();
@@ -134,6 +139,7 @@ public class ShareController {
     }
 
     @RequestMapping(value = "/searchArticle")
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "搜索文章")
     public ModelAndView searchArticle(ArticleVO articleVO){
         ModelAndView modelAndView = new ModelAndView();
         List<Article> articles = articleService.getArticle(articleVO);
@@ -152,6 +158,7 @@ public class ShareController {
      * @return
      */
     @RequestMapping(value = "/getArticleByCategory")
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "按照类别获取文章")
     public ModelAndView getArticleByCategory(int idCategory){
         ModelAndView modelAndView = new ModelAndView();
         List<Article> articles = articleService.getArticleByCategory(idCategory);

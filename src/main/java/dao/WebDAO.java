@@ -44,4 +44,13 @@ public class WebDAO {
         return webMapper.selectAllWeb();
     }
 
+    /**
+     * 按照id删除web
+     * @param id
+     * @return
+     */
+    public int deleteWebById(int id){
+        return webMapper.deleteWebById(id);
+    }
+
 }

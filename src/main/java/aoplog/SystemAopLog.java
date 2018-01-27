@@ -69,22 +69,22 @@ public class SystemAopLog {
                 buffer.append("id:").append(id);
             }
             if (!"".equals(operateTypeDesc)){
-                buffer.append("操作类型描述:").append(operateTypeDesc);
+                buffer.append("操作类型描述:").append(operateTypeDesc).append(";");
             }
             if (-1L != operateType){
-                buffer.append("操作类型:").append(operateType);
+                buffer.append("操作类型:").append(operateType).append(";");
             }
             if (!"".equals(moudleCode)){
-                buffer.append("模块编码:").append(moudleCode);
+                buffer.append("模块编码:").append(moudleCode).append(";");
             }
             if (!"".equals(moudleName)){
-                buffer.append("模块名称:").append(methodName);
+                buffer.append("模块名称:").append(methodName).append(";");
             }
             if (!"".equals(bussType)){
-                buffer.append("业务类型:").append(bussType);
+                buffer.append("业务类型:").append(bussType).append(";");
             }
             if(!"".equals(bussTypeDesc)){
-                buffer.append("业务类型描述:").append(bussTypeDesc);
+                buffer.append("业务类型描述:").append(bussTypeDesc).append(";");
             }
             if (null == e){
                 logger.info(buffer.toString());

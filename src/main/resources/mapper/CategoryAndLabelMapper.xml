@@ -70,4 +70,13 @@
     <select id="selectHotLabel" resultType="model.Label">
         SELECT * FROM label ORDER BY articlenum DESC limit 10
     </select>
+    <update id="updateLabel" parameterType="model.Label">
+        UPDATE label
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="category != null and category.idCategory != null">idcategory=#{category.idCategory},</if>
+            <if test="description != null">description=#{description}</if>
+        </set>
+        WHERE idlabel = #{idLabel}
+    </update>
 </mapper>

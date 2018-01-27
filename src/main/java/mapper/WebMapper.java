@@ -27,6 +27,17 @@ public interface WebMapper {
      */
     List<Web> selectWebForIndex(@Param("keyWord") String keyWord);
 
+    /**
+     * 选择所有web
+     * @return
+     */
     List<Web> selectAllWeb();
+
+    /**
+     * 按照id删除电子书
+     * @param id
+     * @return
+     */
+    int deleteWebById(int id);
 
 }

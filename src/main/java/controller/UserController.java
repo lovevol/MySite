@@ -141,6 +141,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/validateUserForRegister")
+    @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "用户激活")
     public String validateUser(User user){
 
        if (userService.updateUserByIdAndValidateCode(user)){
@@ -151,6 +152,7 @@ public class UserController {
 
     }
     @RequestMapping(value = "/myInfo")
+    @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "查看个人信息")
     public ModelAndView myInfo(HttpSession session){
         User user = (User) session.getAttribute("user");
 
@@ -173,6 +175,7 @@ public class UserController {
 
     @RequestMapping(value = "/saveArticleByAjax")
     @ResponseBody
+    @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "收藏文章")
     public Object saveArticleByAjax(HttpSession session,int articleId){
         User user = (User)session.getAttribute("user");
         if (user == null){
@@ -185,6 +188,7 @@ public class UserController {
 
     @RequestMapping(value = "/cancelArticleByAjax")
     @ResponseBody
+    @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "取消文章收藏")
     public Object cancelArticleByAjax(HttpSession session,int articleId){
         User user = (User)session.getAttribute("user");
         if (user == null){

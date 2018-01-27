@@ -65,7 +65,7 @@ public class CategoryAndLabelDAO {
 
     /**
      * 添加文章时更新该标签下文章的数目
-     * @param label 要更新的标签
+     * @param idLabel
      * @return 更新结果
      */
     public int updateLabelForAddArticle(int idLabel){
@@ -122,5 +122,9 @@ public class CategoryAndLabelDAO {
 
     public List<Label> getHotLabel(){
         return categoryAndLabelMapper.selectHotLabel();
+    }
+
+    public int updateLabel(Label label){
+        return categoryAndLabelMapper.updateLabel(label);
     }
 }

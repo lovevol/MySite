@@ -27,4 +27,8 @@ public class WebService {
     public List<Web> getWeb(){
         return webDAO.selectAllWeb();
     }
+
+    public int deleteWebById(int id){
+        return webDAO.deleteWebById(id);
+    }
 }

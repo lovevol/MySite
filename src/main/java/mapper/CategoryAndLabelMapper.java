@@ -104,4 +104,5 @@ public interface CategoryAndLabelMapper {
     void updateLabelForDeleteArticle(int id);
 
     List<Label> selectHotLabel();
+    int updateLabel(Label label);
 }

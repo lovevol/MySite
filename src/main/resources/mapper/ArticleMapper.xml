@@ -46,6 +46,7 @@
                 AND sketch like concat('%',#{sketch},'%')
             </if>
         </where>
+        ORDER BY date
     </select>
     <select id="selectArticleById" parameterType="int" resultMap="articleMap">
         SELECT * FROM article WHERE idarticle = #{id}
@@ -96,12 +97,13 @@
         WHERE idcontent = #{idContent}
     </update>
     <select id="selectArticleByLabelId" parameterType="int" resultMap="articleMap">
-        SELECT * FROM article WHERE idlabel = #{id}
+        SELECT * FROM article WHERE idlabel = #{id} ORDER BY date
     </select>
     <select id="selectArticleForUserSave" parameterType="java.util.Set" resultMap="articleMap">
         SELECT * FROM article WHERE idarticle IN
         <foreach item="articleId" index="index" open="(" separator="," close=")" collection="ids">
             #{articleId}
         </foreach>
+        ORDER BY date
     </select>
 </mapper>

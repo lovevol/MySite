@@ -65,7 +65,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">网站帮助</a></li>
                         <li><a href="${pageContext.request.contextPath}/page/other/mySiteInfo.jsp">网站介绍</a></li>
-                        <li><a href="#">网站源码</a></li>
+                        <li><a href="http://github.com/lovevol/MySite" target="_blank">网站源码</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">关于作者</a></li>
                     </ul>

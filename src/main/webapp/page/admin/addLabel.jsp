@@ -29,9 +29,8 @@
             });
         });
         function modify(id) {
-            $("#idCategoryForModify").val($("#idCategory"+id).val());
+            $("#idLabelForModify").val($("#idLabel"+id).val());
             $("#nameForModify").val($("#name"+id).val());
-            $("#typeForModify").val($("#type"+id).val());
             $("#descriptionForModify").text($("#description"+id).val());
         }
         function deleteCategory(id){
@@ -100,15 +99,19 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">修改标签</h4>
             </div>
-            <form action="${pageContext.request.contextPath}/admin/modifyCategory" method="post">
+            <form action="${pageContext.request.contextPath}/admin/modifyLabel" method="post">
                 <div class="modal-body">
-                    <input name="idCategory" id="idCategoryForModify" hidden="hidden">
+                    <input name="idLabel" id="idLabelForModify" hidden="hidden">
                     <label for="nameForModify">标签：</label>
                     <input name="name" id="nameForModify" class="form-control">
-                    <label for="typeForModify">类目:</label>
-                    <select id="typeForModify" name="type" class="form-control">
-                        <option id="type1ForModify" value="1">文章分享</option>
-                        <option id="ForModifytype2" value="2">资源分享</option>
+                    <label for="typeForModify">类別:</label>
+                    <select id="typeForModify" name="category.idCategory" class="form-control">
+                        <option>请选择</option>
+                        <c:if test="${!empty categories}">
+                            <c:forEach items="${categories}" var="category">
+                                <option value="${category.idCategory}">${category.name}</option>
+                            </c:forEach>
+                        </c:if>
                     </select>
                     <label for="descriptionForModify">描述:</label>
                     <textarea rows="5" id="descriptionForModify" name="description" class="form-control"></textarea>

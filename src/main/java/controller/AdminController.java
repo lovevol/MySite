@@ -1,6 +1,7 @@
 package controller;
 
 import PagingPlugin.PageParams;
+import aoplog.AopLog;
 import model.*;
 import org.apache.ibatis.annotations.Update;
 import org.apache.log4j.Logger;
@@ -75,6 +76,7 @@ public class AdminController {
      * @throws IOException
      */
     @RequestMapping(value = "/addWeb")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "添加网站")
     public String addWeb(Web web, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (web.getWebUrl() == null || web.getDescription() == null || web.getLabel() == null
                 || "".equals(web.getWebUrl()) || "".equals(web.getDescription()) || "".equals(web.getLabel())) {
@@ -95,6 +97,7 @@ public class AdminController {
      * @throws IOException
      */
     @RequestMapping(value = "/addEbook")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "添加电子书")
     public String addEbook(HttpServletRequest request, Ebook ebook) throws IOException {
         if (ebook.getDescription() != null && !"".equals(ebook.getDescription())
                 && ebook.getBookName() != null) {
@@ -129,12 +132,14 @@ public class AdminController {
      * @throws IOException
      */
     @RequestMapping(value = "/addArticle")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "添加文章")
     public String addArticle(Article article, HttpServletRequest request, MultipartFile image) throws IOException {
         if (article.getTitle() != null && !"".equals(article.getTitle())
                 && article.getLabel() != null && !"".equals(article.getLabel())
                 && article.getCategory() != null && !"".equals(article.getCategory())
                 && article.getContent() != null && !"".equals(article.getContent())) {
             if (image != null && !image.isEmpty()) {
+                //String path = "/home/mysite_image/";
                 String path = request.getServletContext().getRealPath("/image/");
                 String imageName = image.getOriginalFilename();
                 //文件重命名，解决中文文件名问题
@@ -159,6 +164,7 @@ public class AdminController {
      * 异步的方式处理文件的上传
      */
     @RequestMapping(value = "/uploadEbookFile")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "上传电子书")
     public String uploadEbookFile(@RequestParam("file") MultipartFile file,
                                   HttpServletRequest request,HttpServletResponse response) throws IOException {
         if (file != null && !file.isEmpty()) {
@@ -180,6 +186,7 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/addCategory")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "添加类别")
     public String addCategory(Category category){
         categoryAndLabelService.addCategory(category);
         return "redirect:/admin/indexOfAdmin";
@@ -191,6 +198,7 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/addLabel")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "添加标签")
     public String addLabel(Label label){
         label.setArticleNum(0);
         categoryAndLabelService.addLabel(label);
@@ -240,6 +248,7 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/modifyCategory")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "修改类别")
     public ModelAndView modifyCategory(Category category){
         int result = categoryAndLabelService.updateCategory(category);
         ModelAndView modelAndView =new ModelAndView();
@@ -255,6 +264,7 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/deleteCategoryById")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "删除类别")
     public ModelAndView deleteCategoryById(int idCategory){
         int result = categoryAndLabelService.deleteCategoryById(idCategory);
         ModelAndView modelAndView =new ModelAndView();
@@ -270,9 +280,21 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/deleteLabelById")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "删除标签")
     public ModelAndView deleteLabelById(int idLabel){
         ModelAndView modelAndView = new ModelAndView();
         int result = categoryAndLabelService.deleteLabelById(idLabel);
+        if (result >= 1){
+            modelAndView.setViewName("redirect:/admin/goAddLabel");
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/modifyLabel")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "修改标签")
+    public ModelAndView modifyLabel(Label label){
+        int result = categoryAndLabelService.updateLabel(label);
+        ModelAndView modelAndView =new ModelAndView();
         if (result >= 1){
             modelAndView.setViewName("redirect:/admin/goAddLabel");
         }
@@ -315,6 +337,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/deleteArticleById")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "删除文章")
     public ModelAndView deleteArticleById(int id){
         int result = articleService.deleteArticleById(id);
         ModelAndView md = new ModelAndView();
@@ -339,12 +362,14 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateArticle")
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "更新文章")
     public String updateArticle(Article article, HttpServletRequest request, MultipartFile image) throws IOException {
         if (article.getTitle() != null && !"".equals(article.getTitle())
                 && article.getLabel() != null && !"".equals(article.getLabel())
                 && article.getCategory() != null && !"".equals(article.getCategory())
                 && article.getContent() != null && !"".equals(article.getContent())) {
             if (image != null && !image.isEmpty()) {
+                //String path = "/home/mysite_image/";
                 String path = request.getServletContext().getRealPath("/image/");
                 String imageName = image.getOriginalFilename();
                 //文件重命名，解决中文文件名问题
@@ -363,6 +388,48 @@ public class AdminController {
         } else {
             request.setAttribute("errorMsg", "添加文章数据不正确！");
             return "redirect:/admin/goArticleList";
+        }
+    }
+
+    @RequestMapping(value = "/goWebEdit")
+    public ModelAndView goWebEdit(){
+        ModelAndView md = new ModelAndView();
+        List<Web> webs = webService.getWeb();
+        md.addObject("webs",webs);
+        md.setViewName("/page/admin/webListForEdit.jsp");
+        return md;
+    }
+
+    @RequestMapping(value = "/deleteWebById")
+    @ResponseBody
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "删除网站")
+    public String deleteWebById(int idWeb){
+        int result = webService.deleteWebById(idWeb);
+        if (result >= 1){
+            return "success";
+        }else {
+            return "error";
+        }
+    }
+
+    @RequestMapping(value = "/goEbookEdit")
+    public ModelAndView goEbookEdit(){
+        ModelAndView md = new ModelAndView();
+        List<Ebook> ebooks = ebookService.getEbook();
+        md.addObject("ebooks",ebooks);
+        md.setViewName("/page/admin/ebookForEdit.jsp");
+        return md;
+    }
+
+    @RequestMapping(value = "/deleteEbookById")
+    @ResponseBody
+    @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "删除电子书")
+    public String deleteEbookById(int idEbook){
+        int result = ebookService.deleteEbookById(idEbook);
+        if (result >= 1){
+            return "success";
+        }else {
+            return "error";
         }
     }
 }

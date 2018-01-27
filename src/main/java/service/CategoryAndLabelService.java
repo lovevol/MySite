@@ -66,4 +66,8 @@ public class CategoryAndLabelService {
     public List<Label> getHotLabel(){
         return categoryAndLabelDAO.getHotLabel();
     }
+
+    public int updateLabel(Label label){
+        return categoryAndLabelDAO.updateLabel(label);
+    }
 }

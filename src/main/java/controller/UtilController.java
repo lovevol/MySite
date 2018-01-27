@@ -1,5 +1,6 @@
 package controller;
 
+import aoplog.AopLog;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ public class UtilController {
     @Autowired
     private JedisService jedisService;
     @RequestMapping(value = "/history")
+    @AopLog(bussTypeDesc = "其他业务",operateTypeDesc = "获取浏览记录")
     public ModelAndView getBrowsingHistory(HttpSession session){
         ModelAndView md = new ModelAndView();
         User user = (User) session.getAttribute("user");

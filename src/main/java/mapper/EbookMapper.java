@@ -32,5 +32,12 @@ public interface EbookMapper {
      * @return
      */
     List<Ebook> selectAllEbook();
+
+    /**
+     * 按照id删除电子书
+     * @param id
+     * @return
+     */
+    int deleteEbookById(int id);
 }
 

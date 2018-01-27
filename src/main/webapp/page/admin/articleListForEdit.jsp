@@ -101,6 +101,7 @@
             <form action="${pageContext.request.contextPath}/admin/goArticleList" method="post" onsubmit=" return checkInputForSubmit()" id="searchForm">
                 <input type="hidden" id="pageSize" name="pageSize" value="${articleVO.pageSize}">
                 <input type="hidden" id="page" name="page" value="${articleVO.page}">
+                <input type="hidden" id="totalPage" value="${articleVO.totalPage}">
                 <label for="title">标题:</label>
                 <input type="text" name="title" id="title" class="form-control" value="${articleVO.title}">
                 <label for="startDate">起时:</label>
