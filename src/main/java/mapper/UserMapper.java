@@ -5,10 +5,8 @@ package mapper;
  */
 
 import PagingPlugin.PageParams;
-import model.Article;
 import model.User;
 import org.springframework.stereotype.Repository;
-import valueobject.ArticleVO;
 
 import java.util.List;
 

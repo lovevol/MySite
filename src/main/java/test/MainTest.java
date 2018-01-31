@@ -4,15 +4,10 @@ package test;
  * on 2017/9/6.
  */
 import dao.UserDAO;
-import mapper.UserMapper;
-import model.Article;
 import model.User;
 import myenum.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
-import valueobject.ArticleVO;
 
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;

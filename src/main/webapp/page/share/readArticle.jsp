@@ -58,20 +58,29 @@
                 $("#save").show();
             }
         }
+        function getArticleByLabelId(id,name) {
+            $("#idLabel").val(id);
+            $("#labelName").val(name);
+            $("#idLabelForm").submit();
+        }
     </script>
 </head>
 <body style=" padding-top: 70px;background-color: #e4e4e4;">
 <div style="left: 10%;padding: 15px;width:10%;height: 500px;position: fixed;background-color: white">
-    <h5>标签</h5>
+    <h5>相关标签</h5>
+    <form action="${pageContext.request.contextPath}/share/searchArticle" method="post" id="idLabelForm">
+        <input type="hidden" id="idLabel" name="label.idLabel">
+        <input type="hidden" id="labelName" name="label.name">
+    </form>
     <hr class="myhr1">
-    <table style="text-align: center">
+    <table class="table mytable">
         <c:forEach items="${labels}" var="label">
             <tr>
                 <td>
-                    <a href="#">${label.name}<c:if test="${label.articleNum  ne 0}"></a>
+                    <a href="javascript:getArticleByLabelId('${label.idLabel}','${label.name}');">${label.name}</a>
                 </td>
                 <td style="padding-left: 10px">
-                    <span class="badge">${label.articleNum}</span></c:if>
+                    <span class="badge">${label.articleNum}</span>
                 </td>
             </tr>
         </c:forEach>
@@ -107,7 +116,7 @@
     <h4>文章分类</h4>
     <hr class="myhr1">
     <c:forEach items="${requestScope.categoriesForArticle}" var="categoriesForArticle">
-        <a href="#" class="btn mybtn1">${categoriesForArticle.name}</a>
+        <a href="${pageContext.request.contextPath}/share/searchArticle?category.idCategory=${categoriesForArticle.idCategory}" class="btn mybtn1">${categoriesForArticle.name}</a>
     </c:forEach>
 </div>
 </body>

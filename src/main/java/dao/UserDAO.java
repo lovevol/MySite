@@ -2,11 +2,9 @@ package dao;
 
 import PagingPlugin.PageParams;
 import mapper.UserMapper;
-import model.Article;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import valueobject.ArticleVO;
 
 import java.util.List;
 

@@ -27,7 +27,7 @@
         </where>
         ORDER BY date DESC LIMIT 5
     </select>
-    <select id="selectArticle" resultMap="articleMap" parameterType="valueobject.ArticleVO">
+    <select id="selectArticle" resultMap="articleMap" parameterType="value.ArticleVO">
         SELECT * FROM article
         <where>
             <if test="title != null">

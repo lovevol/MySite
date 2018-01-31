@@ -1,4 +1,4 @@
-package valueobject;
+package value;
 
 import PagingPlugin.PageParams;
 import model.Article;

@@ -5,14 +5,16 @@ import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import util.Constant;
 
-import java.net.URL;
 import java.util.List;
 import java.util.Set;
 
 @Component
 public class JedisDao {
+    @Autowired
+    private JedisPool jedisPool;
     public boolean checkLogin(User user){
         Jedis jedis = getJedis();
         String result = jedis.get(String.valueOf(user.getIdUser()));
@@ -29,7 +31,7 @@ public class JedisDao {
     //浏览记录保存
     public void setRecordForBrowsing(User user, String url){
         Jedis jedis = getJedis();
-        jedis.lpush(String.valueOf(user.getIdUser()),url);
+        jedis.lpush(String.valueOf(user.getIdUser())+Constant.USER_RECORD,url);
         close(jedis);
 
     }
@@ -37,7 +39,7 @@ public class JedisDao {
     //浏览记录获取
     public List<String> getRecordForBrowsing(User user){
         Jedis jedis = getJedis();
-        List<String> list = jedis.lrange(String.valueOf(user.getIdUser()),0,-1);
+        List<String> list = jedis.lrange(String.valueOf(user.getIdUser()+Constant.USER_RECORD),0,-1);
         close(jedis);
         return  list;
     }
@@ -84,9 +86,9 @@ public class JedisDao {
         return result;
     }
     private Jedis getJedis(){
-        return RedisUtil.getJedis();
+        return jedisPool.getResource();
     }
     private void close(Jedis jedis){
-        RedisUtil.returnResource(jedis);
+        jedis.close();
     }
 }

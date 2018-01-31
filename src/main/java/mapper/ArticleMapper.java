@@ -1,11 +1,10 @@
 package mapper;
 
-import PagingPlugin.PageParams;
 import model.Article;
 import model.Content;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import valueobject.ArticleVO;
+import value.ArticleVO;
 
 import java.util.List;
 import java.util.Set;
