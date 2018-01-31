@@ -1,5 +1,6 @@
 package valueobject;
 
+import PagingPlugin.PageParams;
 import model.Article;
 import model.Category;
 import model.Content;
@@ -8,6 +9,7 @@ import model.Label;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -15,7 +17,7 @@ import java.util.*;
  * Created by lh
  * on 2017/9/11.
  */
-public class ArticleVO extends BaseVO {
+public class ArticleVO extends PageParams {
     private int idArticle;
     private String title;
     private Timestamp date;
@@ -24,6 +26,9 @@ public class ArticleVO extends BaseVO {
     private Category category;
     private Label label;
     private Content content;
+    private Date startDate;
+    private Date endDate;
+
 
     /**
      * 利用反射机制对VO实现组装
@@ -142,4 +147,22 @@ public class ArticleVO extends BaseVO {
     public void setContent(Content content) {
         this.content = content;
     }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+
 }

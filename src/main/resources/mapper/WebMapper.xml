@@ -18,4 +18,7 @@
     <select id="selectAllWeb" resultType="model.Web">
         SELECT * FROM web
     </select>
+    <delete id="deleteWebById" parameterType="int">
+        DELETE FROM web WHERE idweb = #{id}
+    </delete>
 </mapper>

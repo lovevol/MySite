@@ -72,6 +72,9 @@ public class index {
         List<Category> categoriesForShare = categoryAndLabelService.getCategoryByType(2);
         modelAndView.addObject("categoriesForArticle",categoriesForArticle);
         modelAndView.addObject("categoriesForShare",categoriesForShare);
+        //获取热门标签数据
+        List<Label> hotLabels = categoryAndLabelService.getHotLabel();
+        modelAndView.addObject("hotLabels",hotLabels);
         return modelAndView;
     }
 

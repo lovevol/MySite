@@ -42,8 +42,8 @@ public class CategoryAndLabelService {
         return categoryAndLabelDAO.getCategoryByType(type);
     }
 
-    public int updateLabelForAddArticle(Label label){
-        return categoryAndLabelDAO.updateLabelForAddArticle(label);
+    public int updateLabelForAddArticle(int idLabel){
+        return categoryAndLabelDAO.updateLabelForAddArticle(idLabel);
     }
 
     public int updateCategory(Category category){
@@ -58,5 +58,16 @@ public class CategoryAndLabelService {
     }
     public int deleteLabelById(int id){
         return categoryAndLabelDAO.deleteLabelById(id);
+    }
+    public void updateLabelForDeleteArticle(int id){
+        categoryAndLabelDAO.updateLabelForDeleteArticle(id);
+    }
+
+    public List<Label> getHotLabel(){
+        return categoryAndLabelDAO.getHotLabel();
+    }
+
+    public int updateLabel(Label label){
+        return categoryAndLabelDAO.updateLabel(label);
     }
 }

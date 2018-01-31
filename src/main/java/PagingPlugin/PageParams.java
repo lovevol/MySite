@@ -1,12 +1,12 @@
 package PagingPlugin;
 
 public class PageParams {
-    private Integer page;//当前页
-    private Integer pageSize;//页大小
-    private Boolean useFlag;//是否分页
-    private Boolean checkFlag;//是否检查页数范围
-    private Integer total;//总数据数
-    private Integer totalPage;//总页数
+    private Integer page = 1;//当前页
+    private Integer pageSize = 10;
+    private Boolean useFlag = true;
+    private Boolean checkFlag = true;
+    private Integer total = 0;
+    private Integer totalPage = 0;
 
     public Integer getPage() {
         return page;

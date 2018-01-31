@@ -1,5 +1,7 @@
 package controller;
 
+import PagingPlugin.PageParams;
+import aoplog.AopLog;
 import dao.ArticleDAO;
 import dao.EbookDAO;
 import dao.WebDAO;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import redis.JedisService;
 import service.ArticleService;
 import service.CategoryAndLabelService;
 import service.EbookService;
@@ -22,9 +25,12 @@ import service.WebService;
 import valueobject.ArticleVO;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Retention;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by lh
@@ -39,13 +45,16 @@ public class ShareController {
     private EbookService ebookService;
     private WebService webService;
     private CategoryAndLabelService categoryAndLabelService;
+    private JedisService jedisService;
 
     @Autowired
-    public ShareController(ArticleService articleService, EbookService ebookService, WebService webService,CategoryAndLabelService categoryAndLabelService) {
+    public ShareController(ArticleService articleService, EbookService ebookService, WebService webService,CategoryAndLabelService categoryAndLabelService,
+                           JedisService jedisService) {
         this.articleService = articleService;
         this.ebookService = ebookService;
         this.webService = webService;
         this.categoryAndLabelService = categoryAndLabelService;
+        this.jedisService = jedisService;
     }
 
     /**
@@ -53,10 +62,11 @@ public class ShareController {
      * @return
      */
     @RequestMapping(value = "/webShare")
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "查看网站")
     public ModelAndView webShare(){
-        //List<Web> webs = webService.getWebForIndex();
+        List<Web> webs = webService.getWeb();
         ModelAndView modelAndView = new ModelAndView();
-        //modelAndView.addObject("webs",webs);
+        modelAndView.addObject("webs",webs);
         modelAndView.setViewName("/page/share/webShare.jsp");
         return modelAndView;
     }
@@ -66,6 +76,7 @@ public class ShareController {
      * @return
      */
     @RequestMapping(value = "ebookShare")
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "查看电子书")
     public ModelAndView ebookShare(){
         List<Ebook> ebooks = ebookService.getEbook();
         ModelAndView modelAndView = new ModelAndView();
@@ -83,6 +94,7 @@ public class ShareController {
      * @throws IOException
      */
     @RequestMapping(value = "/downloadEbook")
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "下载电子书")
     public ResponseEntity<byte[]> downloadEbook(HttpServletRequest request,
                                                 @RequestParam("fileName") String fileName,
                                                 Model model) throws IOException {
@@ -101,19 +113,33 @@ public class ShareController {
      * @return
      */
     @RequestMapping(value = "/readArticle")
-    public ModelAndView readArticle(int articleId){
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "读文章")
+    public ModelAndView readArticle(int articleId, HttpSession session){
         Article article = articleService.getArticleById(articleId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("article",article);
         List<Category> categoriesForArticle = categoryAndLabelService.getCategoryByType(1);
         modelAndView.addObject("categoriesForArticle",categoriesForArticle);
-        List<Label> labels = categoryAndLabelService.getLabel();
+        List<Label> labels = categoryAndLabelService.getLabelByCategoryId(article.getCategory().getIdCategory());
         modelAndView.addObject("labels",labels);
+        //记录阅读量
+        jedisService.setViewNumOfArticle(article);
+        String num = jedisService.getViewNumOfArticle(article);
+        modelAndView.addObject("num",num);
+        //查看用户是否收藏该文章
+        User user = (User)session.getAttribute("user");
+        if (user != null){
+            Set<String> ids = jedisService.getArticleForUser(user.getIdUser());
+            if (ids.contains(String.valueOf(articleId))){
+                modelAndView.addObject("saved","true");
+            }
+        }
         modelAndView.setViewName("/page/share/readArticle.jsp");
         return modelAndView;
     }
 
     @RequestMapping(value = "/searchArticle")
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "搜索文章")
     public ModelAndView searchArticle(ArticleVO articleVO){
         ModelAndView modelAndView = new ModelAndView();
         List<Article> articles = articleService.getArticle(articleVO);
@@ -124,6 +150,22 @@ public class ShareController {
         List<Category> categories = categoryAndLabelService.getCategory();
         modelAndView.addObject("categorys",categories);
         modelAndView.addObject("articleVO",articleVO);
+        return modelAndView;
+    }
+
+    /**
+     * 按照类别获取文章
+     * @return
+     */
+    @RequestMapping(value = "/getArticleByCategory")
+    @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "按照类别获取文章")
+    public ModelAndView getArticleByCategory(int idCategory){
+        ModelAndView modelAndView = new ModelAndView();
+        List<Article> articles = articleService.getArticleByCategory(idCategory);
+        modelAndView.addObject("articles",articles);
+        List<Category> categoriesForArticle = categoryAndLabelService.getCategoryByType(1);
+        modelAndView.addObject("categoriesForArticle",categoriesForArticle);
+        modelAndView.setViewName("/page/share/articleShare.jsp");
         return modelAndView;
     }
 }

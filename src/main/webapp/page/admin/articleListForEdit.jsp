@@ -13,12 +13,6 @@
     <script type="text/javascript">
         /*按照类别，动态更新label*/
         function getLabel() {
-            var select = $("#label");
-            if ($("#category").val() == 0 || $("#category").val() == null) {
-                select.empty();
-                select.append("<option value='0'>" + "请选择" + "</option>");
-                return;
-            }
             var idLabel = ${articleVO.label.idLabel}
             $.ajax({
                 url:"${pageContext.request.contextPath}/getLabelForAjax?idCategory="+$("#category").val(),
@@ -26,7 +20,7 @@
                 contentType:"application/json",
                 success:function (data) {
                     /* alert(data);*/
-
+                    var select = $("#label");
                     select.empty();
                     var data1 = eval('(' + data + ')');
                     if(data1 !== null && data1.length >= 1){
@@ -76,7 +70,19 @@
             }
             return true;
         }
+        function deleteArticle(id) {
+            if (confirm("确定删除？")){
+                $("#editForm").attr("action","${pageContext.request.contextPath}/admin/deleteArticleById");
+                $("#idArticle").val(id);
+                $("#editForm").submit();
+            }
 
+        }
+        function updateArticle(id) {
+            $("#editForm").attr("action","${pageContext.request.contextPath}/admin/goUpdateArticle");
+            $("#idArticle").val(id);
+            $("#editForm").submit();
+        }
         function reset() {
             $("#labelName").val(null);
         }
@@ -92,7 +98,7 @@
         <h4>文章搜索</h4>
         <hr>
         <div class="form-group">
-            <form action="${pageContext.request.contextPath}/share/searchArticle" method="post" onsubmit=" return checkInputForSubmit()" id="searchForm">
+            <form action="${pageContext.request.contextPath}/admin/goArticleList" method="post" onsubmit=" return checkInputForSubmit()" id="searchForm">
                 <input type="hidden" id="pageSize" name="pageSize" value="${articleVO.pageSize}">
                 <input type="hidden" id="page" name="page" value="${articleVO.page}">
                 <input type="hidden" id="totalPage" value="${articleVO.totalPage}">
@@ -112,24 +118,23 @@
                     </c:forEach>
                 </select>
                 <label for="label">标签:</label>
-                <select id="label" name="label.idLabel" class="form-control" onchange="changeLabel()">
-                    <option value=0>请选择</option>
-                    <c:if test="${articleVO.label != null && articleVO.label.idLabel != null && articleVO.label.idLabel != 0}">
-                        <option value="${articleVO.label.idLabel}" selected="selected">${articleVO.label.name}</option>
-                    </c:if>
+                <select id="label" name="label.idLabel" class="form-control" >
+                    <option value=0 >请选择</option>
                 </select>
-                <input type="hidden" name="label.name" id="labelName" value="${articleVO.label.name}">
                 <label for="sketch">简述:</label>
                 <input type="text" name="sketch" id="sketch" class="form-control" value="${articleVO.sketch}">
 
                 <button type="submit" class="btn btn-primary">查询</button>
-                <button type="reset" class="btn btn-danger" onclick="">重置</button>
+                <button type="reset" class="btn btn-danger">重置</button>
             </form>
         </div>
 
     </div>
 </div>
 <div style="height: 100%;float: left;width: 50%;margin-left: 20px;">
+    <form action="${pageContext.request.contextPath}/admin/deleteArticleById" id="editForm" method="post">
+        <input type="hidden" id="idArticle" name="id">
+    </form>
     <c:if test="${articles.size() ne 0}">
         <c:forEach items="${requestScope.articles}" var="article" varStatus="articleStatus">
             <div style="padding: 20px" class="mydiv">
@@ -142,11 +147,8 @@
                 <br>
                 <p style="font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${article.sketch}</p>
                 <hr>
-                <form action="${pageContext.request.contextPath}/share/readArticle" method="post">
-                    <input type="number" hidden="hidden" value="${article.idArticle}" name="articleId" id="articleId">
-                    <input type="submit"  class="btn btn-primary" value="阅读全文">
-                </form>
-
+                <a href="#" class="btn btn-primary" onclick="updateArticle('${article.idArticle}')">修改文章</a>
+                <a class="btn btn-danger" onclick="deleteArticle('${article.idArticle}')">删除文章</a>
             </div>
         </c:forEach>
     </c:if>
@@ -155,7 +157,6 @@
         <h3>对不起，没找到相关结果</h3>
         </div>
     </c:if>
-    <%--分页页面--%>
     <%@include file="/include/page.jsp"%>
 </div>
 <div style="width: 25%;float: left">
@@ -163,7 +164,7 @@
         <h4>文章分类</h4>
         <hr class="myhr1">
         <c:forEach items="${requestScope.categoriesForArticle}" var="categoriesForArticle">
-            <a href="${pageContext.request.contextPath}/share/searchArticle?category.idCategory=${categoriesForArticle.idCategory}" class="btn mybtn1" title="${categoriesForArticle.description}">${categoriesForArticle.name}</a>
+            <a href="${pageContext.request.contextPath}/admin/goArticleListByCategory?idCategory=${categoriesForArticle.idCategory}" class="btn mybtn1" title="${categoriesForArticle.description}">${categoriesForArticle.name}</a>
         </c:forEach>
     </div>
 </div>

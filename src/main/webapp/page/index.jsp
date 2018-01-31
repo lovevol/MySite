@@ -64,6 +64,11 @@
             }
             return true;
         }
+        function getArticleByLabelId(id,name) {
+            $("#idLabel").val(id);
+            $("#labelName").val(name);
+            $("#idLabelForm").submit();
+        }
     </script>
 </head>
 <body style=" padding-top: 50px;background-color: #e4e4e4;">
@@ -97,7 +102,26 @@
                 <button type="reset" class="btn btn-danger">重置</button>
             </form>
         </div>
-
+    </div>
+    <div style="padding: 20px;margin-top: 20px" class="mydiv">
+        <form action="${pageContext.request.contextPath}/share/searchArticle" method="post" id="idLabelForm">
+            <input type="hidden" id="idLabel" name="label.idLabel">
+            <input type="hidden" id="labelName" name="label.name">
+        </form>
+        <table class="table mytable">
+            <h4>热门标签</h4>
+            <hr class="myhr3">
+            <c:forEach items="${hotLabels}" var="label">
+                <tr>
+                    <td>
+                        <a href="javascript:getArticleByLabelId('${label.idLabel}','${label.name}');">${label.name}</a>
+                    </td>
+                    <td>
+                        <span class="badge">${label.articleNum}</span>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
     </div>
 </div>
 <div style="height: 100%;float: left;width: 50%;margin-left: 20px;">
@@ -172,7 +196,7 @@
         <h4>文章分类</h4>
         <hr class="myhr1">
         <c:forEach items="${requestScope.categoriesForArticle}" var="categoriesForArticle">
-            <a href="#" class="btn mybtn1" title="${categoriesForArticle.description}">${categoriesForArticle.name}</a>
+            <a href="${pageContext.request.contextPath}/share/searchArticle?category.idCategory=${categoriesForArticle.idCategory}" class="btn mybtn1" title="${categoriesForArticle.description}">${categoriesForArticle.name}</a>
         </c:forEach>
     </div>
     <div style="background-color: white; margin-top: 20px; margin-left: 20px;width: 60%;padding: 20px">
@@ -180,13 +204,13 @@
         <hr class="myhr2">
         <a href="${pageContext.request.contextPath}/share/webShare" class="btn mybtn2">网站分享</a>
         <a href="${pageContext.request.contextPath}/share/ebookShare" class="btn mybtn2">电子书分享</a>
-        <button class="btn mybtn2">个人心得</button>
-        <button class="btn mybtn2">......</button>
+        <%--<button class="btn mybtn2">个人心得</button>
+        <button class="btn mybtn2">......</button>--%>
         <%--<c:forEach items="${requestScope.categoriesForShare}" var="categoriesForShare">
             <a href="${pageContext.request.contextPath}/share/webShare" class="btn mybtn2" title="${categoriesForShare.description}">${categoriesForShare.name}</a>
         </c:forEach>--%>
     </div>
-    <div style="background-color: white; margin-top: 20px; margin-left: 20px;width: 60%;padding: 20px">
+    <%--<div style="background-color: white; margin-top: 20px; margin-left: 20px;width: 60%;padding: 20px">
         <h4>关于作者</h4>
         <hr class="myhr3">
         <a href="#" class="thumbnail">
@@ -214,7 +238,7 @@
                 <td>人各有路，不必羡慕</td>
             </tr>
         </table>
-    </div>
+    </div>--%>
 </div>
 </body>
 </html>

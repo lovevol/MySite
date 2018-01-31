@@ -1,5 +1,6 @@
 package service;
 
+import PagingPlugin.PageParams;
 import dao.ArticleDAO;
 import dao.CategoryAndLabelDAO;
 import model.Article;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import valueobject.ArticleVO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by lh
@@ -36,9 +38,7 @@ public class ArticleService {
         //再储存文章到数据库
         int result = articleDAO.addArticle(article);
         //更新label的文章数目
-        Label label = categoryAndLabelDAO.getLabelById(article.getLabel().getIdLabel());
-        label.setArticleNum(label.getArticleNum() + 1);
-        categoryAndLabelDAO.updateLabelForAddArticle(label);
+        categoryAndLabelDAO.updateLabelForAddArticle(article.getLabel().getIdLabel());
         return result;
     }
 
@@ -54,7 +54,43 @@ public class ArticleService {
         return articleDAO.getArticleById(id);
     }
 
+    /**
+     * 主页搜索
+     * @param articleVO
+     * @return
+     */
     public List<Article> getArticle(ArticleVO articleVO){
         return articleDAO.getArticle(articleVO);
+    }
+
+    public List<Article> getArticleByCategory(int idCategory){
+        return articleDAO.getArticleByCategory(idCategory);
+    }
+
+    public int deleteArticleById(int id){
+        Article article = getArticleById(id);
+        categoryAndLabelDAO.updateLabelForDeleteArticle(article.getLabel().getIdLabel());
+        return articleDAO.deleteArticleById(id);
+    }
+
+    public int updateArticle(Article article){
+        Content content = article.getContent();
+        if (content != null && content.getContent() != null){
+            articleDAO.updateContent(content);
+        }
+        //如果标签改变，则修改标签下文章数量
+        Article oldArticle = articleDAO.getArticleById(article.getIdArticle());
+        if (!(oldArticle.getLabel().getIdLabel() == article.getLabel().getIdLabel())){
+            categoryAndLabelDAO.updateLabelForAddArticle(article.getLabel().getIdLabel());
+            categoryAndLabelDAO.updateLabelForDeleteArticle(oldArticle.getLabel().getIdLabel());
+        }
+        return articleDAO.updateArticle(article);
+    }
+
+    public List<Article> getArticleByLabelId(int id){
+        return articleDAO.getArticleByLabelId(id);
+    }
+    public List<Article> selectArticleForUserSave(Set<String> ids){
+        return articleDAO.selectArticleForUserSave(ids);
     }
 }

@@ -16,6 +16,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.form.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/json2.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/myJs.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.structure.css">

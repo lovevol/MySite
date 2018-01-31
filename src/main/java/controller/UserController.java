@@ -1,17 +1,25 @@
 package controller;
 
 import aoplog.AopLog;
+import model.Article;
+import model.Label;
 import model.User;
 import myenum.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import redis.JedisService;
+import service.ArticleService;
 import service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by lh
@@ -23,6 +31,10 @@ import java.io.IOException;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private JedisService jedisService;
+    @Autowired
+    private ArticleService articleService;
     /**
      * 用户界面的路径
      */
@@ -129,6 +141,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/validateUserForRegister")
+    @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "用户激活")
     public String validateUser(User user){
 
        if (userService.updateUserByIdAndValidateCode(user)){
@@ -137,5 +150,55 @@ public class UserController {
            return "redirect:/user/register";
        }
 
+    }
+    @RequestMapping(value = "/myInfo")
+    @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "查看个人信息")
+    public ModelAndView myInfo(HttpSession session){
+        User user = (User) session.getAttribute("user");
+
+        ModelAndView md = new ModelAndView();
+        if (user != null){
+            //获取收藏的文章
+            Set<String> ids = jedisService.getArticleForUser(user.getIdUser());
+            if (ids.size() >0){
+                List<Article> articles =articleService.selectArticleForUserSave(ids);
+                md.addObject("articles",articles);
+            }
+            md.addObject("user",user);
+            md.setViewName("/page/user/myInfo.jsp");
+        }else {
+            md.setViewName("redirect:/user/login");
+        }
+
+        return md;
+    }
+
+    @RequestMapping(value = "/saveArticleByAjax")
+    @ResponseBody
+    @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "收藏文章")
+    public Object saveArticleByAjax(HttpSession session,int articleId){
+        User user = (User)session.getAttribute("user");
+        if (user == null){
+            return "false";
+        }else {
+            jedisService.saveArticleForUser(user.getIdUser(),articleId);
+            return "true";
+        }
+    }
+
+    @RequestMapping(value = "/cancelArticleByAjax")
+    @ResponseBody
+    @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "取消文章收藏")
+    public Object cancelArticleByAjax(HttpSession session,int articleId){
+        User user = (User)session.getAttribute("user");
+        if (user == null){
+            return "false";
+        }else {
+            Long result = jedisService.cancelArticleSave(user.getIdUser(),articleId);
+            if (result != 1L){
+                return "false";
+            }
+            return "true";
+        }
     }
 }

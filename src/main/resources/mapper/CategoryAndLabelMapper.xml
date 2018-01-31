@@ -46,8 +46,11 @@
     <select id="selectLabelById" parameterType="int" resultMap="labelResultMap">
         SELECT * FROM label WHERE idlabel=#{id}
     </select>
-    <update id="updateLabelForAddArticle" parameterType="model.Label">
-        UPDATE label set articlenum = #{articleNum} where idlabel = #{idLabel}
+    <update id="updateLabelForAddArticle" parameterType="int">
+        UPDATE label set articlenum = articlenum + 1 where idlabel = #{idLabel}
+    </update>
+    <update id="updateLabelForDeleteArticle">
+        UPDATE label set articlenum = articlenum - 1 where idlabel = #{idLabel}
     </update>
     <update id="updateCategory" parameterType="model.Category">
         UPDATE category
@@ -64,4 +67,16 @@
     <delete id="deleteLabelById" parameterType="int">
         DELETE FROM label WHERE idlabel=#{id}
     </delete>
+    <select id="selectHotLabel" resultType="model.Label">
+        SELECT * FROM label ORDER BY articlenum DESC limit 10
+    </select>
+    <update id="updateLabel" parameterType="model.Label">
+        UPDATE label
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="category != null and category.idCategory != null">idcategory=#{category.idCategory},</if>
+            <if test="description != null">description=#{description}</if>
+        </set>
+        WHERE idlabel = #{idLabel}
+    </update>
 </mapper>

@@ -53,6 +53,14 @@
             <mvc:mapping path="/admin/*"/>
             <bean class="Interceptor.AdminAuthorizationInterceptor"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/css/*"/>
+            <mvc:exclude-mapping path="/js/*"/>
+            <mvc:exclude-mapping path="/image/*"/>
+            <mvc:exclude-mapping path="/utf8-jsp/**"/>
+            <bean class="Interceptor.BrowsingHistoryInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
     <!--文件上传服务-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

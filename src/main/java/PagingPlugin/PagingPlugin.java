@@ -73,9 +73,9 @@ public class PagingPlugin implements Interceptor {
     @Override
     public void setProperties(Properties properties) {
         String strDefaultPage = properties.getProperty("default.page", "1");
-        String strDefaultPageSize = properties.getProperty("default.pageSize", "20");
-        String strDefaultUseFlag = properties.getProperty("default.useFlag", "false");
-        String strDefaultCheckFlag = properties.getProperty("default.checkFlag", "false");
+        String strDefaultPageSize = properties.getProperty("default.pageSize", "10");
+        String strDefaultUseFlag = properties.getProperty("default.useFlag", "true");
+        String strDefaultCheckFlag = properties.getProperty("default.checkFlag", "true");
         this.defaultPage = Integer.parseInt(strDefaultPage);
         this.defaultPageSize = Integer.parseInt(strDefaultPageSize);
         this.defaultUseFlag = Boolean.parseBoolean(strDefaultUseFlag);
@@ -156,7 +156,7 @@ public class PagingPlugin implements Interceptor {
     }
     private void checkPage(Boolean checkFlag,Integer pageNum,Integer pageTotal) throws Throwable{
         if (checkFlag){
-            if (pageNum > pageTotal){
+            if (pageNum > pageTotal && pageTotal != 0){
                 throw new Exception("查询失败，页码大于总页码");
             }
         }

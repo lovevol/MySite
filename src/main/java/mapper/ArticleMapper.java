@@ -1,5 +1,6 @@
 package mapper;
 
+import PagingPlugin.PageParams;
 import model.Article;
 import model.Content;
 import org.apache.ibatis.annotations.Param;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import valueobject.ArticleVO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2017/9/15.
@@ -55,4 +57,15 @@ public interface ArticleMapper {
      * @return　文章
      */
     List<Article> selectArticle(ArticleVO articleVO);
+
+    List<Article> selectArticleByCategory(int idCategory);
+
+    int deleteArticleById(int id);
+
+    int updateArticle(Article article);
+
+    int updateContent(Content content);
+
+    List<Article> selectArticleByLabelId(int id);
+    List<Article> selectArticleForUserSave(@Param(value = "ids") Set<String> ids);
 }

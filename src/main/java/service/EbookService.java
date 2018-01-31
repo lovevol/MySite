@@ -28,4 +28,8 @@ public class EbookService {
     public List<Ebook> getEbook(){
         return ebookDAO.selectAllEbook();
     }
+
+    public int deleteEbookById(int id){
+        return ebookDAO.deleteEbookById(id);
+    }
 }

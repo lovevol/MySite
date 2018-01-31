@@ -1,4 +1,5 @@
 package dao;
+import PagingPlugin.PageParams;
 import mapper.ArticleMapper;
 import model.Article;
 import model.Content;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Component;
 import valueobject.ArticleVO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by lh
@@ -60,5 +62,34 @@ public class ArticleDAO {
      */
     public List<Article> getArticle(ArticleVO articleVO){
         return articleMapper.selectArticle(articleVO);
+    }
+
+    /**
+     * 按照类别搜索文章
+     * @param idCategory 文章id
+     * @return
+     */
+     public List<Article> getArticleByCategory(int idCategory){
+        return articleMapper.selectArticleByCategory(idCategory);
+     }
+
+     public int deleteArticleById(int id){
+         return articleMapper.deleteArticleById(id);
+     }
+
+     public int updateArticle(Article article){
+         return articleMapper.updateArticle(article);
+     }
+
+     public int updateContent(Content content){
+         return articleMapper.updateContent(content);
+     }
+
+     public List<Article> getArticleByLabelId(int id){
+         return articleMapper.selectArticleByLabelId(id);
+     }
+
+    public List<Article> selectArticleForUserSave(Set<String> ids){
+         return articleMapper.selectArticleForUserSave(ids);
     }
 }

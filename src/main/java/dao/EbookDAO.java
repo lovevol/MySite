@@ -41,4 +41,8 @@ public class EbookDAO {
     public List<Ebook> selectAllEbook(){
         return ebookMapper.selectAllEbook();
     }
+
+    public int deleteEbookById(int id){
+        return ebookMapper.deleteEbookById(id);
+    }
 }

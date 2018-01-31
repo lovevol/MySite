@@ -60,7 +60,7 @@
         <div class="collapse" id="collapseExample2" style="margin: 5px;width: 100%">
             <div class="well">
                 <div class="form-group">
-                    <form action="/admin/uploadEbookFile" method="post" enctype="multipart/form-data" id="formForEbookFile">
+                    <form action="${pageContext.request.contextPath}/admin/uploadEbookFile" method="post" enctype="multipart/form-data" id="formForEbookFile">
                         <label for="file"> 文件:</label><input type="file" name="file" id="file" class="form-control"
                                                              onchange="submitSaveEbook()">
                     </form>

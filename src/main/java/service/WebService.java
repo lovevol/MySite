@@ -24,4 +24,11 @@ public class WebService {
     public int addWeb(Web web){
         return webDAO.addWeb(web);
     }
+    public List<Web> getWeb(){
+        return webDAO.selectAllWeb();
+    }
+
+    public int deleteWebById(int id){
+        return webDAO.deleteWebById(id);
+    }
 }

@@ -43,7 +43,7 @@
                     <c:when test="${! empty sessionScope.user}">
                         <c:choose>
                             <c:when test="${sessionScope.user.roleType eq 1}">
-                                <li><a>欢迎用户:${sessionScope.user.userName}</a></li>
+                                <li><a href="${pageContext.request.contextPath}/user/myInfo">欢迎用户:${sessionScope.user.userName}</a></li>
                                 <li><a href="${pageContext.request.contextPath}/user/logout">退出</a></li>
                             </c:when>
                             <c:otherwise>
@@ -51,6 +51,7 @@
                                 <li><a href="${pageContext.request.contextPath}/user/logout">退出</a></li>
                             </c:otherwise>
                         </c:choose>
+                        <li><a href="${pageContext.request.contextPath}/other/history">浏览记录</a></li>
                     </c:when>
                     <c:otherwise>
                         <li><a href="${pageContext.request.contextPath}/user/login">登陆</a></li>
@@ -63,8 +64,8 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">网站帮助</a></li>
-                        <li><a href="#">网站介绍</a></li>
-                        <li><a href="#">网站源码</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/other/mySiteInfo.jsp">网站介绍</a></li>
+                        <li><a href="http://github.com/lovevol/MySite" target="_blank">网站源码</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">关于作者</a></li>
                     </ul>
