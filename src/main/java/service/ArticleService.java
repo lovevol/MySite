@@ -73,7 +73,7 @@ public class ArticleService {
 
     public int updateArticle(Article article){
         Content content = article.getContent();
-        if (content != null && content.getContent() != null){
+        if (content != null && content.getContent() != null && !content.getContent().equals("")){
             articleDAO.updateContent(content);
         }
         //如果标签改变，则修改标签下文章数量
