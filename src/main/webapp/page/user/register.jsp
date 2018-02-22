@@ -119,13 +119,28 @@
                 div.attr("class","form-group has-error");
             }
         }
+        function check() {
+            var loginName = $("#loginName").val();
+            var userName = $("#userName").val();
+            var password = $("#password").val();
+            var password1 = $("#password1").val();
+            var email = $("#email").val();
+            if(loginName == null || loginName == "" || userName == null || userName == ""||
+                password == null || password == "" || password1 == null || password1 == "" || email == null || email == ""){
+                alert("信息输入有误！");
+                return false;
+            }else {
+                return true;
+            }
+
+        }
     </script>
 </head>
 <body background="${pageContext.request.contextPath}/image/back.jpg">
 <div style="width: 700px;height:800px;background-color: white;margin: 5% auto;border: solid 1px white">
     <br>
     <div style="margin:0 auto;width: 600px;height:800px;border: 1px">
-        <form action="${pageContext.request.contextPath}/user/register" method="post" id="registerForm" onsubmit="">
+        <form action="${pageContext.request.contextPath}/user/register" method="post" id="registerForm" onsubmit="return check();">
             <h3>注册</h3>
             <hr>
             <div class="form-group" id="userNameDiv">
