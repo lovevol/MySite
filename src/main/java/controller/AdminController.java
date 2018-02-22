@@ -287,6 +287,11 @@ public class AdminController {
         return modelAndView;
     }
 
+    /**
+     * 修改标签
+     * @param label
+     * @return
+     */
     @RequestMapping(value = "/modifyLabel")
     @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "修改标签")
     public ModelAndView modifyLabel(Label label){
@@ -311,6 +316,12 @@ public class AdminController {
         return modelAndView;
     }
 
+    /**
+     * 文章编辑界面跳转
+     * @param articleVO
+     * @param pageParams
+     * @return
+     */
     @RequestMapping(value = "/goArticleList")
     public ModelAndView goArticleList(ArticleVO articleVO,PageParams pageParams){
         ModelAndView md = new ModelAndView();
@@ -322,6 +333,11 @@ public class AdminController {
         return md;
     }
 
+    /**
+     * 文章编辑界面跳转（按照类别）
+     * @param idCategory
+     * @return
+     */
     @RequestMapping(value = "/goArticleListByCategory")
     public ModelAndView goArticleListByCategory(int idCategory){
         ModelAndView md = new ModelAndView();
@@ -333,6 +349,11 @@ public class AdminController {
         return md;
     }
 
+    /**
+     * 删除文章
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/deleteArticleById")
     @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "删除文章")
     public ModelAndView deleteArticleById(int id){
@@ -346,6 +367,11 @@ public class AdminController {
         return md;
     }
 
+    /**
+     * 更新文章界面跳转
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/goUpdateArticle")
     public ModelAndView goUpdateArticle(int id){
         ModelAndView md = new ModelAndView();
@@ -358,6 +384,14 @@ public class AdminController {
         return md;
     }
 
+    /**
+     * 更新文章
+     * @param article
+     * @param request
+     * @param image
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/updateArticle")
     @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "更新文章")
     public String updateArticle(Article article, HttpServletRequest request, MultipartFile image) throws IOException {
@@ -388,6 +422,10 @@ public class AdminController {
         }
     }
 
+    /**
+     * web修改界面跳转
+     * @return
+     */
     @RequestMapping(value = "/goWebEdit")
     public ModelAndView goWebEdit(){
         ModelAndView md = new ModelAndView();
@@ -397,6 +435,11 @@ public class AdminController {
         return md;
     }
 
+    /**
+     * 网站删除
+     * @param idWeb
+     * @return
+     */
     @RequestMapping(value = "/deleteWebById")
     @ResponseBody
     @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "删除网站")
@@ -409,6 +452,10 @@ public class AdminController {
         }
     }
 
+    /**
+     * 电子书编辑界面跳转
+     * @return
+     */
     @RequestMapping(value = "/goEbookEdit")
     public ModelAndView goEbookEdit(){
         ModelAndView md = new ModelAndView();
@@ -418,6 +465,11 @@ public class AdminController {
         return md;
     }
 
+    /**
+     * 删除电子书
+     * @param idEbook
+     * @return
+     */
     @RequestMapping(value = "/deleteEbookById")
     @ResponseBody
     @AopLog(bussTypeDesc = "管理员业务",operateTypeDesc = "删除电子书")

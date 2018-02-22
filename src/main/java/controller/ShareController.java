@@ -133,6 +133,11 @@ public class ShareController {
         return modelAndView;
     }
 
+    /**
+     * 文章搜索
+     * @param articleVO
+     * @return
+     */
     @RequestMapping(value = "/searchArticle")
     @AopLog(bussTypeDesc = "分享业务",operateTypeDesc = "搜索文章")
     public ModelAndView searchArticle(ArticleVO articleVO){

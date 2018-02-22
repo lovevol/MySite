@@ -50,6 +50,10 @@
     <mvc:interceptors>
         <!--拦截了管理员操作，执行管理员操作，必须先验证身份-->
         <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="Interceptor.ErrorManageInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
             <mvc:mapping path="/admin/*"/>
             <bean class="Interceptor.AdminAuthorizationInterceptor"/>
         </mvc:interceptor>

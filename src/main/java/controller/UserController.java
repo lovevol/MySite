@@ -2,7 +2,6 @@ package controller;
 
 import aoplog.AopLog;
 import model.Article;
-import model.Label;
 import model.User;
 import myenum.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,21 +55,32 @@ public class UserController {
 
     @AopLog(operateTypeDesc = "用户登陆验证")
     @RequestMapping(value = "/validate")
-    public String validate(HttpServletRequest request, User user){
+    public ModelAndView validate(HttpServletRequest request, User user){
+        ModelAndView md = new ModelAndView();
+        HttpSession session = request.getSession();
         boolean validate = userService.validateLogin(user);
-        if (validate && user.getRoleType() == 1){
-            HttpSession session = request.getSession();
-            user = userService.getUserByLoginName(user.getLoginName());
-            session.setAttribute("user",user);
-            return "redirect:/index";
-        }else if (validate && user.getRoleType() == 2){
-            user = userService.getUserByLoginName(user.getLoginName());
-            HttpSession session = request.getSession();
-            session.setAttribute("user",user);
-            return "redirect:/admin/indexOfAdmin";
+        user = userService.getUserByLoginName(user.getLoginName());
+        if(user != null){
+            //用户状态判断
+            if (!(1==user.getStatus())){
+                md.addObject("loginName",user.getLoginName());
+                md.setViewName("/page/user/activeUser.jsp");
+            }else if (validate && user.getRoleType() == 1){
+                session.setAttribute("user",user);
+                md.setViewName("redirect:/index");
+            }else if (validate && user.getRoleType() == 2){
+                session.setAttribute("user",user);
+                md.setViewName("redirect:/admin/indexOfAdmin");
+            }else {
+                md.addObject("errorMsg","请输入正确的登录名和密码！");
+                md.setViewName("forward:/user/login");
+            }
         }else {
-            return "redirect:/user/login";
+            md.addObject("errorMsg","请输入正确的登录名和密码！");
+            md.setViewName("forward:/user/login");
         }
+
+        return md;
     }
 
     /**
@@ -118,12 +128,15 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/register")
-    public String register(HttpServletRequest request,User user,int genderId){
+    public ModelAndView register(HttpServletRequest request,User user,int genderId){
         user.setGender(Gender.getGender(genderId));
         userService.registerUser(user);
+        ModelAndView md = new ModelAndView();
+        md.addObject("loginName",user.getLoginName());
+        md.setViewName("/page/user/activeUser.jsp");
         //HttpSession session = request.getSession();
         //session.setAttribute("user",user);
-        return "redirect:/index";
+        return md;
     }
 
     /**
@@ -151,6 +164,12 @@ public class UserController {
        }
 
     }
+
+    /**
+     * 查看个人信息
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/myInfo")
     @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "查看个人信息")
     public ModelAndView myInfo(HttpSession session){
@@ -173,6 +192,31 @@ public class UserController {
         return md;
     }
 
+    /**
+     * 用户激活
+     * @param user
+     * @return
+     */
+    @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "用户激活")
+    @RequestMapping(value = "/activeUser")
+    public ModelAndView activeUser(User user){
+        ModelAndView md = new ModelAndView();
+        boolean result = userService.activeUser(user);
+        if (result == false){
+            md.addObject("errorMsg","验证码错误！");
+        }else {
+            md.addObject("errorMsg","激活成功，请登陆");
+        }
+        md.setViewName("forward:/user/login");
+        return md;
+    }
+
+    /**
+     * 文章收藏
+     * @param session
+     * @param articleId
+     * @return
+     */
     @RequestMapping(value = "/saveArticleByAjax")
     @ResponseBody
     @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "收藏文章")
@@ -186,6 +230,12 @@ public class UserController {
         }
     }
 
+    /**
+     * 文章收藏取消
+     * @param session
+     * @param articleId
+     * @return
+     */
     @RequestMapping(value = "/cancelArticleByAjax")
     @ResponseBody
     @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "取消文章收藏")
@@ -200,5 +250,43 @@ public class UserController {
             }
             return "true";
         }
+    }
+
+    /**
+     * 密码修改
+     * @param session
+     * @param user
+     * @return
+     */
+    @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "密码修改")
+    @RequestMapping(value = "/changePassword")
+    public ModelAndView changePassword(HttpSession session,User user){
+        ModelAndView modelAndView = new ModelAndView();
+        boolean result = userService.changePassword(user);
+        if (result){
+            modelAndView.setViewName("redirect:/user/login");
+        }else {
+            modelAndView.setViewName("/page/user/changePassword.jsp");
+        }
+        return modelAndView;
+    }
+
+    /**
+     * 密码修改时发送验证码
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/sendValidateCoedByAjax")
+    @ResponseBody
+    @AopLog(bussTypeDesc = "用户业务",operateTypeDesc = "发送修改密码的验证码")
+    public Object sendValidateCoedForChangePassword(User user){
+
+        boolean result = false;
+        try {
+            result = userService.sendValidateCoedForChangePassword(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result ? "true":"false";
     }
 }

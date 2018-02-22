@@ -70,6 +70,12 @@ public class UserService {
         }
         return userDAO.addUser(user);
     }
+
+    /**
+     * 根据验证码激活用户
+     * @param user
+     * @return
+     */
     public boolean updateUserByIdAndValidateCode(User user){
         user = userDAO.getUserById(user.getIdUser());
         Timestamp now = new Timestamp(System.currentTimeMillis());
@@ -81,11 +87,78 @@ public class UserService {
         }
     }
 
+    /**
+     * 批量添加用户
+     * @param list
+     * @return
+     */
     public int addUserByBatch(List<User> list){
         return userDAO.addUserByBatch(list);
     }
 
     public List<User> getUSer(PageParams pageParams){
         return userDAO.getUSer(pageParams);
+    }
+
+    /**
+     * 用户激活
+     * @param user
+     * @return
+     */
+    public boolean activeUser(User user){
+        User dbUSer = userDAO.getUserByLoginName(user.getLoginName());
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        if (dbUSer.getValidateCode().equals(user.getValidateCode())){
+            if (now.getTime() - dbUSer.getValidateDate().getTime() /(60 * 60 * 1000) <= 3){
+                return false;
+            }
+            updateUserByIdAndValidateCode(dbUSer);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    public int updateUser(User user){
+        return userDAO.updateUser(user);
+    }
+
+    /**
+     * 修改密码是发送验证码
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    public boolean sendValidateCoedForChangePassword(User user) throws Exception {
+        User dbUser = userDAO.getUserByLoginName(user.getLoginName());
+        if (dbUser != null){
+            dbUser.setValidateCode(UUID.randomUUID().toString());
+            dbUser.setValidateDate(new Timestamp(System.currentTimeMillis()));
+            emailService.sendEmailForChangePassword(dbUser);
+            updateUser(dbUser);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 修改密码
+     * @param user
+     * @return
+     */
+    public boolean changePassword(User user){
+        User dbUser = userDAO.getUserByLoginName(user.getLoginName());
+        if (dbUser != null){
+            if (dbUser.getValidateCode().equals(user.getValidateCode())){
+                dbUser.setPassword(MD5Util.getMD5(user.getPassword()));
+                updateUser(dbUser);
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -60,4 +60,6 @@ public interface UserMapper {
 
     int saveUserByBatch(List<User> userList);
     List<User> getUser(PageParams pageParams);
+
+    int updateUser(User user);
 }

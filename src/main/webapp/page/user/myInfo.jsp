@@ -54,7 +54,7 @@
         </tr>
         <tr>
             <td colspan="2"><button class="btn btn-danger">修改信息</button>
-            <button class="btn btn-danger">修改密码</button></td>
+            <a href="${pageContext.request.contextPath}/page/user/changePassword.jsp">修改密码</a></td>
         </tr>
     </table>
 </div>

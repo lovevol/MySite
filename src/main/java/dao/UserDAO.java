@@ -59,4 +59,8 @@ public class UserDAO {
     public List<User> getUSer(PageParams pageParams){
         return userMapper.getUser(pageParams);
     }
+
+    public int updateUser(User user){
+        return userMapper.updateUser(user);
+    }
 }
