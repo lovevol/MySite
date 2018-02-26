@@ -53,6 +53,11 @@ public class UserDAO {
         userMapper.updateUserByIdAndValidateCode(user);
     }
 
+    /**
+     *
+     * @param userList
+     * @return
+     */
     public int addUserByBatch(List<User> userList){
         return userMapper.saveUserByBatch(userList);
     }
@@ -60,6 +65,11 @@ public class UserDAO {
         return userMapper.getUser(pageParams);
     }
 
+    /**
+     * 更新用户信息
+     * @param user 必须包含用户id，更新非空字段
+     * @return
+     */
     public int updateUser(User user){
         return userMapper.updateUser(user);
     }

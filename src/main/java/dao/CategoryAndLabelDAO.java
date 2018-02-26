@@ -116,14 +116,27 @@ public class CategoryAndLabelDAO {
         return categoryAndLabelMapper.deleteLabelById(id);
     }
 
+    /**
+     * 删除文章时减小相应标题下的文章数量
+     * @param id 标签id
+     */
     public void updateLabelForDeleteArticle(int id){
         categoryAndLabelMapper.updateLabelForDeleteArticle(id);
     }
 
+    /**
+     * 获取文章数量最多的前10位标签
+     * @return
+     */
     public List<Label> getHotLabel(){
         return categoryAndLabelMapper.selectHotLabel();
     }
 
+    /**
+     * 更新标签信息
+     * @param label
+     * @return
+     */
     public int updateLabel(Label label){
         return categoryAndLabelMapper.updateLabel(label);
     }

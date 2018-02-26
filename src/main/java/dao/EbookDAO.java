@@ -42,6 +42,11 @@ public class EbookDAO {
         return ebookMapper.selectAllEbook();
     }
 
+    /**
+     * 按照id删除电子书
+     * @param id
+     * @return
+     */
     public int deleteEbookById(int id){
         return ebookMapper.deleteEbookById(id);
     }

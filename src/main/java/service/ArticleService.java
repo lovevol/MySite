@@ -61,6 +61,11 @@ public class ArticleService {
         return articleDAO.getArticle(articleVO);
     }
 
+    /**
+     * 获取指定类别下的文章
+     * @param idCategory 类别id
+     * @return
+     */
     public List<Article> getArticleByCategory(int idCategory){
         return articleDAO.getArticleByCategory(idCategory);
     }
@@ -71,7 +76,13 @@ public class ArticleService {
         return articleDAO.deleteArticleById(id);
     }
 
+    /**
+     * 更新文章
+     * @param article
+     * @return
+     */
     public int updateArticle(Article article){
+        //获取文章内容，若非空，更新文章内容
         Content content = article.getContent();
         if (content != null && content.getContent() != null && !content.getContent().equals("")){
             articleDAO.updateContent(content);
@@ -85,9 +96,20 @@ public class ArticleService {
         return articleDAO.updateArticle(article);
     }
 
+    /**
+     * 获取指定标签下的文章列表
+     * @param id
+     * @return
+     */
     public List<Article> getArticleByLabelId(int id){
         return articleDAO.getArticleByLabelId(id);
     }
+
+    /**
+     * 获取用户的收藏文章列表
+     * @param ids
+     * @return
+     */
     public List<Article> selectArticleForUserSave(Set<String> ids){
         return articleDAO.selectArticleForUserSave(ids);
     }
