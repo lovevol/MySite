@@ -115,6 +115,26 @@
             <artifactId>jedis</artifactId>
             <version>2.9.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
+        <!--<dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>2.0.4.RELEASE</version>
+        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
+       <!-- <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>2.0.4.RELEASE</version>
+        </dependency>-->
+
     </dependencies>
 
     <!--构建时参数-->
@@ -144,7 +164,7 @@
                 </executions>
                 <configuration>
                     <fromFile>target/mySite.war</fromFile>
-                    <url>scp://root:@120.24.4.136/data/wwwroot/default</url>
+                    <url>scp://root:935686942lH@120.24.4.136/data/wwwroot/default</url>
                     <commands>
                         <!--<command>cp -r /data/wwwroot/default/mySite/image/* /data/wwwroot/default/image/*</command>-->
                         <!--<command>rm -rf /data/wwwroot/default/mySite</command>-->

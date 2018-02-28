@@ -30,6 +30,25 @@
                 }
             });
         }
+        function saveComment(articleId) {
+            var content = $("#content").val();
+            if(content == null || content == ""){
+                alert("请输入正确的内容！");
+                return;
+            }
+            $.ajax({
+                url:"${pageContext.request.contextPath}/user/saveComment",
+                type:"post",
+                dataType: 'json',
+                data:{"articleId":articleId,"content":content},
+                success:function (data) {
+                    alert("评论成功，刷新可见");
+                },
+                error:function () {
+                    alert("失败!")
+                }
+            })
+        }
         function cancelArticle(articleId) {
             $.ajax({
                 url:"${pageContext.request.contextPath}/user/cancelArticleByAjax?articleId="+articleId,
@@ -111,6 +130,23 @@
     <span id="save" <c:if test="${saved != null && saved == 'true'}">style="display: none" </c:if>>
         <a href="javascript:saveArticle(${article.idArticle});"><span class="glyphicon glyphicon-star-empty" style="float: right;font-size: 25px;color:cadetblue;margin-left: 10px" id="star2"></span></a><span style="float: right">收藏:</span>
     </span>
+</div>
+<div style="margin-left: 21%;margin-top:20px;padding: 20px;background-color: white;float: left;width: 50%;">
+    <label for="content">写评论</label> <textarea name="content" id="content" class="form-control" maxlength="200"></textarea>
+    <button class="btn btn-primary" onclick="saveComment('${article.idArticle}')">提交</button>
+</div>
+<div style="margin-left: 21%;margin-top:20px;padding: 20px;background-color: white;float: left;width: 50%;">
+    <label>评论</label>
+    <c:forEach items="${comments}" var="comment" varStatus="index" >
+        <hr>
+        <c:if test="${comment.userId == -1}">
+            火星人:
+        </c:if>
+        <c:if test="${comment.userId != -1}">
+            用户${comment.userId}:
+        </c:if>
+        ${comment.content}
+    </c:forEach>
 </div>
 <div style="left: 72%;padding: 20px;background-color: white;float: left;position: fixed;width: 15%">
     <h4>文章分类</h4>

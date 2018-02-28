@@ -2,7 +2,9 @@ package controller;
 
 import aoplog.AopLog;
 import model.Article;
+import model.Comment;
 import model.User;
+import mongodb.MongoService;
 import myenum.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -34,6 +37,8 @@ public class UserController {
     private JedisService jedisService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private MongoService mongoService;
     /**
      * 用户界面的路径
      */
@@ -288,5 +293,21 @@ public class UserController {
             e.printStackTrace();
         }
         return result ? "true":"false";
+    }
+
+    @RequestMapping(value = "saveComment")
+    @ResponseBody
+    public Comment saveCommentForAjax(Comment comment,HttpSession session,HttpServletRequest request){
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            comment.setUserId(-1);
+        }else {
+            comment.setUserId(user.getIdUser());
+        }
+        comment.setDate(new Date());
+        comment.setContent(request.getParameter("content"));
+        comment.setArticleId(Integer.parseInt(request.getParameter("articleId")));
+        mongoService.saveComment(comment);
+        return comment;
     }
 }

@@ -43,8 +43,6 @@
         <hr class="myhr2">
         <a href="${pageContext.request.contextPath}/share/webShare" class="btn mybtn2">网站分享</a>
         <a href="${pageContext.request.contextPath}/share/ebookShare" class="btn mybtn2">电子书分享</a>
-        <button class="btn mybtn2">个人心得</button>
-        <button class="btn mybtn2">......</button>
     </div>
     <div style="background-color: white; margin-top: 20px; margin-left: 30px;width: 50%;height: 300px;padding: 20px">
         <h4 style="color: red">说明</h4>

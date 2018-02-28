@@ -2,6 +2,7 @@ package controller;
 
 import aoplog.AopLog;
 import model.*;
+import mongodb.MongoService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -41,7 +42,8 @@ public class ShareController {
     private WebService webService;
     private CategoryAndLabelService categoryAndLabelService;
     private JedisService jedisService;
-
+    @Autowired
+    private MongoService mongoService;
     @Autowired
     public ShareController(ArticleService articleService, EbookService ebookService, WebService webService,CategoryAndLabelService categoryAndLabelService,
                            JedisService jedisService) {
@@ -129,6 +131,8 @@ public class ShareController {
                 modelAndView.addObject("saved","true");
             }
         }
+        List<Comment> comments = mongoService.getCommentByArticleId(articleId);
+        modelAndView.addObject("comments",comments);
         modelAndView.setViewName("/page/share/readArticle.jsp");
         return modelAndView;
     }

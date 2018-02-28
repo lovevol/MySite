@@ -46,7 +46,7 @@
                 AND sketch like concat('%',#{sketch},'%')
             </if>
         </where>
-        ORDER BY date
+        ORDER BY date DESC ,idarticle ASC
     </select>
     <select id="selectArticleById" parameterType="int" resultMap="articleMap">
         SELECT * FROM article WHERE idarticle = #{id}
@@ -104,6 +104,6 @@
         <foreach item="articleId" index="index" open="(" separator="," close=")" collection="ids">
             #{articleId}
         </foreach>
-        ORDER BY date
+        ORDER BY date DESC ,idarticle ASC
     </select>
 </mapper>
