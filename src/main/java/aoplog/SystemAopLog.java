@@ -32,7 +32,7 @@ public class SystemAopLog {
 
     @AfterThrowing(value = "controllerAspect()",throwing = "e")
     public void doAfter(JoinPoint joinPoint,Exception e){
-        handleLog(joinPoint, null,typeAfterError);
+        handleLog(joinPoint,e,typeAfterError);
     }
     private void handleLog(JoinPoint joinPoint,Exception e,int type){
         try {
@@ -90,6 +90,7 @@ public class SystemAopLog {
                 logger.info(buffer.toString());
             }else {
                 logger.error(buffer.toString());
+                logger.error(e.getMessage());
             }
         }catch (Exception e1){
             logger.error(e.getMessage());

@@ -138,7 +138,7 @@
     </dependencies>
 
     <!--构建时参数-->
-    <build>
+   <!-- <build>
         <finalName>mySite</finalName>
         <extensions>
             <extension>
@@ -166,17 +166,17 @@
                     <fromFile>target/mySite.war</fromFile>
                     <url>scp://root:935686942lH@120.24.4.136/data/wwwroot/default</url>
                     <commands>
-                        <!--<command>cp -r /data/wwwroot/default/mySite/image/* /data/wwwroot/default/image/*</command>-->
-                        <!--<command>rm -rf /data/wwwroot/default/mySite</command>-->
-                        <!--<command>service tomcat restart</command>-->
+                        &lt;!&ndash;<command>cp -r /data/wwwroot/default/mySite/image/* /data/wwwroot/default/image/*</command>&ndash;&gt;
+                        &lt;!&ndash;<command>rm -rf /data/wwwroot/default/mySite</command>&ndash;&gt;
+                        &lt;!&ndash;<command>service tomcat restart</command>&ndash;&gt;
                     </commands>
                     <displayCommandOutputs>true</displayCommandOutputs>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!--利用cargo插件完成项目部署-->
-            <!--<plugin>
+            &lt;!&ndash;利用cargo插件完成项目部署&ndash;&gt;
+            &lt;!&ndash;<plugin>
 
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
@@ -205,7 +205,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>&ndash;&gt;
         </plugins>
-    </build>
+    </build>-->
 </project>
