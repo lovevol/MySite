@@ -120,7 +120,7 @@
     <!--在 applicationContext.xml 中声明一个交换机-->
     <rabbit:topic-exchange name="${mq.queue}_exchange" durable="true" auto-delete="false">
         <rabbit:bindings>
-            <rabbit:binding queue="test_queue" pattern="${mq.queue}_patt"/>
+            <rabbit:binding queue="test_queue" pattern="test_queue"/>
         </rabbit:bindings>
     </rabbit:topic-exchange>
     <!--在 applicationContext.xml 中声明一个队列。-->
