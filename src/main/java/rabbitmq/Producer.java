@@ -1,6 +1,8 @@
 package rabbitmq;
 
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ public class Producer {
     AmqpTemplate amqpTemplate;
      public void sendMessage(Object object){
         // convertAndSend 将Java对象转换为消息发送至匹配key的交换机中Exchange
-         amqpTemplate.convertAndSend(EXCHANGE_KEY, QUEUE_KEY, object);
+         //amqpTemplate.convertAndSend(EXCHANGE_KEY, QUEUE_KEY, object);
+         Message message = MessageBuilder.withBody(object.toString().getBytes()).build();
+         amqpTemplate.send(EXCHANGE_KEY,QUEUE_KEY,message);
      }
 }
