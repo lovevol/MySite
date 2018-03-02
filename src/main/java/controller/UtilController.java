@@ -75,7 +75,9 @@ public class UtilController {
     @RequestMapping(value = "/testrabbitmq")
     @ResponseBody
     public String sendMessage(){
-        producer.sendMessage("wewwwwww");
+        for (int i= 0; i< 10;i ++){
+            producer.sendMessage(i);
+        }
         return "ok";
     }
 }

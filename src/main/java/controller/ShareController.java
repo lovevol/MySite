@@ -2,6 +2,7 @@ package controller;
 
 import aoplog.AopLog;
 import model.*;
+import mongodb.Comment;
 import mongodb.MongoService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;

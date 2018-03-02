@@ -4,10 +4,26 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:mongo="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd"
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/cache
+       http://www.springframework.org/schema/cache/spring-cache.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/rabbit
+       http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+       http://www.springframework.org/schema/data/mongo
+       http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd"
+
        default-autowire="byName">
     <!--<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>-->
     <!-- 引入jedis的properties配置文件 -->
@@ -88,25 +104,30 @@
         <constructor-arg name="password" value="${redis.password}" />
         <constructor-arg name="database" value="${redis.database}" type="int" />
     </bean>
-    <!--<mongo:mongo-client id="mongoClient" host="${mongo.host}" port="${mongo.port}" credentials="${mongo.name}"/>
-    &lt;!&ndash; 一些连接属性的设置 &ndash;&gt;
-    &lt;!&ndash;<mongo:options
-            connections-per-host="${mongo.connectionsPerHost}"
-            threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
-            connect-timeout="${mongo.connectTimeout}"
-            max-wait-time="${mongo.maxWaitTime}"
-            auto-connect-retry="${mongo.autoConnectRetry}"
-            socket-keep-alive="${mongo.socketKeepAlive}"
-            socket-timeout="${mongo.socketTimeout}"
-            slave-ok="${mongo.slaveOk}"
-            write-number="1"
-            write-timeout="0"
-            write-fsync="true"/>
-    </mongo:mongo>&ndash;&gt;
-    <mongo:db-factory id="mongoDbFactory" dbname="${mongo.name}" mongo-ref="mongoClient"/>
+    <!--<mongo:mongo-client id="mongoClient" host="${mongo.host}" port="${mongo.port}" credentials="${mongo.name}"/>-->
+    <!-- 一些连接属性的设置 -->
+    <!--<mongo:mongo id="mongo" host="${mongo.host}" port="${mongo.port}">
+        <mongo:options connections-per-host="${mongo.options.connections-per-host}"
+                       threads-allowed-to-block-for-connection-multiplier="${mongo.options.threads-allowed-to-block-for-connection-multiplier}"
+                       connect-timeout="${mongo.options.connect-timeout}"
+                       max-wait-time="${mongo.options.max-wait-time}"
+                       auto-connect-retry="${mongo.options.auto-connect-retry}"
+                       socket-keep-alive="${mongo.options.socket-keep-alive}"
+                       socket-timeout="${mongo.options.socket-timeout}"
+                       slave-ok="${mongo.options.slave-ok}"
+                       write-number="${mongo.options.write-number}"
+                       write-timeout="${mongo.options.write-timeout}"
+                       write-fsync="${mongo.options.write-fsync}"/>
+    </mongo:mongo>
+    <mongo:db-factory id="mongoDbFactory" dbname="${mongo.name}" mongo-ref="mongo"/>
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg ref="mongoDbFactory" />
-    </bean>-->
+    </bean>
+    &lt;!&ndash;实体映射自动扫描注入的包&ndash;&gt;
+    <mongo:mapping-converter>
+        <mongo:custom-converters base-package="mongodb" />
+    </mongo:mapping-converter>-->
+
     <!--错误处理-->
     <bean class="util.MyExceptionResolver"/>
 
@@ -128,8 +149,12 @@
 
     <!-- 消费者 -->
     <bean name="rabbitmqService" class="rabbitmq.Consumer"/>
+    <bean name="consumerA" class="rabbitmq.ConsumerA"/>
+    <bean name="consumerB" class="rabbitmq.ConsumerB"/>
     <!-- 配置监听 -->
     <rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto">
-        <rabbit:listener queues="test_queue" ref="rabbitmqService"/>
+        <!--<rabbit:listener queues="test_queue" ref="rabbitmqService"/>-->
+        <rabbit:listener ref="consumerA" queues="test_queue"/>
+        <rabbit:listener ref="consumerB" queues="test_queue"/>
     </rabbit:listener-container>
 </beans>
