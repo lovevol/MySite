@@ -12,6 +12,9 @@
     <title>错误</title>
 </head>
 <body>
-糟糕，我们的网站出错误了！
+<div style="margin: 0 auto;padding-top: 10%;width: 60%;text-align: center">
+    <h1>糟糕，我们的网站出错误了！</h1>
+</div>
+
 </body>
 </html>

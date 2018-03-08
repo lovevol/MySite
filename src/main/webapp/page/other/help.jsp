@@ -33,8 +33,7 @@
         </div>
         <div class="panel-body">
            <ul>
-               <li>1、文章评论功能</li>
-               <li>2、用户发表文章的功能</li>
+               <li>1、用户发表文章的功能</li>
            </ul>
         </div>
     </div>

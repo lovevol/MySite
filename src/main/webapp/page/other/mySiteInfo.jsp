@@ -43,7 +43,7 @@
                 <li>1、语言:Java</li>
                 <li>2、框架:SSM</li>
                 <li>3、服务器:Tomcat</li>
-                <li>4、数据库:MySql,Redis</li>
+                <li>4、数据库:MySql,Redis,MongoDB</li>
                 <li>5、开发环境:Idea,Maven,JDK1.8,Bootstarp</li>
             </ul>
         </div>
