@@ -1,17 +1,9 @@
-package mongodb;
+package model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-
-@Document
 public class Comment {
-
-    @Id
     private String id;
-    @Indexed
     private int articleId;
     private int userId;
     private String content;

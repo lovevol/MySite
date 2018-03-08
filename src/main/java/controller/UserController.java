@@ -3,7 +3,7 @@ package controller;
 import aoplog.AopLog;
 import model.Article;
 import model.User;
-import mongodb.Comment;
+import model.Comment;
 import mongodb.MongoService;
 import myenum.Gender;
 import org.springframework.beans.factory.annotation.Autowired;

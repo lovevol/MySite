@@ -3,6 +3,7 @@ package mongodb;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
+import model.Comment;
 import org.bson.Document;
 import org.springframework.stereotype.Component;
 

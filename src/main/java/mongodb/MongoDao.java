@@ -1,7 +1,7 @@
 package mongodb;
 
 import com.mongodb.client.result.UpdateResult;
-import org.springframework.beans.factory.annotation.Autowired;
+import model.Comment;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
