@@ -58,6 +58,7 @@
             </div>
         </form>
         <span style="color: red; text-align: center;font-size: 10px">*在1920*1080分辨率和谷歌浏览器环境下浏览最佳</span>
+       <%-- <a href="${pageContext.request.contextPath}/other/testrabbitmq" class="btn btn-primary">测试RabbitMQ</a>--%>
     </div>
 </div>
 </body>

@@ -5,7 +5,9 @@ import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import rabbitmq.Producer;
 import redis.JedisService;
 import sun.misc.BASE64Decoder;
 
@@ -22,6 +24,8 @@ import java.util.UUID;
 public class UtilController {
     @Autowired
     private JedisService jedisService;
+    @Autowired
+    private Producer producer;
     @RequestMapping(value = "/history")
     @AopLog(bussTypeDesc = "其他业务",operateTypeDesc = "获取浏览记录")
     public ModelAndView getBrowsingHistory(HttpSession session){
@@ -66,5 +70,14 @@ public class UtilController {
         }
         md.setViewName("redirect:/user/login");
         return md;
+    }
+
+    @RequestMapping(value = "/testrabbitmq")
+    @ResponseBody
+    public String sendMessage(){
+        for (int i= 0; i< 10;i ++){
+            producer.sendMessage(i);
+        }
+        return "ok";
     }
 }

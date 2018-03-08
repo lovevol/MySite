@@ -2,8 +2,8 @@ package controller;
 
 import aoplog.AopLog;
 import model.Article;
-import model.Comment;
 import model.User;
+import mongodb.Comment;
 import mongodb.MongoService;
 import myenum.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -297,7 +297,7 @@ public class UserController {
 
     @RequestMapping(value = "saveComment")
     @ResponseBody
-    public Comment saveCommentForAjax(Comment comment,HttpSession session,HttpServletRequest request){
+    public Comment saveCommentForAjax(Comment comment, HttpSession session, HttpServletRequest request){
         User user = (User) session.getAttribute("user");
         if (user == null) {
             comment.setUserId(-1);
